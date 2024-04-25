@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Register">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="215.0" layoutY="20.0" prefHeight="68.0" prefWidth="171.0" text="  I have ">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="bloodTypeDropdown" layoutX="225.0" layoutY="96.0" prefHeight="24.0" prefWidth="158.0" />
+      <TextField fx:id="nameField" layoutX="135.0" layoutY="163.0" prefHeight="24.0" prefWidth="346.0" promptText="Name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="phoneNumberField" layoutX="135.0" layoutY="223.0" prefHeight="24.0" prefWidth="346.0" promptText="Phone Number">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="passwordField" layoutX="135.0" layoutY="279.0" prefHeight="24.0" prefWidth="346.0" promptText="Password">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="135.0" layoutY="393.0" prefHeight="28.0" prefWidth="314.0" text="If you already have an account">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginPageDirectorButton" layoutX="440.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 30; -fx-background-color: black;" text=" Login Page" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="registerButton" layoutX="249.0" layoutY="340.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="43.0" prefWidth="103.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Register" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="475.0" prefHeight="99.0" prefWidth="546.0" text="Certain medical conditions, age restrictions, minimum weight requirements, medications, pregnancy, and active infections, may disqualify individuals from donating blood or necessitate specific waiting periods." textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+   </children>
+</Pane>
