@@ -19,7 +19,6 @@ public void start(Stage stage) throws IOException {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-        stage.close();
         }
 
 public static void main(String[] args) {
