@@ -1,18 +1,18 @@
 package com.example.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Register {
+public class Register implements Initializable {
     @FXML
     private Button registerButton;
 
@@ -29,26 +29,23 @@ public class Register {
     private TextField passwordField;
 
     @FXML
+    private ComboBox<String> bloodTypeDropdown;
+
+    @FXML
     public void registerButtonOnAction(ActionEvent e)
     {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/designdb", "root", "Asclepius1453");
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO user (username, blood_Type, password, phone_number) VALUES ('" + nameField.getText() + "', 'arh+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
-
-            // statement.executeUpdate("UPDATE user SET blood_Type = '0rh+'");
-            ResultSet resultSet = statement.executeQuery("select * from user");
-            while (resultSet.next()) {
-                System.out.println("name : " + resultSet.getString("username") + " " +
-                        "blood type: " + resultSet.getString("blood_Type") +
-                        "phone number: " + resultSet.getString("phone_number"));
-            }
-        } catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
+        //TODO
+        //The information of the user will be stored in database and account will be created.
     }
 
-
+    @FXML
+    public void Select (ActionEvent event)
+    {
+        String s = bloodTypeDropdown.getSelectionModel().getSelectedItem().toString();
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<String> list = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
+        bloodTypeDropdown.setItems(list);
+    }
 }

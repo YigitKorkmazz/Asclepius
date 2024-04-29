@@ -23,9 +23,8 @@ public class Login {
             stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
-            Scene scene = null;
-            scene = new Scene(fxmlLoader.load(), 600, 600);
-            stage.setTitle("Hello!");
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("Register");
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
