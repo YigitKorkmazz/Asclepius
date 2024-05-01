@@ -24,12 +24,12 @@
       </Label>
       <HBox alignment="CENTER" layoutX="103.0" layoutY="274.0" prefHeight="100.0" prefWidth="434.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="63.0">
          <children>
-            <Label prefHeight="24.0" prefWidth="247.0" text="If you do not have an account" HBox.hgrow="ALWAYS">
+            <Label prefHeight="30.0" prefWidth="274.0" text="If you do not have an account" wrapText="true" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Register" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Register" textAlignment="CENTER" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="18.0" />
                </font>
