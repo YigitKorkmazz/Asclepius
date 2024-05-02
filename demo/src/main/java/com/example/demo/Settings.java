@@ -2,6 +2,7 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class Settings {
     @FXML
@@ -43,7 +44,8 @@ public class Settings {
     @FXML
     public void logOut()
     {
-        //TODO
+        Stage stage = (Stage) logOutBtn.getScene().getWindow();
+        stage.close();
     }
 
     public void changePassword()

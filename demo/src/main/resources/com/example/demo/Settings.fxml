@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Feed">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Settings">
    <children>
       <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <items>
@@ -102,23 +102,8 @@
                <content>
                   <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="598.0" prefWidth="671.0" style="-fx-background-color: white;">
                      <children>
-                        <Label alignment="CENTER" font="$x1" layoutX="193.0" layoutY="14.0" prefHeight="24.0" prefWidth="239.0" style="&#10;" text="Settings" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="210.0" />
-                        <PasswordField layoutX="199.0" layoutY="47.0" promptText="Old Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="208.5">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </PasswordField>
-                        <PasswordField layoutX="200.0" layoutY="87.0" promptText="New Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="207.5">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </PasswordField>
-                        <PasswordField layoutX="199.0" layoutY="130.0" promptText="New Password Again" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="208.5">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </PasswordField>
-                        <Button alignment="CENTER" layoutX="263.0" layoutY="174.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="174.0">
+                        <Label alignment="CENTER" font="$x1" layoutX="194.0" layoutY="2.0" prefHeight="24.0" prefWidth="239.0" style="&#10;" text="Settings" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="2.0" />
+                        <Button alignment="CENTER" layoutX="271.0" layoutY="176.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="271.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="176.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -137,27 +122,17 @@
                            </font>
                         </Label>
                         <ComboBox layoutX="362.0" layoutY="327.0" prefHeight="24.0" prefWidth="54.0" AnchorPane.leftAnchor="362.0" AnchorPane.rightAnchor="226.0" />
-                        <TextField layoutX="212.0" layoutY="358.0" promptText="New Phone Number" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="183.5">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <PasswordField layoutX="212.0" layoutY="400.0" promptText="Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="183.5">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </PasswordField>
-                        <Button fx:id="logOutBtn" layoutX="294.0" layoutY="552.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Log Out" textFill="RED" underline="true" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="262.5">
+                        <Button fx:id="logOutBtn" layoutX="294.0" layoutY="568.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: white;" text="Log Out" textFill="RED" underline="true" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="262.5">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="290.0" layoutY="448.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="262.0" AnchorPane.topAnchor="448.0">
+                        <Button alignment="CENTER" layoutX="278.0" layoutY="457.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="457.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <VBox layoutX="190.0" layoutY="490.0" prefHeight="71.0" prefWidth="399.0" spacing="20.0" AnchorPane.bottomAnchor="37.0" AnchorPane.topAnchor="490.0">
+                        <VBox layoutX="180.0" layoutY="497.0" prefHeight="71.0" prefWidth="399.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="515.0">
                            <children>
                               <CheckBox mnemonicParsing="false" prefHeight="19.0" prefWidth="398.0" text="I don't want to receive notificiations for relevant requests">
                                  <font>
@@ -169,6 +144,39 @@
                                     <Font size="15.0" />
                                  </font>
                               </CheckBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="186.0" layoutY="38.0" prefHeight="138.0" prefWidth="289.0" spacing="15.0" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="38.0">
+                           <children>
+                              <PasswordField promptText="Old Password" style="-fx-background-radius: 30;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </PasswordField>
+                              <PasswordField promptText="New Password" style="-fx-background-radius: 30;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </PasswordField>
+                              <PasswordField promptText="New Password Again" style="-fx-background-radius: 30;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </PasswordField>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="197.0" layoutY="364.0" prefHeight="79.0" prefWidth="280.0" spacing="15.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="165.0">
+                           <children>
+                              <TextField promptText="New Phone Number" style="-fx-background-radius: 30;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <PasswordField promptText="Password" style="-fx-background-radius: 30;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </PasswordField>
                            </children>
                         </VBox>
                      </children>
