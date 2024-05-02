@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Register implements Initializable {
+    //ui components
     @FXML
     private Button registerButton;
 
@@ -31,6 +32,7 @@ public class Register implements Initializable {
     @FXML
     private ComboBox<String> bloodTypeDropdown;
 
+    //methods
     @FXML
     public void registerButtonOnAction(ActionEvent e)
     {

@@ -29,14 +29,27 @@ public class Login {
     @FXML
     public void loginButtonOnAction (ActionEvent e)
     {
-        //TODO
+        //TODO: CHECK CREDENTIALS
+        try{
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
+            Stage primaryStage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("Feed");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     public void directRegistration ()
     {
         try{
-            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Stage stage = (Stage) registrationDirectorButton.getScene().getWindow();
             stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
