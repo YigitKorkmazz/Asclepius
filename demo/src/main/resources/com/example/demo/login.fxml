@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Login">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Login">
    <children>
-      <PasswordField layoutX="165.0" layoutY="167.0" prefHeight="33.0" prefWidth="270.0" promptText="Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" />
-      <TextField layoutX="145.0" layoutY="117.0" prefHeight="33.0" prefWidth="270.0" promptText="Phone Number" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" />
+      <PasswordField fx:id="passwordField" layoutX="165.0" layoutY="167.0" prefHeight="33.0" prefWidth="270.0" promptText="Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" />
+      <TextField fx:id="phoneNumberField" layoutX="145.0" layoutY="117.0" prefHeight="33.0" prefWidth="270.0" promptText="Phone Number" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" />
       <Button fx:id="loginButton" layoutX="261.0" layoutY="231.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="33.0" prefWidth="79.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="260.0">
          <font>
             <Font size="18.0" />
@@ -22,16 +22,16 @@
             <Font size="46.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="103.0" layoutY="274.0" prefHeight="100.0" prefWidth="434.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="63.0">
+      <HBox alignment="CENTER" layoutX="29.0" layoutY="274.0" prefHeight="100.0" prefWidth="545.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="26.0">
          <children>
-            <Label prefHeight="30.0" prefWidth="274.0" text="If you do not have an account" wrapText="true" HBox.hgrow="ALWAYS">
+            <Label prefHeight="30.0" prefWidth="263.0" text="If you do not have an account " wrapText="true" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Register" textAlignment="CENTER" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
+            <Button fx:id="registrationDirectorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#directRegistration" prefHeight="37.0" prefWidth="145.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="Register here" textAlignment="CENTER" underline="true" wrapText="true" HBox.hgrow="ALWAYS">
                <font>
-                  <Font size="18.0" />
+                  <Font size="20.0" />
                </font>
             </Button>
          </children>

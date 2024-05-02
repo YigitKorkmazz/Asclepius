@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +18,22 @@ public class Login {
     private Button loginButton;
 
     @FXML
+    private Button registrationDirectorButton;
+
+    @FXML
+    private TextField phoneNumberField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
     public void loginButtonOnAction (ActionEvent e)
+    {
+        //TODO
+    }
+
+    @FXML
+    public void directRegistration ()
     {
         try{
             Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -30,11 +47,6 @@ public class Login {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-
-        /*Stage stage = (Stage) loginButton.getScene().getWindow();
-        stage.close();*/
-
     }
 
 }

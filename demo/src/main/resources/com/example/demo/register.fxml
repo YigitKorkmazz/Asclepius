@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="619.0" style="-fx-background-radius: 30;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Register">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="619.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Register">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="30.0" prefHeight="68.0" prefWidth="171.0" text="  I have " AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="223.0">
          <font>
@@ -35,12 +35,12 @@
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="485.0" prefHeight="99.0" prefWidth="546.0" text="Certain medical conditions, age restrictions, minimum weight requirements, medications, pregnancy, and active infections, may disqualify individuals from donating blood or necessitate specific waiting periods." textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="28.0" />
       <HBox alignment="CENTER" layoutX="83.0" layoutY="408.0" prefHeight="99.0" prefWidth="522.0" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="14.0">
          <children>
-            <Label prefHeight="28.0" prefWidth="314.0" text="If you already have an account">
+            <Label prefHeight="28.0" prefWidth="297.0" text="If you already have an account ">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
-            <Button fx:id="loginPageDirectorButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="134.0" style="-fx-background-radius: 30; -fx-background-color: black;" text=" Login Page" textFill="WHITE">
+            <Button fx:id="loginPageDirectorButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: white;" text="Login Page" underline="true">
                <font>
                   <Font size="20.0" />
                </font>
