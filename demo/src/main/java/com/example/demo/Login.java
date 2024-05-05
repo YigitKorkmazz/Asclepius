@@ -35,7 +35,7 @@ public class Login {
             stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 650);
             stage.setTitle("Feed");
             stage.setScene(scene);
             stage.setFullScreen(true);

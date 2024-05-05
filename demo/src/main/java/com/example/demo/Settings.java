@@ -42,10 +42,43 @@ public class Settings {
     private Button logOutBtn;
 
     @FXML
+    protected Label bloodTypeLabel;
+
+    @FXML
+    private Label cityLabel;
+
+    @FXML
+    private Button bloodTypeChangeButton;
+
+    @FXML
+    private Button cityChangeButton;
+
+    @FXML
+    private Button settingsButton;
+
+    @FXML
+    private Button myDonationsButton;
+
+    @FXML
+    private Button myDonationRequestsButton;
+
+    @FXML
     public void logOut()
     {
         Stage stage = (Stage) logOutBtn.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void goMyDonations ()
+    {
+
+    }
+
+    @FXML
+    public void goMyDonationRequests()
+    {
+
     }
 
     public void changePassword()

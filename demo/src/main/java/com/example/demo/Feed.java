@@ -77,4 +77,16 @@ public class Feed{
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    public void goMyDonations ()
+    {
+
+    }
+
+    @FXML
+    public void goMyDonationRequests()
+    {
+
+    }
 }

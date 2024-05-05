@@ -27,7 +27,7 @@ public void start(Stage stage) throws IOException {
         StackPane root = new StackPane();
         root.getChildren().add(logoImageView);
 
-        Scene scene = new Scene(root, 600, 800, Color.RED);
+        Scene scene = new Scene(root, 600, 675, Color.RED);
         stage.setScene(scene);
         stage.setTitle("Logo Animation");
 
@@ -36,7 +36,7 @@ public void start(Stage stage) throws IOException {
         fadeTransition.setOnFinished(event -> {
                 try {
                         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-                        Scene newScene = new Scene(fxmlLoader.load(), 600, 600);
+                        Scene newScene = new Scene(fxmlLoader.load(), 600, 675);
                         stage.setTitle("Hello!");
                         stage.setScene(newScene);
                 } catch (IOException e) {
