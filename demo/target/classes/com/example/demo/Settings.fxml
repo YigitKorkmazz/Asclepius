@@ -76,7 +76,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="myDonationRequestsButton" layoutX="19.0" layoutY="411.0" mnemonicParsing="false" style="-fx-background-color: white;" text="&gt; My Donation Requests" underline="true">
+                  <Button fx:id="myDonationRequestsButton" layoutX="19.0" layoutY="411.0" mnemonicParsing="false" onAction="#goMyDonationRequests" style="-fx-background-color: white;" text="&gt; My Donation Requests" underline="true">
                      <font>
                         <Font size="20.0" />
                      </font>
