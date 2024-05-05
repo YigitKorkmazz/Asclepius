@@ -78,6 +78,7 @@ public class Feed{
         }
     }
 
+    /*
     @FXML
     public void goMyDonations ()
     {
@@ -89,4 +90,5 @@ public class Feed{
     {
 
     }
+     */
 }

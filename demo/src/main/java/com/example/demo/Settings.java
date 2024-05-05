@@ -69,6 +69,7 @@ public class Settings {
         stage.close();
     }
 
+    /*
     @FXML
     public void goMyDonations ()
     {
@@ -80,6 +81,7 @@ public class Settings {
     {
 
     }
+     */
 
     public void changePassword()
     {
