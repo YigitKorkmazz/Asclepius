@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,8 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Feed{
-    //ui components
+public class myDonationRequests {
     @FXML
     protected Label bloodTypeLabel;
 
@@ -32,36 +32,9 @@ public class Feed{
     @FXML
     private Button myDonationRequestsButton;
 
-    //methods
-    public void sortScarcity ()
-    {
-        //TODO
-    }
+    @FXML
+    private Button plusSignButton;
 
-    /*public void listDonationRequest (DonationRequest request)
-    {
-        //TODO
-    }
-
-    public void sortDonationRequests (DonationRequest request)
-    {
-        //TODO
-    }*/
-
-    public void displayDonationList ()
-    {
-        //TODO
-    }
-
-    public void openDonationRequest ()
-    {
-        //TODO
-    }
-
-    public void openMenuPage()
-    {
-       //TODO
-    }
 
     @FXML
     public void settingsOnAction()
@@ -77,6 +50,8 @@ public class Feed{
             ex.printStackTrace();
         }
     }
+
+    @FXML
     public void goSettingsPage1()
     {
         try{
@@ -90,6 +65,8 @@ public class Feed{
             ex.printStackTrace();
         }
     }
+
+    @FXML
     public void goSettingsPage2()
     {
         try{
@@ -133,7 +110,7 @@ public class Feed{
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     public void goFeed()
     {
@@ -149,4 +126,18 @@ public class Feed{
         }
     }
 
+    @FXML
+    public void plusSignOnAction (ActionEvent event)
+    {
+        try {
+            Stage stage = (Stage) plusSignButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("DonationCreationPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("My Donations");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

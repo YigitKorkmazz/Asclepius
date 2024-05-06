@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Feed{
-    //ui components
+public class myDonations {
+
     @FXML
     protected Label bloodTypeLabel;
 
@@ -31,37 +31,6 @@ public class Feed{
 
     @FXML
     private Button myDonationRequestsButton;
-
-    //methods
-    public void sortScarcity ()
-    {
-        //TODO
-    }
-
-    /*public void listDonationRequest (DonationRequest request)
-    {
-        //TODO
-    }
-
-    public void sortDonationRequests (DonationRequest request)
-    {
-        //TODO
-    }*/
-
-    public void displayDonationList ()
-    {
-        //TODO
-    }
-
-    public void openDonationRequest ()
-    {
-        //TODO
-    }
-
-    public void openMenuPage()
-    {
-       //TODO
-    }
 
     @FXML
     public void settingsOnAction()
@@ -133,7 +102,7 @@ public class Feed{
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     public void goFeed()
     {
@@ -148,5 +117,4 @@ public class Feed{
             ex.printStackTrace();
         }
     }
-
 }

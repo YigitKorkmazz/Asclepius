@@ -89,8 +89,6 @@ public class Settings {
         }
     }
 
-
-
     @FXML
     public void goMyDonationRequests()
     {
