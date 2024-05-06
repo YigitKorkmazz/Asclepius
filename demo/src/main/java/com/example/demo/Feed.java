@@ -77,6 +77,32 @@ public class Feed{
             ex.printStackTrace();
         }
     }
+    public void goSettingsPage1()
+    {
+        try{
+            Stage stage = (Stage) bloodTypeChangeButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("Settings");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void goSettingsPage2()
+    {
+        try{
+            Stage stage = (Stage) cityChangeButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("Settings");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     /*
     @FXML
