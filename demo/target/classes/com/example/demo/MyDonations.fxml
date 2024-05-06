@@ -67,7 +67,11 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+<<<<<<< HEAD
                   <Button fx:id="myDonationsButton" layoutX="19.0" layoutY="352.0" mnemonicParsing="false" style="-fx-background-color: white;" text="&gt; My Donations" underline="true">
+=======
+                  <Button fx:id="myDonationsButton" layoutX="19.0" layoutY="352.0" mnemonicParsing="false" onAction="#goMyDonations" style="-fx-background-color: white;" text="&gt; My Donations" underline="true">
+>>>>>>> d3ed1694179cf59bf5260008fe0ea8cc401a5e1d
                      <font>
                         <Font size="20.0" />
                      </font>
