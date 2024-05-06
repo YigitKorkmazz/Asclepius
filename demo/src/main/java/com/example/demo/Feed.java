@@ -127,4 +127,34 @@ public class Feed{
         }
     }
 
+    @FXML
+    public void goMyDonations()
+    {
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("My Donations");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void goFeed()
+    {
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("My Donations");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
