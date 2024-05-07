@@ -47,7 +47,7 @@
             </Button>
          </children>
       </HBox>
-      <PasswordField layoutX="145.0" layoutY="285.0" prefHeight="37.0" prefWidth="346.0" promptText="Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="128.0">
+      <PasswordField fx:id="passwordField" layoutX="145.0" layoutY="285.0" prefHeight="37.0" prefWidth="346.0" promptText="Password" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="128.0">
          <font>
             <Font size="20.0" />
          </font>
