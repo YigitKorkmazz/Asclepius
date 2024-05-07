@@ -12,14 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class Register implements Initializable {
@@ -50,25 +46,49 @@ public class Register implements Initializable {
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11703300", "sql11703300", "QHBShewvQg");
                 Statement statement = connection.createStatement();
-                String phoneNumber = phoneNumberField.getText();
-                ResultSet existingUser = statement.executeQuery("SELECT * FROM USER WHERE phone_number = '" + phoneNumber + "'");
-                if (!existingUser.next()) {
-                    statement.executeUpdate("INSERT INTO USER (username, blood_Type, password, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumber + "')");
+                if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
+                {
+                    statement.executeUpdate("INSERT INTO USER (username, blood_Type, password, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
                     showSuccessAlert();
+                }
+                else if (checkFieldsEmpty())
+                {
+                    showErrorAlertForEmptyInputs();
                 }
                 else
                 {
-                    showErrorAlert();
-                    phoneNumberField.setText("");
-                    nameField.setText("");
-                    passwordField.setText("");
+                    showErrorAlertForAlreadyUsed();
                 }
 
-                // Close the connection
+                phoneNumberField.setText("");
+                nameField.setText("");
+                passwordField.setText("");
                 connection.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+    }
+
+    public boolean checkPhoneNumberIsUsing (Connection connection, Statement statement)
+    {
+        try {
+            ResultSet existingUser = statement.executeQuery("SELECT * FROM USER WHERE phone_number = '" + phoneNumberField.getText() + "'");
+            if (!existingUser.next()) {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean checkFieldsEmpty ()
+    {
+        return nameField.getText().isEmpty() || phoneNumberField.getText().isEmpty() || passwordField.getText().isEmpty();
+
     }
 
     @FXML
@@ -100,7 +120,6 @@ public class Register implements Initializable {
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
-        alert.setHeaderText("Look, an Information Dialog");
         alert.setContentText("Your Account has been created !");
         alert.setOnCloseRequest(event -> {
             // Open another page here
@@ -118,11 +137,20 @@ public class Register implements Initializable {
         alert.show();
     }
 
-    public void showErrorAlert()
+    public void showErrorAlertForAlreadyUsed()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Phone Number Already Exists");
+        alert.setContentText("The phone number you entered is already registered.");
+        alert.show();
+    }
+
+    public void showErrorAlertForEmptyInputs ()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Do not leave any field blank !");
         alert.setContentText("The phone number you entered is already registered.");
         alert.show();
     }
