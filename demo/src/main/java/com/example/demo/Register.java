@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,6 +59,9 @@ public class Register implements Initializable {
                 else
                 {
                     showErrorAlert();
+                    phoneNumberField.setText("");
+                    nameField.setText("");
+                    passwordField.setText("");
                 }
 
                 // Close the connection
@@ -71,6 +75,20 @@ public class Register implements Initializable {
     public void Select (ActionEvent event)
     {
         String s = bloodTypeDropdown.getSelectionModel().getSelectedItem().toString();
+    }
+
+    @FXML
+    public void loginDirectorButtonOnAction (ActionEvent event)
+    {
+        try {
+            Stage stage = (Stage) loginPageDirectorButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            Scene newScene = new Scene(fxmlLoader.load(), 600, 675);
+            stage.setTitle("Login!");
+            stage.setScene(newScene);
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception as appropriate
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

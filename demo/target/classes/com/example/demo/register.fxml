@@ -40,7 +40,7 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <Button fx:id="loginPageDirectorButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: white;" text="Login Page" underline="true">
+            <Button fx:id="loginPageDirectorButton" mnemonicParsing="false" onAction="#loginDirectorButtonOnAction" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: white;" text="Login Page" underline="true">
                <font>
                   <Font size="20.0" />
                </font>
