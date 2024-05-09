@@ -48,7 +48,7 @@ public class Register implements Initializable {
                 Statement statement = connection.createStatement();
                 if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
                 {
-                    statement.executeUpdate("INSERT INTO USER (username, blood_Type, password, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
+                    statement.executeUpdate("INSERT INTO user (username, blood_Type, password, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
                     showSuccessAlert();
                 }
                 else if (checkFieldsEmpty())
@@ -72,7 +72,7 @@ public class Register implements Initializable {
     public boolean checkPhoneNumberIsUsing (Connection connection, Statement statement)
     {
         try {
-            ResultSet existingUser = statement.executeQuery("SELECT * FROM USER WHERE phone_number = '" + phoneNumberField.getText() + "'");
+            ResultSet existingUser = statement.executeQuery("SELECT * FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
             if (!existingUser.next()) {
                 return false;
             }
