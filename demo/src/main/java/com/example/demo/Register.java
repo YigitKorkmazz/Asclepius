@@ -44,11 +44,11 @@ public class Register implements Initializable {
         {
             //TODO*
             try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11705244", "sql11705244", "93b96VJf17");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
                 Statement statement = connection.createStatement();
                 if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
                 {
-                    statement.executeUpdate("INSERT INTO user (username, blood_Type, password, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
+                    statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
                     showSuccessAlert();
                 }
                 else if (checkFieldsEmpty())
