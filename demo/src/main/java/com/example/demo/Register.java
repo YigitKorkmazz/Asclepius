@@ -46,16 +46,16 @@ public class Register implements Initializable {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
             Statement statement = connection.createStatement();
-            if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
+            if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty() && !checkPhoneNumberIsTrue())
             {
-                statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
+                statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number) VALUES ('" + nameField.getText() + "','" + bloodTypeDropdown.getValue() + "', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
                 showSuccessAlert();
             }
             else if (checkFieldsEmpty())
             {
                 showErrorAlertForEmptyInputs();
             }
-            else if ( checkPhoneNumberIsTrue()){
+            else if (!checkPhoneNumberIsTrue()){
                 showErrorAlertWrongPhoneNumber();
             }
             else
