@@ -44,7 +44,7 @@ public class Register implements Initializable {
         {
             //TODO*
             try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11703300", "sql11703300", "QHBShewvQg");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11705244", "sql11705244", "93b96VJf17");
                 Statement statement = connection.createStatement();
                 if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
                 {
