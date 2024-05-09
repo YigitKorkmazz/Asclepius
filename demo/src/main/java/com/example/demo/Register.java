@@ -41,32 +41,35 @@ public class Register implements Initializable {
     //methods
     @FXML
     public void registerButtonOnAction(ActionEvent e)
-        {
-            //TODO*
-            try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
-                Statement statement = connection.createStatement();
-                if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
-                {
-                    statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
-                    showSuccessAlert();
-                }
-                else if (checkFieldsEmpty())
-                {
-                    showErrorAlertForEmptyInputs();
-                }
-                else
-                {
-                    showErrorAlertForAlreadyUsed();
-                }
-
-                phoneNumberField.setText("");
-                nameField.setText("");
-                passwordField.setText("");
-                connection.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+    {
+        //TODO*
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
+            Statement statement = connection.createStatement();
+            if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty())
+            {
+                statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number) VALUES ('" + nameField.getText() + "', 'ARH+', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
+                showSuccessAlert();
             }
+            else if (checkFieldsEmpty())
+            {
+                showErrorAlertForEmptyInputs();
+            }
+            else if ( checkPhoneNumberIsTrue()){
+                showErrorAlertWrongPhoneNumber();
+            }
+            else
+            {
+                showErrorAlertForAlreadyUsed();
+            }
+
+            phoneNumberField.setText("");
+            nameField.setText("");
+            passwordField.setText("");
+            connection.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public boolean checkPhoneNumberIsUsing (Connection connection, Statement statement)
@@ -154,4 +157,31 @@ public class Register implements Initializable {
         alert.setContentText("The phone number you entered is already registered.");
         alert.show();
     }
+
+    public boolean checkPhoneNumberIsTrue(){
+
+        String phoneNumber = phoneNumberField.getText();
+
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            if (!Character.isDigit(phoneNumber.charAt(i))) {
+                return false;
+            }
+        }
+
+        if (phoneNumber.length() != 10) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void showErrorAlertWrongPhoneNumber ()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Please Check The Phone Number!");
+        alert.setContentText("There is a problem with the phone number!");
+        alert.show();
+    }
+
 }
