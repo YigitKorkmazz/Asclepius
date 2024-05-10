@@ -10,12 +10,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Feed{
+
+    private static User currentUser;
+
     //ui components
     @FXML
-    protected Label bloodTypeLabel;
+    public Label helloLabel;
 
     @FXML
-    private Label cityLabel;
+    private Label bloodTypeLabel;
+
+    @FXML
+    public Label cityLabel;
 
     @FXML
     private Button bloodTypeChangeButton;
@@ -31,6 +37,17 @@ public class Feed{
 
     @FXML
     private Button myDonationRequestsButton;
+
+
+    // Rest of your class implementation...
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
 
     //methods
     public void sortScarcity ()
@@ -56,11 +73,6 @@ public class Feed{
     public void openDonationRequest ()
     {
         //TODO
-    }
-
-    public void openMenuPage()
-    {
-       //TODO
     }
 
     @FXML
@@ -149,4 +161,15 @@ public class Feed{
         }
     }
 
+    @FXML
+    public void initialize (){
+        User currentUser = getCurrentUser();
+        if (currentUser != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else {
+            helloLabel.setText("Hello, Guest");
+        }
+
+        cityLabel.setText("Ankara");
+    }
 }

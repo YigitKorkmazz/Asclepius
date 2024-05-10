@@ -49,6 +49,8 @@ public class Login {
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
                     Stage primaryStage = new Stage();
+                    User user = new User( existingUser.getString("blood_type"),  existingUser.getString("Name"), phoneNumberField.getText(), passwordField.getText(), "Ankara");
+                    Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 600, 650);
                     stage.setTitle("Feed");

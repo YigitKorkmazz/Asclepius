@@ -49,7 +49,7 @@
       <items>
         <AnchorPane style="-fx-background-color: white;">
           <children>
-            <Label alignment="CENTER" layoutX="64.0" layoutY="14.0" minWidth="60.0" prefHeight="21.0" prefWidth="62.0" style="&#10;" text="Hello" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="helloLabel" alignment="CENTER" layoutX="64.0" layoutY="14.0" minWidth="60.0" prefHeight="21.0" prefWidth="62.0" style="&#10;" text="Hello" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
               <font>
                 <Font size="20.0" fx:id="x1" />
               </font>
@@ -106,7 +106,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="cityChangeButton" layoutX="64.0" layoutY="228.0" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: white;">
+                  <Button fx:id="cityChangeButton" layoutX="107.0" layoutY="230.0" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: white;">
                      <font>
                         <Font size="20.0" />
                      </font>
