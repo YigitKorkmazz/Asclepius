@@ -30,6 +30,9 @@ public class myDonations {
     private Button settingsButton;
 
     @FXML
+    private Button homePageButton;
+
+    @FXML
     private Button myDonationsButton;
 
     @FXML
