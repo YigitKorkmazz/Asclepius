@@ -14,10 +14,10 @@ public class UserDAO {
     protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
 
     protected static final String SELECT_ALL_USERS = "SELECT * FROM user";
-    protected static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE id = ?";
-    protected static final String INSERT_USER = "INSERT INTO user (type, name, phone_number, password, city) VALUES (?, ?, ?, ?, ?)";
-    protected static final String UPDATE_USER = "UPDATE user SET type = ?, name = ?, phone_number = ?, password = ?, city = ? WHERE id = ?";
-    protected static final String DELETE_USER = "DELETE FROM user WHERE id = ?";
+    protected static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE User_id = ?";
+    protected static final String INSERT_USER = "INSERT INTO user (blood_type, Name, phone_number, userPassword, city) VALUES (?, ?, ?, ?, ?)";
+    protected static final String UPDATE_USER = "UPDATE user SET blood_type = ?, Name = ?, phone_number = ?, userPassword = ?, city = ? WHERE User_id = ?";
+    protected static final String DELETE_USER = "DELETE FROM user WHERE User_id = ?";
 
     protected Connection getConnection() {
         Connection connection = null;

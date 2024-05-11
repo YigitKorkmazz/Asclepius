@@ -176,10 +176,17 @@ public class Settings extends UserDAO{
 
     }
 
-    public void changePassword (String newPassword)
-    {
-        Feed.getCurrentUser().setPassword(newPassword);
+    public void changePassword(String newPassword) {
+        User currentUser = Feed.getCurrentUser();
+        currentUser.setPassword(newPassword); // Update password in memory
+
+        // Create an instance of UserDAO
+        UserDAO userDAO = new UserDAO();
+
+        // Use updateUser method of UserDAO to persist all changes, including the new password
+        userDAO.updateUser(currentUser);
     }
+
 
     public void showOldPasswordIsWrongAlert (Stage ownerStage)
     {
