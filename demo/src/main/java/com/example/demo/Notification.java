@@ -1,20 +1,36 @@
 package com.example.demo;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 
-public class Notification {
+public class Notification extends Application {
 
-    //instance variables
-    private enum Type
-    {
-        TAGGED,
-        REQUEST_ACCEPTED,
-        URGENT_DONATION_REQUEST
+    @Override
+    public void start(Stage primaryStage) {
+        Button notifyButton = new Button("Show Notification");
+        notifyButton.setOnAction(event -> showNotification("Urgent Blood Donation", "Donate Blood"));
+
+        VBox root = new VBox(notifyButton);
+        root.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(root, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Notification");
+        primaryStage.show();
     }
 
-    private String message;
+    public void showNotification(String title, String message) {
+        Notifications.create()
+                .title(title)
+                .text(message)
+                .showInformation();
+    }
 
-    //methods
-    public void sendNotification (User user, Type typeOfNotification)
-    {
-        //TODO
+    public static void main(String[] args) {
+        launch(args);
     }
 }
+
