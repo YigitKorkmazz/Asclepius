@@ -8,6 +8,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Feed">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DonationRequestCreation">
    <children>
       <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <items>
@@ -109,11 +110,11 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <VBox layoutY="70.0" prefHeight="356.0" prefWidth="623.0">
+                        <VBox layoutY="70.0" prefHeight="436.0" prefWidth="624.0">
                            <children>
                               <HBox prefHeight="96.0" prefWidth="620.0">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="413.0" text="Blood Type" textAlignment="CENTER">
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="352.0" text="Blood Type" textAlignment="CENTER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -121,24 +122,24 @@
                                     <ChoiceBox fx:id="bloodTypeDropdown" prefHeight="24.0" prefWidth="121.0" style="-fx-background-radius: 30;" />
                                  </children>
                               </HBox>
-                              <AnchorPane prefHeight="251.0" prefWidth="642.0">
+                              <AnchorPane prefHeight="343.0" prefWidth="624.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="24.0" prefWidth="624.0" text="Needed By">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="222.0" layoutY="31.0" promptText="Name" style="-fx-background-radius: 30;" />
-                                    <TextField layoutX="223.0" layoutY="76.0" promptText="Phone Number" style="-fx-background-radius: 30;" />
-                                    <TextField layoutX="223.0" layoutY="121.0" promptText="Address" style="-fx-background-radius: 30;" />
-                                    <CheckBox layoutX="246.0" layoutY="171.0" mnemonicParsing="false" text="Transportation Help" />
-                                    <HBox layoutX="71.0" layoutY="208.0" prefHeight="81.0" prefWidth="508.0">
+                                    <TextField fx:id="nameField" layoutX="222.0" layoutY="31.0" promptText="Name" style="-fx-background-radius: 30;" />
+                                    <TextField fx:id="phoneNumberField" layoutX="223.0" layoutY="76.0" promptText="Phone Number" style="-fx-background-radius: 30;" />
+                                    <CheckBox layoutX="245.0" layoutY="213.0" mnemonicParsing="false" text="Transportation Help" />
+                                    <HBox layoutX="69.0" layoutY="261.0" prefHeight="81.0" prefWidth="508.0">
                                        <children>
                                           <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="179.0" text="O USD" />
                                           <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="170.0" text="50 USD" />
                                           <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="158.0" text="100 USD" />
                                        </children>
                                     </HBox>
+                                    <TextArea fx:id="addressArea" layoutX="223.0" layoutY="113.0" prefHeight="83.0" prefWidth="180.0" promptText="Address" wrapText="true" />
                                  </children>
                               </AnchorPane>
                            </children>
