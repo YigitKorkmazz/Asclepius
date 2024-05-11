@@ -17,7 +17,7 @@
          <items>
             <AnchorPane style="-fx-background-color: white;">
                <children>
-                  <Label alignment="CENTER" layoutX="64.0" layoutY="14.0" minWidth="60.0" prefHeight="21.0" prefWidth="62.0" style="&#10;" text="Hello" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="helloLabel" alignment="CENTER" layoutX="2.0" layoutY="14.0" minWidth="60.0" prefHeight="24.0" prefWidth="249.0" style="&#10;" text="Hello" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font size="20.0" fx:id="x1" />
                      </font>
@@ -74,7 +74,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="cityChangeButton" layoutX="64.0" layoutY="225.0" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: white;">
+                  <Button fx:id="cityChangeButton" layoutX="123.0" layoutY="227.0" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: white;">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -95,12 +95,21 @@
                <content>
                   <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="584.0" prefWidth="671.0" style="-fx-background-color: white;">
                      <children>
-                        <Label alignment="CENTER" font="$x1" layoutX="-2.0" layoutY="14.0" prefHeight="24.0" prefWidth="654.0" style="&#10;" text="My Donation Requests" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="19.0" />
-                        <Button fx:id="plusSignButton" layoutX="592.0" layoutY="21.0" mnemonicParsing="false" onAction="#plusSignOnAction" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: WHITE;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+                        <Label alignment="CENTER" font="$x1" layoutY="60.0" prefHeight="24.0" prefWidth="654.0" style="&#10;" text="My Donation Requests" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="19.199999999999932" />
+                        <Button fx:id="plusSignButton" layoutX="579.0" layoutY="55.0" mnemonicParsing="false" onAction="#plusSignOnAction" prefHeight="39.0" prefWidth="39.0" style="-fx-background-color: WHITE;" AnchorPane.rightAnchor="8.199999999999932" AnchorPane.topAnchor="55.0">
                            <graphic>
                               <ImageView fitHeight="27.0" fitWidth="24.0">
                                  <image>
                                     <Image url="@images/plusSign.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="homePageButton" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#goFeed" prefHeight="48.0" prefWidth="54.0" style="-fx-background-color: white;">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/homepage.png" />
                                  </image>
                               </ImageView>
                            </graphic>

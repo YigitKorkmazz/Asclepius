@@ -171,5 +171,7 @@ public class Feed{
         }
 
         cityLabel.setText("Ankara");
+
+
     }
 }
