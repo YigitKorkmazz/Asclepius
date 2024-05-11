@@ -13,7 +13,7 @@ public class BloodRequestDAO {
     private String jdbcUsername = "myFirstProject_willingmen";
     private String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
 
-    private static final String SELECT_ALL_BLOOD_REQUESTS = "SELECT * FROM blood_requests";
+    private static final String SELECT_ALL_BLOOD_REQUESTS = "SELECT * FROM Donations";
 
     protected Connection getConnection() {
         Connection connection = null;

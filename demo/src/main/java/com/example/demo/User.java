@@ -2,14 +2,15 @@ package com.example.demo;
 
 import java.util.ArrayList;
 
-public class User extends UserController{
-    //instance variables
+public class User extends UserController {
+    // Instance variables
     private int uniqueId;
     private String name;
     private String phoneNumber;
     private String password;
-    private enum BloodType
-    {
+
+    // Enum for BloodType
+    private enum BloodType {
         ABRHPositive,
         ARHNegative,
         ARHPositive,
@@ -21,60 +22,37 @@ public class User extends UserController{
     }
     private BloodType bloodType;
 
-    private enum city{}
-    private ArrayList<com.example.demo.DonationRequest> ownDonationRequest;
-    private ArrayList<com.example.demo.DonationRequest> acceptedDonationRequests;
+    private enum City {
+        ANKARA, ISTANBUL, IZMIR
+    }
+    private City city; // Assuming you need an instance variable for city
 
-    public User (String type, String name, String phoneNumber, String password, String city)
-    {
+    private ArrayList<DonationRequest> ownDonationRequest;
+    private ArrayList<DonationRequest> acceptedDonationRequests;
+
+    public User(String type, String name, String phoneNumber, String password, String cityString) {
         this.bloodType = convertStringTypeToEnum(type);
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.password = password;
+        this.city = City.valueOf(cityString); // This assumes cityString is a valid enum name
     }
 
-    public BloodType convertStringTypeToEnum (String type)
-    {
-        if (type.equals("ABRH+"))
-        {
-            return BloodType.ABRHPositive;
+    private BloodType convertStringTypeToEnum(String type) {
+        switch (type) {
+            case "ABRH+": return BloodType.ABRHPositive;
+            case "ABRH-": return BloodType.ABRHNegative;
+            case "ARH+": return BloodType.ARHPositive;
+            case "ARH-": return BloodType.ARHNegative;
+            case "BRH+": return BloodType.BRHPositive;
+            case "BRH-": return BloodType.BRHNegative;
+            case "0RH+": return BloodType.ZeroRHPositive;
+            case "0RH-": return BloodType.ZeroRHNegative;
+            default: return null;
         }
-        else if (type.equals("ABRH-"))
-        {
-            return BloodType.ABRHNegative;
-        }
-        else if (type.equals("ARH+"))
-        {
-            return BloodType.ARHPositive;
-        }
-        else if (type.equals("ARH-"))
-        {
-            return BloodType.ARHNegative;
-        }
-        else if (type.equals("BRH+"))
-        {
-            return BloodType.BRHPositive;
-        }
-        else if (type.equals("BRH-"))
-        {
-            return BloodType.BRHNegative;
-        }
-        else if (type.equals("0RH+"))
-        {
-            return BloodType.ZeroRHPositive;
-        }
-        else if (type.equals("0RH-"))
-        {
-            return BloodType.ZeroRHNegative;
-        }
-
-        return null;
     }
 
-    public void addDonation (com.example.demo.DonationRequest request)
-    {
-        //TODO
-    }
+    // Adding getters and setters
 
     public int getUniqueId() {
         return uniqueId;
@@ -100,7 +78,28 @@ public class User extends UserController{
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public BloodType getBloodType() {
         return bloodType;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(String cityString) {
+        this.city = City.valueOf(cityString);
+    }
+
+    public void addDonation(DonationRequest request) {
+        // Implementation needed based on your application logic
+        // Example: this.ownDonationRequest.add(request);
     }
 }
