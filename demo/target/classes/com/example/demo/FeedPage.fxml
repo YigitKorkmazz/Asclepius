@@ -145,7 +145,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="89.0" prefWidth="681.0" wrapText="true">
+                              <Button mnemonicParsing="false" prefHeight="89.0" prefWidth="700.0" wrapText="true">
                                  <graphic>
                                     <VBox prefHeight="75.0" prefWidth="649.0">
                                        <children>
@@ -170,7 +170,7 @@
                                     </VBox>
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="676.0" wrapText="true" GridPane.rowIndex="1">
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="701.0" wrapText="true" GridPane.rowIndex="1">
                                  <graphic>
                                     <VBox prefHeight="75.0" prefWidth="649.0">
                                        <children>
@@ -195,7 +195,7 @@
                                     </VBox>
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="94.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="677.0" wrapText="true" GridPane.rowIndex="2">
+                              <Button layoutX="10.0" layoutY="94.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="699.0" wrapText="true" GridPane.rowIndex="2">
                                  <graphic>
                                     <VBox prefHeight="75.0" prefWidth="649.0">
                                        <children>
@@ -220,7 +220,7 @@
                                     </VBox>
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="685.0" wrapText="true" GridPane.rowIndex="3">
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="700.0" wrapText="true" GridPane.rowIndex="3">
                                  <graphic>
                                     <VBox prefHeight="75.0" prefWidth="649.0">
                                        <children>
@@ -245,9 +245,9 @@
                                     </VBox>
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="663.0" wrapText="true" GridPane.rowIndex="4">
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="701.0" wrapText="true" GridPane.rowIndex="4">
                                  <graphic>
-                                    <VBox prefHeight="75.0" prefWidth="649.0">
+                                    <VBox prefHeight="80.0" prefWidth="700.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="24.0" prefWidth="624.0" text="0RH+ BLOOD REQUEST" />
                                           <Label alignment="CENTER" prefHeight="15.0" prefWidth="635.0" text="veli kavlak">
@@ -270,9 +270,9 @@
                                     </VBox>
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="346.0" mnemonicParsing="false" prefHeight="88.0" prefWidth="657.0" wrapText="true" GridPane.rowIndex="5">
+                              <Button layoutX="10.0" layoutY="346.0" mnemonicParsing="false" prefHeight="88.0" prefWidth="700.0" wrapText="true" GridPane.rowIndex="5">
                                  <graphic>
-                                    <VBox prefHeight="75.0" prefWidth="649.0">
+                                    <VBox prefHeight="79.0" prefWidth="700.0">
                                        <children>
                                           <Label alignment="CENTER" prefHeight="24.0" prefWidth="624.0" text="0RH+ BLOOD REQUEST" />
                                           <Label alignment="CENTER" prefHeight="15.0" prefWidth="635.0" text="veli kavlak">

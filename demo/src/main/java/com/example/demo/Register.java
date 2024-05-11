@@ -183,7 +183,7 @@ public class Register implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Please Check The Phone Number!");
-        alert.setContentText("There is a problem with the phone number!");
+        alert.setContentText("Enter your phone number without zero (5XXXXXXXXX)");
         alert.show();
     }
 

@@ -101,7 +101,7 @@ public class Login {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Please Check The Credidentials!");
-        alert.setContentText("There is a problem with the credidentials!");
+        alert.setContentText("Enter your phone number without zero (5XXXXXXXXX)");
         alert.show();
     }
 
