@@ -23,7 +23,7 @@ public class User extends UserController {
     private BloodType bloodType;
 
     private enum City {
-        ANKARA, ISTANBUL, IZMIR
+        Ankara, Istanbul, Izmir
     }
     private City city; // Assuming you need an instance variable for city
 
