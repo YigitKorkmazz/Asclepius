@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    private String jdbcURL = "jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen";
-    private String jdbcUsername = "myFirstProject_willingmen";
-    private String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
+    protected String jdbcURL = "jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen";
+    protected String jdbcUsername = "myFirstProject_willingmen";
+    protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
 
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
-    private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
-    private static final String INSERT_USER = "INSERT INTO users (type, name, phone_number, password, city) VALUES (?, ?, ?, ?, ?)";
-    private static final String UPDATE_USER = "UPDATE users SET type = ?, name = ?, phone_number = ?, password = ?, city = ? WHERE id = ?";
-    private static final String DELETE_USER = "DELETE FROM users WHERE id = ?";
+    protected static final String SELECT_ALL_USERS = "SELECT * FROM users";
+    protected static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
+    protected static final String INSERT_USER = "INSERT INTO users (type, name, phone_number, password, city) VALUES (?, ?, ?, ?, ?)";
+    protected static final String UPDATE_USER = "UPDATE users SET type = ?, name = ?, phone_number = ?, password = ?, city = ? WHERE id = ?";
+    protected static final String DELETE_USER = "DELETE FROM users WHERE id = ?";
 
     protected Connection getConnection() {
         Connection connection = null;

@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class Register implements Initializable {
     //ui components
+
     @FXML
     private Button registerButton;
 
