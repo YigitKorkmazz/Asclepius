@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Settings {
+
+    @FXML
+    private Label helloLabel;
+
     @FXML
     private PasswordField oldPassword;
 
@@ -104,6 +108,17 @@ public class Settings {
         }
     }
 
+    @FXML
+    public void initialize (){
+        User currentUser = Feed.getCurrentUser();
+        if (currentUser != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else {
+            helloLabel.setText("Hello, Guest");
+        }
+
+        cityLabel.setText("Ankara");
+    }
 
     public void changePassword()
     {
@@ -124,4 +139,5 @@ public class Settings {
     {
         //TODO
     }
+
 }

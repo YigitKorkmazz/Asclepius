@@ -21,7 +21,7 @@
          <items>
             <AnchorPane style="-fx-background-color: white;">
                <children>
-                  <Button layoutX="55.0" layoutY="244.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: white;">
+                  <Button layoutX="123.0" layoutY="245.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: white;">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -36,7 +36,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label alignment="CENTER" layoutX="64.0" layoutY="14.0" minWidth="60.0" prefHeight="21.0" prefWidth="62.0" style="&#10;" text="Hello" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="helloLabel" alignment="CENTER" layoutX="64.0" layoutY="14.0" minWidth="60.0" prefHeight="21.0" prefWidth="62.0" style="&#10;" text="Hello" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font size="20.0" fx:id="x1" />
                      </font>
@@ -46,7 +46,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="cityLabel" layoutX="14.0" layoutY="244.0" prefHeight="44.0" prefWidth="83.0" text="City" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="125.0">
+                  <Label fx:id="cityLabel" layoutX="19.0" layoutY="245.0" prefHeight="44.0" prefWidth="159.0" text="City" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="71.0">
                      <font>
                         <Font size="20.0" />
                      </font>

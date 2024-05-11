@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class myDonationRequests {
     @FXML
+    private Label helloLabel;
+
+    @FXML
     protected Label bloodTypeLabel;
 
     @FXML
@@ -133,11 +136,23 @@ public class myDonationRequests {
             Stage stage = (Stage) plusSignButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("DonationCreationPage.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-            stage.setTitle("My Donations");
+            stage.setTitle("Create Donation Request");
             stage.setScene(scene);
             stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initialize (){
+        User currentUser = Feed.getCurrentUser();
+        if (currentUser != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else {
+            helloLabel.setText("Hello, Guest");
+        }
+
+        cityLabel.setText("Ankara");
     }
 }

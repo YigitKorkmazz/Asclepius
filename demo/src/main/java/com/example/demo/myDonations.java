@@ -12,6 +12,9 @@ import java.io.IOException;
 public class myDonations {
 
     @FXML
+    private Label helloLabel;
+
+    @FXML
     protected Label bloodTypeLabel;
 
     @FXML
@@ -116,5 +119,17 @@ public class myDonations {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initialize (){
+        User currentUser = Feed.getCurrentUser();
+        if (currentUser != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else {
+            helloLabel.setText("Hello, Guest");
+        }
+
+        cityLabel.setText("Ankara");
     }
 }
