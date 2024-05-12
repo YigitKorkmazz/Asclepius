@@ -20,6 +20,8 @@ public class BloodRequestDAO {
     private static final String DELETE_SQL = "DELETE FROM Donations WHERE unique_id = ?";
 
 
+    public BloodRequestDAO() {}
+
     protected Connection getConnection() {
         Connection connection = null;
         try {

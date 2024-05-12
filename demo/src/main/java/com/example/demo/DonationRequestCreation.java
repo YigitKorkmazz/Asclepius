@@ -3,13 +3,12 @@ package com.example.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DonationRequestCreation {
 
@@ -142,5 +141,35 @@ public class DonationRequestCreation {
         }
 
         cityLabel.setText("Ankara");
+    }
+    @FXML
+    public void publishButtonOnAction(ActionEvent event) {
+        // Validate inputs
+        String name = nameField.getText().trim();
+        String phoneNumber = phoneNumberField.getText().trim();
+        String address = addressArea.getText().trim();
+
+        if (name.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Missing Information");
+            alert.setHeaderText("Required Fields Missing");
+            alert.setContentText("Please ensure all fields are filled out: Name, Phone Number, and Address.");
+            alert.showAndWait();
+            return;
+        }
+
+        User currentUser = Feed.getCurrentUser();
+        DonationRequest newRequest = new DonationRequest(currentUser, phoneNumber, address, null, null, null, null, new ArrayList<User>());
+
+        // Insert the donation request into the database
+        BloodRequestDAO donationRequestDAO = new BloodRequestDAO();
+        try {
+            donationRequestDAO.insertDonationRequest(newRequest);
+            System.out.println("Donation request published successfully.");
+            // Optionally clear the fields or navigate away
+        } catch (Exception e) {
+            System.out.println("Failed to insert donation request: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
