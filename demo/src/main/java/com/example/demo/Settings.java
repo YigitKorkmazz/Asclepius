@@ -131,14 +131,11 @@ public class Settings extends UserDAO{
     @FXML
     public void initialize (){
         User currentUser = Feed.getCurrentUser();
-        if (currentUser != null) {
-            helloLabel.setText("Hello, " + currentUser.getName());
-        } else {
-            helloLabel.setText("Hello, Guest");
-        }
-
-        cityLabel.setText("Ankara");
-
+        helloLabel.setText("Hello, " + currentUser.getName());
+        cityLabel.setText(currentUser.getCityAsString());
+        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+        bloodType.setText(currentUser.getBloodTypeAsString());
+        city.setText(currentUser.getCityAsString());
         ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
         ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
         bloodTypeDropdown.setItems(bloodTypeList);

@@ -133,6 +133,7 @@ public class myDonations {
             helloLabel.setText("Hello, Guest");
         }
 
-        cityLabel.setText("Ankara");
+        cityLabel.setText(currentUser.getCityAsString());
+        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
     }
 }

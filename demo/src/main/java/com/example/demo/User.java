@@ -38,7 +38,7 @@ public class User extends UserController {
         this.city = City.valueOf(cityString); // This assumes cityString is a valid enum name
     }
 
-    private BloodType convertStringTypeToEnum(String type) {
+    public BloodType convertStringTypeToEnum(String type) {
         switch (type) {
             case "ABRH+": return BloodType.ABRHPositive;
             case "ABRH-": return BloodType.ABRHNegative;
@@ -63,6 +63,17 @@ public class User extends UserController {
             case ZeroRHPositive: return "0RH+";
             case ZeroRHNegative: return "0RH-";
             default: return "Unknown";
+        }
+    }
+
+    public String getCityAsString ()
+    {
+        switch (this.city)
+        {
+            case Ankara : return "Ankara";
+            case Istanbul: return "Istanbul";
+            case Izmir: return "Izmir";
+            default: return "unknown";
         }
     }
 

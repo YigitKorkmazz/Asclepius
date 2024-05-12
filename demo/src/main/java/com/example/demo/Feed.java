@@ -170,8 +170,7 @@ public class Feed{
             helloLabel.setText("Hello, Guest");
         }
 
-        cityLabel.setText("Ankara");
-
-
+        cityLabel.setText(currentUser.getCityAsString());
+        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
     }
 }
