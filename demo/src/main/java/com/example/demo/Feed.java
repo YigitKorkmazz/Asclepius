@@ -5,9 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Feed{
 
@@ -38,6 +42,10 @@ public class Feed{
     @FXML
     private Button myDonationRequestsButton;
 
+    @FXML
+    private VBox donationRequestsContainer;
+
+    private BloodRequestDAO donationRequestDAO;
 
     // Rest of your class implementation...
 
@@ -50,29 +58,55 @@ public class Feed{
     }
 
     //methods
-    public void sortScarcity ()
-    {
-        //TODO
+    public void sortScarcity() {
+        List<DonationRequest> donationRequests = donationRequestDAO.listAllBloodRequests();
+        List<DonationRequest> sortedRequests = donationRequests.stream().sorted(Comparator.comparingInt(request -> request.getBloodType().ordinal())).collect(Collectors.toList());
+        displayDonationRequests(sortedRequests);
     }
 
-    /*public void listDonationRequest (DonationRequest request)
+
+    // TO-DO: Widget Class Yap.
+    /*
+    public void listDonationRequest(DonationRequest request)
     {
-        //TODO
+        DonationRequestWidget widget = new DonationRequestWidget(request);
+        donationRequestsContainer.getChildren().add(widget);
+    }
+    */
+
+    // TO-DO: Widget Class Yap.
+    public void sortDonationRequests(List<DonationRequest> requests) {
+        List<DonationRequest> sortedRequests = requests.stream().sorted(Comparator.comparingInt(request -> request.getBloodType().ordinal())).collect(Collectors.toList());
+        displayDonationRequests(sortedRequests);
     }
 
-    public void sortDonationRequests (DonationRequest request)
-    {
-        //TODO
-    }*/
-
-    public void displayDonationList ()
-    {
-        //TODO
+    // TO-DO: Widget Class Yap.
+    public void displayDonationList() {
+        List<DonationRequest> donationRequests = donationRequestDAO.listAllBloodRequests();
+        displayDonationRequests(donationRequests);
     }
 
-    public void openDonationRequest ()
+    private void displayDonationRequests(List<DonationRequest> requests) {
+        donationRequestsContainer.getChildren().clear();
+        for (DonationRequest request : requests) {
+            listDonationRequest(request);
+        }
+    }
+
+    public void openDonationRequest(DonationRequest request)
     {
-        //TODO
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("donationRequestScreen.fxml"));
+            Scene scene = new Scene(loader.load());
+            DonationRequestScreen controller = loader.getController();
+            controller.setDonationRequest(request);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Donation Request");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

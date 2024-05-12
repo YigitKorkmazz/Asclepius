@@ -18,6 +18,7 @@ public class UserDAO {
     protected static final String INSERT_USER = "INSERT INTO user (blood_type, Name, phone_number, userPassword, city) VALUES (?, ?, ?, ?, ?)";
     protected static final String UPDATE_USER = "UPDATE user SET blood_type = ?, Name = ?, phone_number = ?, userPassword = ?, city = ? WHERE User_id = ?";
     protected static final String DELETE_USER = "DELETE FROM user WHERE User_id = ?";
+    protected static final String SELECT_USER_BY_PHONE_AND_PASSWORD = "SELECT * FROM user WHERE phone_number = ? AND userPassword = ?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -56,6 +57,29 @@ public class UserDAO {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
             preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                user = new User(
+                        rs.getString("blood_type"),
+                        rs.getString("Name"),
+                        rs.getString("phone_number"),
+                        rs.getString("userPassword"),
+                        rs.getString("city")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public User getUserByPhoneAndPassword(String phoneNumber, String password) {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_PHONE_AND_PASSWORD)) {
+            preparedStatement.setString(1, phoneNumber);
+            preparedStatement.setString(2, password);
+
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 user = new User(
