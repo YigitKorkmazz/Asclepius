@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class DonationRequest {
     // Instance variables
-    private int uniqueId;
-    private User patientName;  // Ensure User class is defined elsewhere in your project
+    private static int uniqueId;
+    private User patientName;
     private String phoneNumberAssc;
     private String address;
     private City city;  // Using enum type for city
@@ -38,10 +38,10 @@ public class DonationRequest {
     }
 
     // Constructor
-    public DonationRequest(int uniqueId, User patientName, String phoneNumberAssc, String address,
+    public DonationRequest(User patientName, String phoneNumberAssc, String address,
                            City city, BloodType bloodType, TransportationAssist transportationAssist,
                            MoneyAssist moneyAssist, ArrayList<User> usersAcceptedList) {
-        this.uniqueId = uniqueId;
+        this.uniqueId = uniqueId++;
         this.patientName = patientName;
         this.phoneNumberAssc = phoneNumberAssc;
         this.address = address;
@@ -52,5 +52,72 @@ public class DonationRequest {
         this.usersAcceptedList = new ArrayList<>(usersAcceptedList);
     }
 
-    // Getters and setters (Add as needed for your functionality)
+    // @TO-DO: some of the setters may be redundant. @umutcaginozcan
+    public int getUniqueId() {
+        return uniqueId;
+    }
+
+    public User getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(User patientName) {
+        this.patientName = patientName;
+    }
+
+    public ArrayList<User> getUsersAcceptedList() {
+        return usersAcceptedList;
+    }
+
+    public void setUsersAcceptedList(ArrayList<User> usersAcceptedList) {
+        this.usersAcceptedList = usersAcceptedList;
+    }
+
+    public MoneyAssist getMoneyAssist() {
+        return moneyAssist;
+    }
+
+    public void setMoneyAssist(MoneyAssist moneyAssist) {
+        this.moneyAssist = moneyAssist;
+    }
+
+    public String getPhoneNumberAssc() {
+        return phoneNumberAssc;
+    }
+
+    public void setPhoneNumberAssc(String phoneNumberAssc) {
+        this.phoneNumberAssc = phoneNumberAssc;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(BloodType bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public TransportationAssist getTransportationAssist() {
+        return transportationAssist;
+    }
+
+    public void setTransportationAssist(TransportationAssist transportationAssist) {
+        this.transportationAssist = transportationAssist;
+    }
 }
