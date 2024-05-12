@@ -89,7 +89,7 @@ public class UserDAO {
     public void updateUser(User user) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER);) {
-            preparedStatement.setString(1, String.valueOf(user.getBloodType()));
+            preparedStatement.setString(1, user.getBloodTypeAsString());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getPhoneNumber());
             preparedStatement.setString(4, user.getPassword());

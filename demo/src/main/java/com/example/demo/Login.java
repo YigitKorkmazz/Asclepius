@@ -50,6 +50,13 @@ public class Login {
                     stage.close();
                     Stage primaryStage = new Stage();
                     User user = new User( existingUser.getString("blood_type"),  existingUser.getString("Name"), phoneNumberField.getText(), passwordField.getText(), "Ankara");
+
+                    // User ID is set.
+                    ResultSet userId = statement.executeQuery("SELECT User_id FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
+                    if (userId.next()) {
+                        int id = userId.getInt("User_id");
+                        user.setUniqueId(id);
+                    }
                     Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 600, 650);

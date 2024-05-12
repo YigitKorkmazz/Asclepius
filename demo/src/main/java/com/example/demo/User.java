@@ -52,6 +52,20 @@ public class User extends UserController {
         }
     }
 
+    public String getBloodTypeAsString() {
+        switch (this.bloodType) {
+            case ABRHPositive: return "ABRH+";
+            case ABRHNegative: return "ABRH-";
+            case ARHPositive: return "ARH+";
+            case ARHNegative: return "ARH-";
+            case BRHPositive: return "BRH+";
+            case BRHNegative: return "BRH-";
+            case ZeroRHPositive: return "0RH+";
+            case ZeroRHNegative: return "0RH-";
+            default: return "Unknown";
+        }
+    }
+
     // Adding getters and setters
 
     public int getUniqueId() {
