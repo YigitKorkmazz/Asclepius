@@ -93,9 +93,9 @@ public class BloodRequestDAO {
             preparedStatement.setString(3, request.getPatientName().getPhoneNumber());
             preparedStatement.setString(4, request.getAddress());
             preparedStatement.setString(5, request.getCity().toString()); // Assuming City is an enum and you store its string representation
-            preparedStatement.setString(6, request.getBloodType().toString()); // Same assumption for BloodType
+            preparedStatement.setString(6, request.getBloodTypeAsString()); // Same assumption for BloodType
             preparedStatement.setString(7, request.getTransportationAssist().toString()); // And TransportationAssist
-            preparedStatement.setString(8, request.getMoneyAssist().toString()); // And MoneyAssist
+            preparedStatement.setString(8, request.getMoneyAssistAsString()); // And MoneyAssist
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {

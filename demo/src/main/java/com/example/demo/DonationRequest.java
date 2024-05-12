@@ -133,6 +133,17 @@ public class DonationRequest {
         }
     }
 
+    public String getMoneyAssistAsString ()
+    {
+        switch (this.moneyAssist)
+        {
+            case ZERO : return "0 usd";
+            case FIFTY: return "50 usd";
+            case HUNDRED: return "100 usd";
+            default: return  null;
+        }
+    }
+
     public static DonationRequest.BloodType convertStringTypeToEnum(String type) {
         switch (type) {
             case "ABRH+": return DonationRequest.BloodType.ABRHPositive;
