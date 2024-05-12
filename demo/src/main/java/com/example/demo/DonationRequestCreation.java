@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -46,6 +48,31 @@ public class DonationRequestCreation {
     private TextArea addressArea;
 
     @FXML
+    private Button publishButton;
+
+    @FXML
+    private ComboBox<String> cityDropdown;
+
+    @FXML
+    private ComboBox<String> bloodTypeDropdown;
+
+    @FXML
+    private CheckBox transportationHelpCb;
+
+    @FXML
+    private ToggleGroup Amount;
+
+    @FXML
+    private RadioButton zeroUsd;
+
+    @FXML
+    private RadioButton fiftyUsd;
+
+    @FXML
+    private RadioButton hundredUsd;
+
+    private DonationRequest newRequest;
+
     public void settingsOnAction()
     {
         try{
@@ -134,13 +161,12 @@ public class DonationRequestCreation {
     @FXML
     public void initialize (){
         User currentUser = Feed.getCurrentUser();
-        if (currentUser != null) {
-            helloLabel.setText("Hello, " + currentUser.getName());
-        } else {
-            helloLabel.setText("Hello, Guest");
-        }
-
-        cityLabel.setText("Ankara");
+        helloLabel.setText("Hello, " + currentUser.getName());
+        cityLabel.setText(currentUser.getCityAsString());
+        ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
+        ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
+        bloodTypeDropdown.setItems(bloodTypeList);
+        cityDropdown.setItems(cityList);
     }
     @FXML
     public void publishButtonOnAction(ActionEvent event) {
@@ -148,6 +174,10 @@ public class DonationRequestCreation {
         String name = nameField.getText().trim();
         String phoneNumber = phoneNumberField.getText().trim();
         String address = addressArea.getText().trim();
+        String bloodType = bloodTypeDropdown.getValue();
+        String city = cityDropdown.getValue();
+        DonationRequest.TransportationAssist transAssist = DonationRequest.TransportationAssist.No;
+        DonationRequest.MoneyAssist moneyAssist= DonationRequest.MoneyAssist.ZERO;
 
         if (name.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -158,8 +188,22 @@ public class DonationRequestCreation {
             return;
         }
 
+        if (transportationHelpCb.isSelected())
+        {
+            transAssist = DonationRequest.TransportationAssist.Yes;
+        }
+
+        if (fiftyUsd.isSelected())
+        {
+            moneyAssist = DonationRequest.MoneyAssist.FIFTY;
+        }
+        else if (hundredUsd.isSelected())
+        {
+            moneyAssist = DonationRequest.MoneyAssist.HUNDRED;
+        }
+
         User currentUser = Feed.getCurrentUser();
-        DonationRequest newRequest = new DonationRequest(currentUser, phoneNumber, address, null, null, null, null, new ArrayList<User>());
+        newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>());
 
         // Insert the donation request into the database
         BloodRequestDAO donationRequestDAO = new BloodRequestDAO();

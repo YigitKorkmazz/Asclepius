@@ -14,10 +14,10 @@ public class BloodRequestDAO {
     protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
 
     private static final String SELECT_ALL_BLOOD_REQUESTS = "SELECT * FROM Donations";
-    private static final String SELECT_USER_BY_ID = "SELECT * FROM Users WHERE id = ?";
-    private static final String INSERT_SQL = "INSERT INTO Donations (patient_id, phone_number, address, city, blood_type, transportation_assist, money_assist) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE Donations SET patient_id = ?, phone_number = ?, address = ?, city = ?, blood_type = ?, transportation_assist = ?, money_assist = ? WHERE unique_id = ?";
-    private static final String DELETE_SQL = "DELETE FROM Donations WHERE unique_id = ?";
+    private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE unique_id = ?";
+    private static final String INSERT_SQL = "INSERT INTO Donations (User_id, patient_name, phone_number, address, city, bloodType, transportationAssist, moneyAssist) VALUES (?, ?, ?,?, ?, ?, ?, ?)";
+    private static final String UPDATE_SQL = "UPDATE Donations SET User_id = ?, patient_name = ?, phone_number = ?, address = ?, city = ?, bloodType = ?, transportationAssist = ?, moneyAssist = ? WHERE donation_id = ?";
+    private static final String DELETE_SQL = "DELETE FROM Donations WHERE donation_id = ?";
 
 
     public BloodRequestDAO() {}
@@ -39,10 +39,10 @@ public class BloodRequestDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BLOOD_REQUESTS);) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int uniqueId = rs.getInt("unique_id");
+                int uniqueId = rs.getInt("User_id");
                 // Assuming User has a constructor that accepts a string for the name
                 User patientName = new User(
-                        rs.getString("patient_type"),
+                        rs.getString("bloodType"),
                         rs.getString("patient_name"),
                         rs.getString("phone_number"),
                         rs.getString("password"),
@@ -52,7 +52,7 @@ public class BloodRequestDAO {
                 String address = rs.getString("address");
                 // Using valueOf to convert String to Enum
                 DonationRequest.City city = DonationRequest.City.valueOf(rs.getString("city"));
-                DonationRequest.BloodType bloodType = DonationRequest.BloodType.valueOf(rs.getString("blood_type"));
+                DonationRequest.BloodType bloodType = DonationRequest.BloodType.valueOf(rs.getString("bloodType"));
                 DonationRequest.TransportationAssist transportationAssist = DonationRequest.TransportationAssist.valueOf(rs.getString("transportation_assist"));
                 DonationRequest.MoneyAssist moneyAssist = DonationRequest.MoneyAssist.valueOf(rs.getString("money_assist"));
                 ArrayList<User> usersAcceptedList = new ArrayList<>(); // More complex fetching logic might be needed here
@@ -71,8 +71,8 @@ public class BloodRequestDAO {
             preparedStatement.setInt(1, userId);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                String type = rs.getString("blood_type");
-                String name = rs.getString("name");
+                String type = rs.getString("bloodType");
+                String name = rs.getString("patient_name");
                 String phoneNumber = rs.getString("phone_number");
                 String password = rs.getString("password");
                 String city = rs.getString("city");
@@ -89,12 +89,13 @@ public class BloodRequestDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
 
             preparedStatement.setInt(1, request.getPatientName().getUniqueId()); // Assuming getPatientName() returns a User object which has a getUniqueId()
-            preparedStatement.setString(2, request.getPatientName().getPhoneNumber());
-            preparedStatement.setString(3, request.getAddress());
-            preparedStatement.setString(4, request.getCity().toString()); // Assuming City is an enum and you store its string representation
-            preparedStatement.setString(5, request.getBloodType().toString()); // Same assumption for BloodType
-            preparedStatement.setString(6, request.getTransportationAssist().toString()); // And TransportationAssist
-            preparedStatement.setString(7, request.getMoneyAssist().toString()); // And MoneyAssist
+            preparedStatement.setString(2, request.getPatientName().getName());
+            preparedStatement.setString(3, request.getPatientName().getPhoneNumber());
+            preparedStatement.setString(4, request.getAddress());
+            preparedStatement.setString(5, request.getCity().toString()); // Assuming City is an enum and you store its string representation
+            preparedStatement.setString(6, request.getBloodType().toString()); // Same assumption for BloodType
+            preparedStatement.setString(7, request.getTransportationAssist().toString()); // And TransportationAssist
+            preparedStatement.setString(8, request.getMoneyAssist().toString()); // And MoneyAssist
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {

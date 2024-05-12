@@ -3,13 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -110,41 +111,54 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
-                        <VBox layoutY="70.0" prefHeight="436.0" prefWidth="624.0">
+                        <VBox layoutY="70.0" prefHeight="463.0" prefWidth="624.0">
                            <children>
-                              <HBox prefHeight="96.0" prefWidth="620.0">
+                              <HBox prefHeight="60.0" prefWidth="633.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="27.0" prefWidth="352.0" text="Blood Type" textAlignment="CENTER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                    <ChoiceBox fx:id="bloodTypeDropdown" prefHeight="24.0" prefWidth="121.0" style="-fx-background-radius: 30;" />
+                                    <ComboBox fx:id="bloodTypeDropdown" prefWidth="150.0" style="-fx-background-radius: 30;" />
                                  </children>
                               </HBox>
-                              <AnchorPane prefHeight="343.0" prefWidth="624.0">
+                              <HBox prefHeight="45.0" prefWidth="633.0">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="624.0" text="Needed By">
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="352.0" text="City" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cityDropdown" prefWidth="150.0" style="-fx-background-radius: 30;" />
+                                 </children>
+                              </HBox>
+                              <AnchorPane prefHeight="423.0" prefWidth="633.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="-9.0" layoutY="20.0" prefHeight="24.0" prefWidth="642.0" text="Needed By">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="nameField" layoutX="222.0" layoutY="31.0" promptText="Name" style="-fx-background-radius: 30;" />
-                                    <TextField fx:id="phoneNumberField" layoutX="223.0" layoutY="76.0" promptText="Phone Number" style="-fx-background-radius: 30;" />
-                                    <CheckBox layoutX="245.0" layoutY="213.0" mnemonicParsing="false" text="Transportation Help" />
-                                    <HBox layoutX="69.0" layoutY="261.0" prefHeight="81.0" prefWidth="508.0">
+                                    <TextField fx:id="nameField" layoutX="222.0" layoutY="61.0" promptText="Name" style="-fx-background-radius: 30;" />
+                                    <TextField fx:id="phoneNumberField" layoutX="222.0" layoutY="99.0" promptText="Phone Number" style="-fx-background-radius: 30;" />
+                                    <CheckBox fx:id="transportationHelpCb" layoutX="237.0" layoutY="245.0" mnemonicParsing="false" text="Transportation Help" />
+                                    <HBox layoutX="70.0" layoutY="299.0" prefHeight="63.0" prefWidth="508.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="179.0" text="O USD" />
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="170.0" text="50 USD" />
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="158.0" text="100 USD" />
+                                          <RadioButton fx:id="zeroUsd" mnemonicParsing="false" prefHeight="18.0" prefWidth="179.0" text="O USD">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="Amount" />
+                                             </toggleGroup></RadioButton>
+                                          <RadioButton fx:id="fiftyUsd" mnemonicParsing="false" prefHeight="18.0" prefWidth="170.0" text="50 USD" toggleGroup="$Amount" />
+                                          <RadioButton fx:id="hundredUsd" mnemonicParsing="false" prefHeight="18.0" prefWidth="158.0" text="100 USD" toggleGroup="$Amount" />
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="addressArea" layoutX="223.0" layoutY="113.0" prefHeight="83.0" prefWidth="180.0" promptText="Address" wrapText="true" />
+                                    <TextArea fx:id="addressArea" layoutX="222.0" layoutY="140.0" prefHeight="83.0" prefWidth="180.0" promptText="Address" wrapText="true" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </VBox>
-                        <Button layoutX="257.0" layoutY="540.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="110.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Publish" textFill="WHITE">
+                        <Button fx:id="publishButton" layoutX="257.0" layoutY="540.0" mnemonicParsing="false" onAction="#publishButtonOnAction" prefHeight="44.0" prefWidth="110.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Publish" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>

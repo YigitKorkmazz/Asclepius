@@ -16,12 +16,13 @@ public class DonationRequest {
 
     // Enums for city, blood type, transportation assist, and money assist
     public enum City {
-        ANKARA, ISTANBUL, IZMIR // Example cities
+        Ankara, Istanbul, Izmir
     }
 
     public enum BloodType {
         ABRHPositive,
         ARHPositive,
+        ARHNegative,
         BRHPositive,
         ZeroRHPositive,
         ABRHNegative,
@@ -30,7 +31,7 @@ public class DonationRequest {
     }
 
     public enum TransportationAssist {
-        REQUIRED, NOT_REQUIRED // Example values
+        Yes,No;
     }
 
     public enum MoneyAssist {
@@ -41,7 +42,7 @@ public class DonationRequest {
     public DonationRequest(User patientName, String phoneNumberAssc, String address,
                            City city, BloodType bloodType, TransportationAssist transportationAssist,
                            MoneyAssist moneyAssist, ArrayList<User> usersAcceptedList) {
-        this.uniqueId = uniqueId++;
+        this.uniqueId++;
         this.patientName = patientName;
         this.phoneNumberAssc = phoneNumberAssc;
         this.address = address;
@@ -119,5 +120,44 @@ public class DonationRequest {
 
     public void setTransportationAssist(TransportationAssist transportationAssist) {
         this.transportationAssist = transportationAssist;
+    }
+
+    public MoneyAssist convertStringToMoneyAssist (String amount)
+    {
+        switch (amount)
+        {
+            case "0 USD" : return MoneyAssist.ZERO;
+            case "50 USD" : return MoneyAssist.FIFTY;
+            case "100 USD" : return MoneyAssist.HUNDRED;
+            default: return null;
+        }
+    }
+
+    public static DonationRequest.BloodType convertStringTypeToEnum(String type) {
+        switch (type) {
+            case "ABRH+": return DonationRequest.BloodType.ABRHPositive;
+            case "ABRH-": return DonationRequest.BloodType.ABRHNegative;
+            case "ARH+": return DonationRequest.BloodType.ARHPositive;
+            case "ARH-": return DonationRequest.BloodType.ARHNegative;
+            case "BRH+": return DonationRequest.BloodType.BRHPositive;
+            case "BRH-": return DonationRequest.BloodType.BRHNegative;
+            case "0RH+": return DonationRequest.BloodType.ZeroRHPositive;
+            case "0RH-": return DonationRequest.BloodType.ZeroRHNegative;
+            default: return null;
+        }
+    }
+
+    public String getBloodTypeAsString() {
+        switch (this.bloodType) {
+            case ABRHPositive: return "ABRH+";
+            case ABRHNegative: return "ABRH-";
+            case ARHPositive: return "ARH+";
+            case ARHNegative: return "ARH-";
+            case BRHPositive: return "BRH+";
+            case BRHNegative: return "BRH-";
+            case ZeroRHPositive: return "0RH+";
+            case ZeroRHNegative: return "0RH-";
+            default: return "Unknown";
+        }
     }
 }
