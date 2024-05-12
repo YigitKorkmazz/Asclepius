@@ -45,6 +45,14 @@ public class DonationRequestScreen {
     @FXML
     private Button bloodTypeChangeButton;
 
+    @FXML
+    private Button settingsButton;
+
+    @FXML
+    private Button myDonationsButton;
+
+    @FXML
+    private Button myDonationRequestsButton;
     //methods
     @FXML
     public void displayDonationRequest()
@@ -80,6 +88,50 @@ public class DonationRequestScreen {
     public void tagFriend()
     {
         //TODO
+    }
+
+    @FXML
+    public void goMyDonationRequests()
+    {
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("My Donation Requests");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void goMyDonations()
+    {
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("My Donations");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void settingsOnAction()
+    {
+        try{
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("Settings");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     public void goSettingsPage1()
     {
