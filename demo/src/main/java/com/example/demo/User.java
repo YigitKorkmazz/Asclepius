@@ -127,4 +127,9 @@ public class User extends UserController {
         // Implementation needed based on your application logic
         // Example: this.ownDonationRequest.add(request);
     }
+
+    public void setBloodType (String bloodType)
+    {
+        this.bloodType = convertStringTypeToEnum(bloodType);
+    }
 }

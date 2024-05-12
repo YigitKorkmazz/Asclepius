@@ -34,7 +34,6 @@ public class Login {
     @FXML
     public void loginButtonOnAction (ActionEvent e)
     {
-
         try{
             Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
             Statement statement = connection.createStatement();
@@ -56,6 +55,11 @@ public class Login {
                     if (userId.next()) {
                         int id = userId.getInt("User_id");
                         user.setUniqueId(id);
+                    }
+                    ResultSet city = statement.executeQuery("SELECT city FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
+                    if (city.next()) {
+                        String cityName  = city.getString("city");
+                        user.setCity(cityName);
                     }
                     Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));

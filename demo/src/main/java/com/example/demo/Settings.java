@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 
@@ -18,7 +17,7 @@ public class Settings extends UserDAO{
     private TextField newPhoneNumberTf;
 
     @FXML
-    private TextField newPasswordTf;
+    private TextField validationPasswordTf;
 
     @FXML
     private Label helloLabel;
@@ -76,6 +75,8 @@ public class Settings extends UserDAO{
 
     @FXML
     private Button myDonationRequestsButton;
+
+    private UserDAO userDAO = new UserDAO();
 
     @FXML
     public void logOut()
@@ -170,17 +171,33 @@ public class Settings extends UserDAO{
     @FXML
     public void secondChangeOnAction (ActionEvent event)
     {
-
+        Stage stage = (Stage) oldPassword.getScene().getWindow(); // Get the main stage
+        if (!validationPasswordTf.getText().isEmpty() && checkPasswordIsCorrect(validationPasswordTf.getText())) {
+            if (bloodTypeDropdown.getValue() != null) {
+                changeBloodType();
+            }
+            if (cityDropdown.getValue() != null) {
+                changeCity();
+            }
+            if (!newPhoneNumberTf.getText().isEmpty())
+            {
+                changePhoneNumber();
+            }
+            showSuccessfullyChangedAlert(stage);
+            makeFieldsEmpty();
+        }
+        else if (checkPasswordIsCorrect(validationPasswordTf.getText()))
+        {
+            showPasswordIsWrongAlert(stage);
+        }
+        else{
+            showFieldsAreEmptyAlert(stage);
+        }
     }
 
     public void changePassword(String newPassword) {
         User currentUser = Feed.getCurrentUser();
         currentUser.setPassword(newPassword); // Update password in memory
-
-        // Create an instance of UserDAO
-        UserDAO userDAO = new UserDAO();
-
-        // Use updateUser method of UserDAO to persist all changes, including the new password
         userDAO.updateUser(currentUser);
     }
 
@@ -215,6 +232,34 @@ public class Settings extends UserDAO{
         alert.show();
     }
 
+    public void showSuccessfullyChangedAlert(Stage ownerStage)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(ownerStage);
+        alert.setTitle("Information Dialog");
+        alert.setContentText("Your changes Are saved");
+        alert.show();
+    }
+
+    public void makeFieldsEmpty ()
+    {
+        newPhoneNumberTf.setText("");
+        validationPasswordTf.setText("");
+        oldPassword.setText("");
+        newPassword.setText("");
+        newPasswordAgain.setText("");
+    }
+
+    public void showPasswordIsWrongAlert (Stage ownerStage)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(ownerStage); // Set the owner of the alert
+        alert.setTitle("Error");
+        alert.setHeaderText("Check Password");
+        alert.setContentText("Your password is wrong!");
+        alert.show();
+    }
+
     public boolean checkPasswordsMatching (String password1, String password2)
     {
         return password1.equals(password2);
@@ -225,24 +270,35 @@ public class Settings extends UserDAO{
         return user.getPassword().equals(oldPassword);
     }
 
-    public boolean  arePasswordFieldsEmpty (String password1, String password2, String oldPassword)
+    public boolean arePasswordFieldsEmpty (String password1, String password2, String oldPassword)
     {
         return password1.isEmpty() || password2.isEmpty() || oldPassword.isEmpty();
     }
 
+    public boolean checkPasswordIsCorrect (String password)
+    {
+        return password.equals(Feed.getCurrentUser().getPassword());
+    }
+
     public void changeBloodType()
     {
-        //User user = new User ()
+        User currentUser = Feed.getCurrentUser();
+        currentUser.setBloodType(bloodTypeDropdown.getValue()); // Update password in memory
+        userDAO.updateUser(currentUser);
     }
 
     public void changeCity ()
     {
-        //TODO
+        User currentUser = Feed.getCurrentUser();
+        currentUser.setCity(cityDropdown.getValue()); // Update password in memory
+        userDAO.updateUser(currentUser);
     }
 
     public void changePhoneNumber()
     {
-        //TODO
+        User currentUser = Feed.getCurrentUser();
+        currentUser.setPhoneNumber(newPhoneNumberTf.getText()); // Update password in memory
+        userDAO.updateUser(currentUser);
     }
 
 }
