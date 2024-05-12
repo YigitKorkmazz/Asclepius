@@ -124,8 +124,7 @@ public class User extends UserController {
     }
 
     public void addDonation(DonationRequest request) {
-        // Implementation needed based on your application logic
-        // Example: this.ownDonationRequest.add(request);
+        this.acceptedDonationRequests.add(request);
     }
 
     public void setBloodType (String bloodType)
