@@ -58,24 +58,24 @@ public class Feed{
     }
 
     //methods
-    /*public void sortScarcity() {
+    public void sortScarcity() {
         List<DonationRequest> donationRequests = donationRequestDAO.listAllBloodRequests();
         List<DonationRequest> sortedRequests = donationRequests.stream().sorted(Comparator.comparingInt(request -> request.getBloodType().ordinal())).collect(Collectors.toList());
         displayDonationRequests(sortedRequests);
-    }*/
+    }
 
 
     // TO-DO: Widget Class Yap.
-    /*
+
     public void listDonationRequest(DonationRequest request)
     {
         DonationRequestWidget widget = new DonationRequestWidget(request);
         donationRequestsContainer.getChildren().add(widget);
     }
-    */
+
 
     // TO-DO: Widget Class Yap.
-    /*public void sortDonationRequests(List<DonationRequest> requests) {
+    public void sortDonationRequests(List<DonationRequest> requests) {
         List<DonationRequest> sortedRequests = requests.stream().sorted(Comparator.comparingInt(request -> request.getBloodType().ordinal())).collect(Collectors.toList());
         displayDonationRequests(sortedRequests);
     }
@@ -92,7 +92,7 @@ public class Feed{
             listDonationRequest(request);
         }
     }
-
+/*
     public void openDonationRequest(DonationRequest request)
     {
         try {
