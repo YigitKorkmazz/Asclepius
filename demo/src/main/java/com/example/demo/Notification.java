@@ -7,30 +7,31 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
-public class Notification extends Application {
+public class Notification {
+    public enum Type {
 
-    @Override
-    public void start(Stage primaryStage) {
-        Button notifyButton = new Button("Show Notification");
-        notifyButton.setOnAction(event -> showNotification("Urgent Blood Donation", "Donate Blood"));
-
-        VBox root = new VBox(notifyButton);
-        root.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(root, 300, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Notification");
-        primaryStage.show();
+        TAGGED,
+        REQUEST_ACCEPTED,
+        URGENT_DONATION_REQUEST
     }
-
-    public void showNotification(String title, String message) {
-        Notifications.create()
-                .title(title)
-                .text(message)
-                .showInformation();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+    private String message;
+    public void sendNotification(User user, Type type) {
+        switch (type) {
+            case TAGGED:
+                message = "You have been tagged in a donation request.";
+                break;
+            case REQUEST_ACCEPTED:
+                message = "Your donation request has been accepted.";
+                break;
+            case URGENT_DONATION_REQUEST:
+                message = "There is an urgent donation request that matches your blood type.";
+                break;
+        }
+// TODO: Implement logic to send the notification to the user
+// You can use the user's notification preferences and send the notification accordingly
+// For example, you can update the user's notification text in the database
+// and check for notifications periodically to send them as OS native notifications
     }
 }
+
 
