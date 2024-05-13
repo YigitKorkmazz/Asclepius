@@ -163,6 +163,7 @@ public class DonationRequestCreation {
         User currentUser = Feed.getCurrentUser();
         helloLabel.setText("Hello, " + currentUser.getName());
         cityLabel.setText(currentUser.getCityAsString());
+        bloodTypeLabel.setText (currentUser.getBloodTypeAsString());
         ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
         ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
         bloodTypeDropdown.setItems(bloodTypeList);
