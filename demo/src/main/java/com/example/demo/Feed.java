@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -13,11 +14,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import javafx.fxml.FXMLLoader;
+
 
 public class Feed{
 
     private static User currentUser;
 
+    @FXML
+    public VBox VBoxforRequests;
     //ui components
     @FXML
     public Label helloLabel;
@@ -203,15 +208,29 @@ public class Feed{
 
     @FXML
     public void initialize (){
-        /*List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
+
+        donationRequestDAO = new BloodRequestDAO();
+        List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
+        User currentUser = getCurrentUser();
+
         for (DonationRequest item: requests)
         {
             if (isMatching())
             {
+                try
+                {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Item.fxml"));
+                    HBox itemBox = loader.load();
+                    ItemController itemController = loader.getController();
+                    itemController.setData(item);
+                    VBoxforRequests.getChildren().add(itemBox);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
             }
-        }*/
-        User currentUser = getCurrentUser();
+        }
         if (currentUser != null) {
             helloLabel.setText("Hello, " + currentUser.getName());
         } else {
@@ -221,4 +240,5 @@ public class Feed{
         cityLabel.setText(currentUser.getCityAsString());
         bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
     }
+
 }

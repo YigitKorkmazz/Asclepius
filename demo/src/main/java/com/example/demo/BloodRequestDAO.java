@@ -36,27 +36,21 @@ public class BloodRequestDAO {
     public List<DonationRequest> listAllBloodRequests() {
         List<DonationRequest> bloodRequests = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BLOOD_REQUESTS);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BLOOD_REQUESTS)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int uniqueId = rs.getInt("User_id");
-                // Assuming User has a constructor that accepts a string for the name
-                User patientName = new User(
-                        rs.getString("bloodType"),
-                        rs.getString("patient_name"),
-                        rs.getString("phone_number"),
-                        rs.getString("password"),
-                        rs.getString("city")
-                );
-                String phoneNumberAssc = rs.getString("phone_number");
+                int userId = rs.getInt("User_id");
+                User patient = getUserById(userId);  // Correctly fetching the user associated with the request
+
                 String address = rs.getString("address");
-                // Using valueOf to convert String to Enum
-                DonationRequest.City city = DonationRequest.City.valueOf(rs.getString("city"));
-                DonationRequest.BloodType bloodType = DonationRequest.BloodType.valueOf(rs.getString("bloodType"));
-                DonationRequest.TransportationAssist transportationAssist = DonationRequest.TransportationAssist.valueOf(rs.getString("transportation_assist"));
-                DonationRequest.MoneyAssist moneyAssist = DonationRequest.MoneyAssist.valueOf(rs.getString("money_assist"));
-                ArrayList<User> usersAcceptedList = new ArrayList<>(); // More complex fetching logic might be needed here
-                bloodRequests.add(new DonationRequest(patientName, phoneNumberAssc, address, city, bloodType, transportationAssist, moneyAssist, usersAcceptedList));
+                DonationRequest.City city = DonationRequest.City.valueOf(rs.getString("city")); // Direct use of enum as stored in DB
+                DonationRequest.BloodType bloodType = DonationRequest.convertStringTypeToEnum(rs.getString("bloodType")); // Converting string to enum
+                DonationRequest.TransportationAssist transportationAssist = DonationRequest.TransportationAssist.valueOf(rs.getString("transportationAssist"));
+                DonationRequest.MoneyAssist moneyAssist = DonationRequest.convertStringToMoneyAssist(rs.getString("moneyAssist")); // Converting money assist
+
+                List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
+
+                bloodRequests.add(new DonationRequest(patient, rs.getString("phone_number"), address, city, bloodType, transportationAssist, moneyAssist, usersAcceptedList));
             }
         } catch (SQLException e) {
             e.printStackTrace();

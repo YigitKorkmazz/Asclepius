@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DonationRequest {
     // Instance variables
@@ -41,7 +42,7 @@ public class DonationRequest {
     // Constructor
     public DonationRequest(User patientName, String phoneNumberAssc, String address,
                            City city, BloodType bloodType, TransportationAssist transportationAssist,
-                           MoneyAssist moneyAssist, ArrayList<User> usersAcceptedList) {
+                           MoneyAssist moneyAssist, List<User> usersAcceptedList) {
         this.uniqueId++;
         this.patientName = patientName;
         this.phoneNumberAssc = phoneNumberAssc;
@@ -122,7 +123,7 @@ public class DonationRequest {
         this.transportationAssist = transportationAssist;
     }
 
-    public MoneyAssist convertStringToMoneyAssist (String amount)
+    public static MoneyAssist convertStringToMoneyAssist (String amount)
     {
         switch (amount)
         {
