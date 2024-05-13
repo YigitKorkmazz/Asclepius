@@ -17,7 +17,9 @@ public class DonationRequest {
 
     // Enums for city, blood type, transportation assist, and money assist
     public enum City {
-        Ankara, Istanbul, Izmir
+        Ankara,
+        Istanbul,
+        Izmir
     }
 
     public enum BloodType {
@@ -156,6 +158,37 @@ public class DonationRequest {
             case "0RH+": return DonationRequest.BloodType.ZeroRHPositive;
             case "0RH-": return DonationRequest.BloodType.ZeroRHNegative;
             default: return null;
+        }
+    }
+
+    public static DonationRequest.City convertStringTypeToEnumForCity(String type) {
+        switch (type) {
+            case "Istanbul": return City.Istanbul;
+            case "Izmir": return City.Izmir;
+            case "Ankara": return City.Ankara;
+
+            default: return null;
+        }
+    }
+
+    public static DonationRequest.TransportationAssist convertStringTypeToEnumForTransportationAsist(String type) {
+        switch (type) {
+            case "Yes": return TransportationAssist.Yes;
+            case "No" : return TransportationAssist.No;
+
+
+            default: return null;
+        }
+    }
+
+    //enum to string for city
+    public String getCityAsString()
+    {
+        switch (this.city) {
+            case Istanbul : return "Istanbul";
+            case Izmir: return "Izmir";
+            case Ankara: return "Ankara";
+            default: return "Unknown";
         }
     }
 

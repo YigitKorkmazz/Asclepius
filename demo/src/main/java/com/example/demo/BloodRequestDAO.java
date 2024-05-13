@@ -43,9 +43,9 @@ public class BloodRequestDAO {
                 User patient = getUserById(userId);  // Correctly fetching the user associated with the request
 
                 String address = rs.getString("address");
-                DonationRequest.City city = DonationRequest.City.valueOf(rs.getString("city")); // Direct use of enum as stored in DB
+                DonationRequest.City city = DonationRequest.convertStringTypeToEnumForCity(rs.getString("city")); // Direct use of enum as stored in DB
                 DonationRequest.BloodType bloodType = DonationRequest.convertStringTypeToEnum(rs.getString("bloodType")); // Converting string to enum
-                DonationRequest.TransportationAssist transportationAssist = DonationRequest.TransportationAssist.valueOf(rs.getString("transportationAssist"));
+                DonationRequest.TransportationAssist transportationAssist = DonationRequest.convertStringTypeToEnumForTransportationAsist(rs.getString("transportationAsist"));
                 DonationRequest.MoneyAssist moneyAssist = DonationRequest.convertStringToMoneyAssist(rs.getString("moneyAssist")); // Converting money assist
 
                 List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
