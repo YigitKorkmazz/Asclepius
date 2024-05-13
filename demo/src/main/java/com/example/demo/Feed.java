@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -195,8 +196,21 @@ public class Feed{
         }
     }
 
+    public boolean isMatching ()
+    {
+        return true;
+    }
+
     @FXML
     public void initialize (){
+        /*List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
+        for (DonationRequest item: requests)
+        {
+            if (isMatching())
+            {
+
+            }
+        }*/
         User currentUser = getCurrentUser();
         if (currentUser != null) {
             helloLabel.setText("Hello, " + currentUser.getName());

@@ -216,15 +216,16 @@ public class DonationRequestCreation {
             System.out.println("Failed to insert donation request: " + e.getMessage());
             e.printStackTrace();
         }
-        try {
-            Stage stage = (Stage) settingsButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-            stage.setTitle("My Donation Requests");
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        Stage stage = (Stage) settingsButton.getScene().getWindow();
+        showDonationCreatedAlert(stage);
+
+    }
+
+    public void showDonationCreatedAlert (Stage ownerStage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(ownerStage);
+        alert.setTitle("Information Dialog");
+        alert.setContentText("Donation created");
+        alert.show();
     }
 }
