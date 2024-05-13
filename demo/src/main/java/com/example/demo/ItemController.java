@@ -37,7 +37,7 @@ public class ItemController implements Initializable {
     {
         try{
             Stage stage = (Stage) goRequestButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("CreatorsRequestPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
             stage.setTitle("CreatorsRequestPage");
             stage.setScene(scene);

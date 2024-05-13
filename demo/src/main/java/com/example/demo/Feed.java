@@ -48,9 +48,6 @@ public class Feed{
     @FXML
     private Button myDonationRequestsButton;
 
-    @FXML
-    private VBox donationRequestsContainer;
-
     private BloodRequestDAO donationRequestDAO;
 
     // Rest of your class implementation...
@@ -76,7 +73,7 @@ public class Feed{
     public void listDonationRequest(DonationRequest request)
     {
         DonationRequestWidget widget = new DonationRequestWidget(request);
-        donationRequestsContainer.getChildren().add(widget);
+        VBoxforRequests.getChildren().add(widget);
     }
 
 
@@ -93,7 +90,7 @@ public class Feed{
     }
 
     private void displayDonationRequests(List<DonationRequest> requests) {
-        donationRequestsContainer.getChildren().clear();
+        VBoxforRequests.getChildren().clear();
         for (DonationRequest request : requests) {
             listDonationRequest(request);
         }
@@ -208,14 +205,13 @@ public class Feed{
 
     @FXML
     public void initialize (){
-
         donationRequestDAO = new BloodRequestDAO();
         List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = getCurrentUser();
 
         for (DonationRequest item: requests)
         {
-            if (isMatching())
+            if (isMatching() && VBoxforRequests != null)
             {
                 try
                 {
@@ -226,20 +222,26 @@ public class Feed{
                     itemController.setData(item);
                     VBoxforRequests.getChildren().add(itemBox);
 
-                } catch (IOException e) {
+                } catch (IOException e ) {
                     throw new RuntimeException(e);
                 }
 
             }
         }
-        if (currentUser != null) {
+        if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());
-        } else {
+        } else if (helloLabel != null) {
             helloLabel.setText("Hello, Guest");
         }
+        if (cityLabel != null)
+        {
+            cityLabel.setText(currentUser.getCityAsString());
+        }
+        if (bloodTypeLabel != null)
+        {
+            bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+        }
 
-        cityLabel.setText(currentUser.getCityAsString());
-        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
     }
 
 }
