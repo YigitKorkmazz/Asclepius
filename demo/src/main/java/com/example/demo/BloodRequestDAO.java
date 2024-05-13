@@ -80,7 +80,7 @@ public class BloodRequestDAO {
 
     public void insertDonationRequest(DonationRequest request) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL);) {
 
             preparedStatement.setInt(1, request.getPatientName().getUniqueId()); // Assuming getPatientName() returns a User object which has a getUniqueId()
             preparedStatement.setString(2, request.getPatientName().getName());

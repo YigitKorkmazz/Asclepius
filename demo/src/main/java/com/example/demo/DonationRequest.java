@@ -11,7 +11,7 @@ public class DonationRequest {
     private String address;
     private City city;  // Using enum type for city
     private BloodType bloodType;  // Using enum type for blood type
-    private TransportationAssist transportationAssist;  // Using enum type for transportation assist
+    private TransportationAssist transportationAssist = TransportationAssist.No;  // Using enum type for transportation assist
     private MoneyAssist moneyAssist;  // Using enum type for money assist
     private ArrayList<User> usersAcceptedList;
 
@@ -118,6 +118,10 @@ public class DonationRequest {
     }
 
     public TransportationAssist getTransportationAssist() {
+       if (transportationAssist == null)
+       {
+           transportationAssist = TransportationAssist.No;
+       }
         return transportationAssist;
     }
 

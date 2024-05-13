@@ -219,7 +219,8 @@ public class Feed{
             {
                 try
                 {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Item.fxml"));
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Item.fxml"));
                     HBox itemBox = loader.load();
                     ItemController itemController = loader.getController();
                     itemController.setData(item);

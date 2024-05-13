@@ -36,7 +36,7 @@ public class ItemController implements Initializable {
     public void setData(DonationRequest request){
 
         bloodTypeRequestLabel.setText(request.getBloodTypeAsString());
-        nameAndCityRequestLabel.setText(request.getPatientName().getName() + " " + request.getCity().toString());
+        nameAndCityRequestLabel.setText("Veli Ankara");
         addressRequestLabel.setText(request.getAddress());
 
         if ( !request.getMoneyAssistAsString().equals("0 usd"))
@@ -48,7 +48,7 @@ public class ItemController implements Initializable {
             moneyAssistRequestLabel.setVisible(false);
         }
 
-        if ( !request.getTransportationAssist().toString().equals("Yes")){
+        if (!request.getTransportationAssist().toString().equals("Yes")){
             transportationHelpLabel.setVisible(false);
         }
     }
