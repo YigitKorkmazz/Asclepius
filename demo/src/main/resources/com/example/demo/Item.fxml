@@ -35,7 +35,7 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Button fx:id="goRequestButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="228.0" prefWidth="77.0" style="-fx-background-color: white;" text="&gt;" textFill="WHITE">
+            <Button fx:id="goRequestButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="228.0" prefWidth="77.0" style="-fx-background-color: white;" text="&gt;" textFill="#6b6a6a">
                <font>
                   <Font size="24.0" />
                </font></Button>
