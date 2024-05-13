@@ -76,6 +76,9 @@ public class Settings extends UserDAO{
     @FXML
     private Button myDonationRequestsButton;
 
+    @FXML
+    private Button deleteTheAccountButton;
+
     private UserDAO userDAO = new UserDAO();
 
     @FXML
@@ -195,6 +198,22 @@ public class Settings extends UserDAO{
         }
     }
 
+    @FXML
+    public void deleteTheAccount (ActionEvent Event)
+    {
+        Stage stage = (Stage) deleteTheAccountButton.getScene().getWindow();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(stage); // Set the owner of the alert
+        alert.setTitle("Account Deletion");
+        alert.setHeaderText("Warning");
+        alert.setContentText("Are you sure about deleting your account ? ");
+        alert.setOnCloseRequest(event -> {
+            userDAO.deleteUser(Feed.getCurrentUser().getUniqueId());
+            stage.close();
+        });
+        alert.show();
+    }
+
     public void changePassword(String newPassword) {
         User currentUser = Feed.getCurrentUser();
         currentUser.setPassword(newPassword); // Update password in memory
@@ -300,5 +319,4 @@ public class Settings extends UserDAO{
         currentUser.setPhoneNumber(newPhoneNumberTf.getText()); // Update password in memory
         userDAO.updateUser(currentUser);
     }
-
 }
