@@ -14,7 +14,7 @@ public class BloodRequestDAO {
     protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
 
     private static final String SELECT_ALL_BLOOD_REQUESTS = "SELECT * FROM Donations";
-    private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE unique_id = ?";
+    private static final String SELECT_USER_BY_ID = "SELECT * FROM Donations WHERE donation_id = ?";
     private static final String INSERT_SQL = "INSERT INTO Donations (User_id, patient_name, phone_number, address, city, bloodType, transportationAssist, moneyAssist) VALUES (?, ?, ?,?, ?, ?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE Donations SET User_id = ?, patient_name = ?, phone_number = ?, address = ?, city = ?, bloodType = ?, transportationAssist = ?, moneyAssist = ? WHERE donation_id = ?";
     private static final String DELETE_SQL = "DELETE FROM Donations WHERE donation_id = ?";
@@ -45,7 +45,7 @@ public class BloodRequestDAO {
                 String address = rs.getString("address");
                 DonationRequest.City city = DonationRequest.convertStringTypeToEnumForCity(rs.getString("city")); // Direct use of enum as stored in DB
                 DonationRequest.BloodType bloodType = DonationRequest.convertStringTypeToEnum(rs.getString("bloodType")); // Converting string to enum
-                DonationRequest.TransportationAssist transportationAssist = DonationRequest.convertStringTypeToEnumForTransportationAsist(rs.getString("transportationAsist"));
+                DonationRequest.TransportationAssist transportationAssist = DonationRequest.convertStringTypeToEnumForTransportationAsist(rs.getString("transportationAssist"));
                 DonationRequest.MoneyAssist moneyAssist = DonationRequest.convertStringToMoneyAssist(rs.getString("moneyAssist")); // Converting money assist
 
                 List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
