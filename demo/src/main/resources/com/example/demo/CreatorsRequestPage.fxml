@@ -140,7 +140,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Button layoutX="155.0" layoutY="497.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
+                  <Button fx:id="closeButton" layoutX="155.0" layoutY="497.0" mnemonicParsing="false" onAction="#closeDonationMethod" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>

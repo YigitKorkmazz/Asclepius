@@ -37,6 +37,9 @@ public class DonationRequestScreen {
     private Button retreatButton;
 
     @FXML
+    private Button closeButton;
+
+    @FXML
     private Button tagAFriendButton;
 
     @FXML
@@ -92,6 +95,21 @@ public class DonationRequestScreen {
 
     @FXML
     public void goMyDonationRequests()
+    {
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("My Donation Requests");
+            stage.setScene(scene);
+            stage.setFullScreen(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void closeDonationMethod()
     {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
