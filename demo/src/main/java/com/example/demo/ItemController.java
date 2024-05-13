@@ -32,6 +32,7 @@ public class ItemController implements Initializable {
     @FXML
     private Button transportationHelpLabel;
 
+    @FXML
     public void goRequestPage()
     {
         try{
@@ -53,9 +54,9 @@ public class ItemController implements Initializable {
 
     public void setData(DonationRequest request){
 
-        bloodTypeRequestLabel.setText(request.getBloodTypeAsString());
-        nameAndCityRequestLabel.setText("Veli Ankara");
-        addressRequestLabel.setText(request.getAddress());
+        bloodTypeRequestLabel.setText (request.getBloodTypeAsString());
+        nameAndCityRequestLabel.setText (request.getPatientName().getName() + " " + request.getCityAsString());
+        addressRequestLabel.setText (request.getAddress());
 
         if ( !request.getMoneyAssistAsString().equals("0 usd"))
         {

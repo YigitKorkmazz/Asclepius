@@ -11,30 +11,21 @@ public class DonationRequest {
     private String address;
     private City city;  // Using enum type for city
     private BloodType bloodType;  // Using enum type for blood type
-    private TransportationAssist transportationAssist = TransportationAssist.No;  // Using enum type for transportation assist
+    private TransportationAssist transportationAssist;  // Using enum type for transportation assist
     private MoneyAssist moneyAssist;  // Using enum type for money assist
     private ArrayList<User> usersAcceptedList;
 
     // Enums for city, blood type, transportation assist, and money assist
     public enum City {
-        Ankara,
-        Istanbul,
-        Izmir
+        Ankara, Istanbul, Izmir
     }
 
     public enum BloodType {
-        ABRHPositive,
-        ARHPositive,
-        ARHNegative,
-        BRHPositive,
-        ZeroRHPositive,
-        ABRHNegative,
-        BRHNegative,
-        ZeroRHNegative
+        ABRHPositive, ARHPositive, ARHNegative, BRHPositive, ZeroRHPositive, ABRHNegative, BRHNegative, ZeroRHNegative
     }
 
     public enum TransportationAssist {
-        Yes,No;
+        Yes, No;
     }
 
     public enum MoneyAssist {
@@ -49,10 +40,10 @@ public class DonationRequest {
         this.patientName = patientName;
         this.phoneNumberAssc = phoneNumberAssc;
         this.address = address;
-        this.city = city;
+        this.city = city != null ? city : City.Ankara; // Default city if null
         this.bloodType = bloodType;
-        this.transportationAssist = transportationAssist;
-        this.moneyAssist = moneyAssist;
+        this.transportationAssist = transportationAssist != null ? transportationAssist : TransportationAssist.No; // Default assist if null
+        this.moneyAssist = moneyAssist != null ? moneyAssist : MoneyAssist.ZERO; // Default money assist if null
         this.usersAcceptedList = new ArrayList<>(usersAcceptedList);
     }
 
@@ -168,9 +159,11 @@ public class DonationRequest {
     public static DonationRequest.City convertStringTypeToEnumForCity(String type) {
         switch (type) {
             case "Istanbul": return City.Istanbul;
+            case "ISTANBUL": return City.Istanbul;
             case "Izmir": return City.Izmir;
+            case "IZMIR": return City.Izmir;
             case "Ankara": return City.Ankara;
-
+            case "ANKARA": return City.Ankara;
             default: return null;
         }
     }
@@ -178,7 +171,9 @@ public class DonationRequest {
     public static DonationRequest.TransportationAssist convertStringTypeToEnumForTransportationAsist(String type) {
         switch (type) {
             case "Yes": return TransportationAssist.Yes;
+            case "YES": return  TransportationAssist.Yes;
             case "No" : return TransportationAssist.No;
+            case "NO" : return TransportationAssist.No;
 
 
             default: return null;

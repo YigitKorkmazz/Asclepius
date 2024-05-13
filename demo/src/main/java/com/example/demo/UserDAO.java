@@ -55,7 +55,7 @@ public class UserDAO {
     public User getUserById(int id) {
         User user = null;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
