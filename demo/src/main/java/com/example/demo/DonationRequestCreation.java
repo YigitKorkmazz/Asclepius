@@ -36,6 +36,9 @@ public class DonationRequestCreation {
     private Button myDonationsButton;
 
     @FXML
+    private Button returnMyDonationRequest;
+
+    @FXML
     private Button myDonationRequestsButton;
 
     @FXML

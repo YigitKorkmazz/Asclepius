@@ -106,9 +106,9 @@
                   <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="605.0" prefWidth="671.0" style="-fx-background-color: white;">
                      <children>
                         <Label alignment="CENTER" font="$x1" layoutX="-2.0" layoutY="14.0" prefHeight="24.0" prefWidth="654.0" style="&#10;" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="19.0" />
-                        <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="48.0" style="-fx-background-color: white;" text="&lt;">
+                        <Button fx:id="returnMyDonationRequest" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goMyDonationRequests" prefHeight="24.0" prefWidth="48.0" style="-fx-background-color: white;" text="&lt;">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="20.0" />
                            </font>
                         </Button>
                         <VBox layoutY="70.0" prefHeight="463.0" prefWidth="624.0">
