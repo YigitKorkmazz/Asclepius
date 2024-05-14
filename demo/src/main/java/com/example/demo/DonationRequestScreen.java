@@ -13,22 +13,19 @@ public class DonationRequestScreen {
 
     //ui components
     @FXML
+    private Label helloLabel;
+
+    @FXML
     private Label bloodTypeLabel;
 
     @FXML
-    private Label nameLabel;
+    private Label cityLabel;
 
     @FXML
-    private Label phoneNumberLabel;
+    private Button transportationHelp;
 
     @FXML
-    private Label locationLabel;
-
-    @FXML
-    private Label transportationHelp;
-
-    @FXML
-    private Label moneyHelpField;
+    private Button moneyHelpLabel;
 
     @FXML
     private Button closeButton;
@@ -50,6 +47,18 @@ public class DonationRequestScreen {
 
     @FXML
     private Button myDonationRequestsButton;
+
+    @FXML
+    private Label bloodType;
+
+    @FXML
+    private Label patientNameLabel;
+
+    @FXML
+    private Label patientPhoneNumberLabel;
+
+    @FXML
+    private Label addressLabel;
 
     private BloodRequestDAO donationRequestDAO;
     public static DonationRequest currentDonation;
@@ -156,5 +165,42 @@ public class DonationRequestScreen {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initialize() {
+        User currentUser = Feed.getCurrentUser();
+        bloodType.setText (currentDonation.getBloodTypeAsString());
+        patientNameLabel.setText (currentDonation.getNameOfPatient());
+        patientPhoneNumberLabel.setText ("(+90) " + currentDonation.getPhoneNumberAssc());
+        addressLabel.setText (currentDonation.getAddress());
+        if (currentDonation.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
+        {
+            transportationHelp.setVisible(false);
+        }
+        if (currentDonation.getMoneyAssistAsString().equals("0 usd"))
+        {
+            moneyHelpLabel.setVisible(false);
+        }
+        else
+        {
+            moneyHelpLabel.setText (currentDonation.getMoneyAssistAsString());
+        }
+
+        if (currentUser != null && helloLabel != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else if (helloLabel != null) {
+            helloLabel.setText("Hello, Guest");
+        }
+        if (cityLabel != null)
+        {
+            cityLabel.setText(currentUser.getCityAsString());
+        }
+        if (bloodTypeLabel != null)
+        {
+            bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+        }
+
+
     }
 }

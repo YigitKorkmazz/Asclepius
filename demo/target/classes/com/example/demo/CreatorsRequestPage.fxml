@@ -95,9 +95,9 @@
             </AnchorPane>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="132.0" prefWidth="639.0">
                <children>
-                  <VBox alignment="TOP_CENTER" layoutY="38.0" prefHeight="467.0" prefWidth="639.0" style="-fx-background-color: white;">
+                  <VBox alignment="TOP_CENTER" layoutY="38.0" prefHeight="467.0" prefWidth="639.0" spacing="20.0" style="-fx-background-color: white;">
                      <children>
-                        <Label alignment="CENTER" prefHeight="79.0" prefWidth="227.0" text="(Blood Type)" textAlignment="CENTER">
+                        <Label fx:id="bloodType" alignment="CENTER" prefHeight="79.0" prefWidth="227.0" text="(Blood Type)" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="36.0" />
                            </font>
@@ -107,37 +107,31 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="55.0" prefWidth="227.0" text="(User Name)" textAlignment="CENTER">
+                        <Label fx:id="patientNameLabel" alignment="CENTER" prefHeight="55.0" prefWidth="227.0" text="(User Name)" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="36.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="227.0" text="(Telephone Number)" textAlignment="CENTER">
+                        <Label fx:id="patientPhoneNumberLabel" alignment="CENTER" prefHeight="26.0" prefWidth="227.0" text="(Telephone Number)" textAlignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="428.0" text="(Address)" textAlignment="CENTER">
+                        <Label fx:id="addressLabel" alignment="CENTER" prefHeight="45.0" prefWidth="428.0" text="(Address)" textAlignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="23.0" prefWidth="216.0" style="-fx-background-color: Black;" text="(Transportation Help)" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="transportationHelp" disable="true" mnemonicParsing="false" style="-fx-background-color: black; -fx-background-radius: 30;" text="Transportation Help" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="2.0" prefWidth="122.0" style="-fx-background-color: Black;" text="(Money)" textAlignment="CENTER" textFill="WHITE">
+                        </Button>
+                        <Button fx:id="moneyHelpLabel" disable="true" mnemonicParsing="false" style="-fx-background-color: black; -fx-background-radius: 30;" text="Money Help" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </Label>
+                        </Button>
                      </children>
                   </VBox>
                   <Button fx:id="closeButton" layoutX="155.0" layoutY="497.0" mnemonicParsing="false" onAction="#closeDonationMethod" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
@@ -145,7 +139,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button layoutX="345.0" layoutY="496.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
+                  <Button fx:id="editButton" layoutX="345.0" layoutY="496.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
