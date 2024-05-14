@@ -5,6 +5,7 @@ module com.example.demo {
     requires org.controlsfx.controls;
     requires java.sql;
     requires java.desktop;
+    requires jdk.sctp;
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
 }

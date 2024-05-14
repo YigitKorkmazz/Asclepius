@@ -46,7 +46,7 @@ public class BloodRequestDAO {
                 DonationRequest.MoneyAssist moneyAssist = DonationRequest.convertStringToMoneyAssist(rs.getString("moneyAssist")); // Converting money assist
                 String patientName = rs.getString("patient_name");
                 List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
-                bloodRequests.add(getRequestById(rs.getInt("donation_id"),creator));
+                bloodRequests.add(getRequestById(rs.getInt("donation_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class BloodRequestDAO {
         return user;
     }
 
-    public DonationRequest getRequestById (int donation_id, User user) {
+    public DonationRequest getRequestById (int donation_id) {
         DonationRequest request = null;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DONATION_BY_ID);) {
@@ -89,7 +89,8 @@ public class BloodRequestDAO {
                 String transportationAssist = rs.getString("transportationAssist");
                 String moneyAssist = rs.getString ("moneyAssist");
                 String address = rs.getString ("address");
-                request = new DonationRequest(user, phoneNumber, address,DonationRequest.convertStringTypeToEnumForCity(city), DonationRequest.convertStringTypeToEnum(type), DonationRequest.convertStringTypeToEnumForTransportationAsist(transportationAssist), DonationRequest.convertStringToMoneyAssist(moneyAssist), new ArrayList<User>(), nameOfPatient);
+                int UserId = rs.getInt("User_id");
+                request = new DonationRequest(getUserById(UserId), phoneNumber, address,DonationRequest.convertStringTypeToEnumForCity(city), DonationRequest.convertStringTypeToEnum(type), DonationRequest.convertStringTypeToEnumForTransportationAsist(transportationAssist), DonationRequest.convertStringToMoneyAssist(moneyAssist), new ArrayList<User>(), nameOfPatient);
                 request.setUniqueId (donation_id);
             }
         } catch (SQLException e) {

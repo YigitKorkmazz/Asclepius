@@ -21,6 +21,7 @@ public class UserDAO {
     protected static final String SELECT_USER_BY_PHONE_AND_PASSWORD = "SELECT * FROM user WHERE phone_number = ? AND userPassword = ?";
     private static final String SELECT_USER_ID_BY_PHONE = "SELECT User_id FROM user WHERE phone_number = ?";
     protected static final String CURRENT_NOTIFICATION = "UPDATE user SET notification = ? WHERE User_id = ?";
+    protected static final String SELECT_NOTIFICATION = "Select notification FROM user WHERE User_id = ?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -139,5 +140,25 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getNotification(int taggedUserId) throws SQLException {
+        String notification = ""; // Default to empty if no data is found
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NOTIFICATION)) {
+            preparedStatement.setInt(1, taggedUserId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    notification = rs.getString("notification");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error executing query: " + e.getMessage());
+                throw e; // Re-throw exception to handle it in calling method or to log it
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting connection or preparing statement: " + e.getMessage());
+            throw e; // Ensure that SQL exceptions are propagated up
+        }
+        return notification;
     }
 }

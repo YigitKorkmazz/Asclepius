@@ -122,17 +122,17 @@ public class DonationPageSeenByUser {
 
         // Handle the result
         if (phoneNumber != null) {
-            addNotification(phoneNumber);
+            addNotification(phoneNumber, "TAG");
         }
     }
 
-    public void addNotification(String phoneNumber) {
+    public void addNotification(String phoneNumber, String type) {
         UserDAO userDAO = new UserDAO();
         int userId = userDAO.findUserIdByPhoneNumber(phoneNumber);
         if (userId != -1) {
-            System.out.println(currentRequest.getUniqueId());
-           String notifyUser = "" + currentRequest.getUniqueId() + " " + Feed.getCurrentUser().getUniqueId() + "TAG";
+            String notifyUser = "" + currentRequest.getUniqueId() + " " + Feed.getCurrentUser().getUniqueId() + " " + type;
             userDAO.updateNotification(userId, notifyUser);
+
             Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
             infoAlert.setContentText("Notification sent to your friend.");
             infoAlert.showAndWait();
@@ -226,22 +226,26 @@ public class DonationPageSeenByUser {
     @FXML
     public void initialize() {
         User currentUser = Feed.getCurrentUser();
-        bloodTypeOfPatient.setText (currentRequest.getBloodTypeAsString());
-        nameLabel.setText (currentRequest.getNameOfPatient());
-        phoneNumberLabel.setText ("(+90) " + currentRequest.getPhoneNumberAssc());
-        locationLabel.setText (currentRequest.getAddress());
-        if (currentRequest.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
+        if ( currentRequest != null)
         {
-            transportationHelp.setVisible(false);
+            bloodTypeOfPatient.setText (currentRequest.getBloodTypeAsString());
+            nameLabel.setText (currentRequest.getNameOfPatient());
+            phoneNumberLabel.setText ("(+90) " + currentRequest.getPhoneNumberAssc());
+            locationLabel.setText (currentRequest.getAddress());
+            if (currentRequest.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
+            {
+                transportationHelp.setVisible(false);
+            }
+            if (currentRequest.getMoneyAssistAsString().equals("0 usd"))
+            {
+                moneyHelpField.setVisible(false);
+            }
+            else
+            {
+                moneyHelpField.setText (currentRequest.getMoneyAssistAsString());
+            }
         }
-        if (currentRequest.getMoneyAssistAsString().equals("0 usd"))
-        {
-            moneyHelpField.setVisible(false);
-        }
-        else
-        {
-            moneyHelpField.setText (currentRequest.getMoneyAssistAsString());
-        }
+
 
         if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());

@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.sun.nio.sctp.HandlerResult;
+import com.sun.nio.sctp.Notification;
+import com.sun.nio.sctp.NotificationHandler;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -40,13 +43,15 @@ public void start(Stage stage) throws IOException {
                         stage.setTitle("Hello!");
                         stage.setScene(newScene);
                 } catch (IOException e) {
-                        e.printStackTrace(); // Handle the exception as appropriate
+                        e.printStackTrace();
                 }
 
         });
-        }
+
+}
 
 public static void main(String[] args) {
         launch(args);
+
         }
 }

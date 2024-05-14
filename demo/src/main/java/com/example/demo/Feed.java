@@ -187,6 +187,10 @@ public class Feed{
 
     @FXML
     public void initialize (){
+
+        NotificationHandler notificationHandler = new NotificationHandler(new UserDAO(), currentUser.getUniqueId(),settingsButton);
+        notificationHandler.startScheduledNotification();
+
         donationRequestDAO = new BloodRequestDAO();
         List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = getCurrentUser();
@@ -227,7 +231,6 @@ public class Feed{
         {
             bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
         }
-
     }
 
 }
