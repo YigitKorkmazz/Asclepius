@@ -103,51 +103,6 @@ public class Feed{
         });
     }
 
-
-    // TO-DO: Widget Class Yap.
-
-    public void listDonationRequest(DonationRequest request)
-    {
-        DonationRequestWidget widget = new DonationRequestWidget(request);
-        VBoxforRequests.getChildren().add(widget);
-    }
-
-
-    // TO-DO: Widget Class Yap.
-    public void sortDonationRequests(List<DonationRequest> requests) {
-        List<DonationRequest> sortedRequests = requests.stream().sorted(Comparator.comparingInt(request -> request.getBloodType().ordinal())).collect(Collectors.toList());
-        displayDonationRequests(sortedRequests);
-    }
-
-    // TO-DO: Widget Class Yap.
-    public void displayDonationList() {
-        List<DonationRequest> donationRequests = donationRequestDAO.listAllBloodRequests();
-        displayDonationRequests(donationRequests);
-    }
-
-    private void displayDonationRequests(List<DonationRequest> requests) {
-        VBoxforRequests.getChildren().clear();
-        for (DonationRequest request : requests) {
-            listDonationRequest(request);
-        }
-    }
-/*
-    public void openDonationRequest(DonationRequest request)
-    {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("donationRequestScreen.fxml"));
-            Scene scene = new Scene(loader.load());
-            DonationRequestScreen controller = loader.getController();
-            controller.setDonationRequest(request);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Donation Request");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
     @FXML
     public void settingsOnAction()
     {
@@ -242,7 +197,7 @@ public class Feed{
 
         for (DonationRequest item: requests)
         {
-            if (VBoxforRequests != null)
+            if (item.getCreatorUser().getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null)
             {
                 try
                 {

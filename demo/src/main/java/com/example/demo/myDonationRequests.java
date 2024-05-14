@@ -146,7 +146,7 @@ public class myDonationRequests {
         donationRequestDAO = new BloodRequestDAO();
         List<DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = Feed.getCurrentUser();
-
+        System.out.println ("SU AN DOGRU YERDESIN");
         for (DonationRequest item : requests) {
             if (item.getCreatorUser().getUniqueId() == currentUser.getUniqueId() && VBoxforRequests != null) {
                 try {

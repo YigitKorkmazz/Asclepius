@@ -32,12 +32,24 @@ public class ItemController implements Initializable {
     @FXML
     private Button transportationHelpLabel;
 
+    private DonationRequest request;
+
     @FXML
     public void goRequestPage()
     {
         try{
             Stage stage = (Stage) goRequestButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+            FXMLLoader fxmlLoader = null;
+            System.out.println (request.getCreatorUser().getUniqueId() );
+            System.out.println (Feed.getCurrentUser().getUniqueId());
+            if (request.getCreatorUser().getUniqueId() == Feed.getCurrentUser().getUniqueId())
+            {
+                fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
+            }
+            else
+            {
+                fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+            }
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Donation");
             stage.setScene(scene);
@@ -52,7 +64,7 @@ public class ItemController implements Initializable {
     }
 
     public void setData(DonationRequest request){
-
+        this.request = request;
         bloodTypeRequestLabel.setText (request.getBloodTypeAsString());
         nameAndCityRequestLabel.setText (request.getNameOfPatient() + " " + request.getCityAsString());
         addressRequestLabel.setText (request.getAddress());

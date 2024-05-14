@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DonationPageSeenByUser {
 
@@ -53,6 +55,9 @@ public class DonationPageSeenByUser {
 
     @FXML
     private Button myDonationRequestsButton;
+
+    private BloodRequestDAO donationRequestDAO;
+
     //methods
     @FXML
     public void displayDonationRequest()
@@ -155,6 +160,12 @@ public class DonationPageSeenByUser {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initialize() {
+        User currentUser = Feed.getCurrentUser();
+
     }
 }
 
