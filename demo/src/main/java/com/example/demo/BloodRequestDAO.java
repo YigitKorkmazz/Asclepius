@@ -45,9 +45,8 @@ public class BloodRequestDAO {
                 DonationRequest.TransportationAssist transportationAssist = DonationRequest.convertStringTypeToEnumForTransportationAsist(rs.getString("transportationAssist"));
                 DonationRequest.MoneyAssist moneyAssist = DonationRequest.convertStringToMoneyAssist(rs.getString("moneyAssist")); // Converting money assist
                 String patientName = rs.getString("patient_name");
-
                 List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
-                bloodRequests.add(new DonationRequest(creator, rs.getString("phone_number"), address, city, bloodType, transportationAssist, moneyAssist, usersAcceptedList,patientName));
+                bloodRequests.add(getRequestById(rs.getInt("donation_id"),creator));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,14 +82,15 @@ public class BloodRequestDAO {
             preparedStatement.setInt(1, donation_id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                String type = rs.getString("blood_type");
+                String type = rs.getString("bloodType");
                 String nameOfPatient = rs.getString("patient_name");
                 String phoneNumber = rs.getString("phone_number");
                 String city = rs.getString("city");
                 String transportationAssist = rs.getString("transportationAssist");
                 String moneyAssist = rs.getString ("moneyAssist");
                 String address = rs.getString ("address");
-                request = new DonationRequest(user, phoneNumber, address,DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(type), DonationRequest.TransportationAssist.valueOf(transportationAssist), DonationRequest.convertStringToMoneyAssist(moneyAssist), new ArrayList<User>(), nameOfPatient);
+                request = new DonationRequest(user, phoneNumber, address,DonationRequest.convertStringTypeToEnumForCity(city), DonationRequest.convertStringTypeToEnum(type), DonationRequest.convertStringTypeToEnumForTransportationAsist(transportationAssist), DonationRequest.convertStringToMoneyAssist(moneyAssist), new ArrayList<User>(), nameOfPatient);
+                request.setUniqueId (donation_id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
