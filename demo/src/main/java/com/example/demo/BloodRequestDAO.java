@@ -83,7 +83,7 @@ public class BloodRequestDAO {
             preparedStatement.setString(2, request.getPatientName().getName());
             preparedStatement.setString(3, request.getPatientName().getPhoneNumber());
             preparedStatement.setString(4, request.getAddress());
-            preparedStatement.setString(5, request.getCity().toString());
+            preparedStatement.setString(5, request.getCityAsString());
             preparedStatement.setString(6, request.getBloodTypeAsString());
             preparedStatement.setString(7, request.getTransportationAssist().toString());
             preparedStatement.setString(8, request.getMoneyAssistAsString());
@@ -105,7 +105,7 @@ public class BloodRequestDAO {
             preparedStatement.setInt(1, request.getPatientName().getUniqueId());
             preparedStatement.setString(2, request.getPatientName().getPhoneNumber());
             preparedStatement.setString(3, request.getAddress());
-            preparedStatement.setString(4, request.getCity().toString());
+            preparedStatement.setString(4, request.getCityAsString());
             preparedStatement.setString(5, request.getBloodType().toString());
             preparedStatement.setString(6, request.getTransportationAssist().toString());
             preparedStatement.setString(7, request.getMoneyAssist().toString());

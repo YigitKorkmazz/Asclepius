@@ -160,8 +160,10 @@ public class DonationRequest {
         switch (type) {
             case "Istanbul": return City.Istanbul;
             case "ISTANBUL": return City.Istanbul;
+            case "İSTANBUL": return City.Istanbul;
             case "Izmir": return City.Izmir;
             case "IZMIR": return City.Izmir;
+            case "İZMIR": return City.Izmir;
             case "Ankara": return City.Ankara;
             case "ANKARA": return City.Ankara;
             default: return null;
