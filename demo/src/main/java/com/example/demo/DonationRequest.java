@@ -48,7 +48,6 @@ public class DonationRequest {
         this.nameOfPatient = nameOfPatient;
     }
 
-    // @TO-DO: some of the setters may be redundant. @umutcaginozcan
     public int getUniqueId() {
         return uniqueId;
     }

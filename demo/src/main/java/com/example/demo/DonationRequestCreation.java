@@ -204,28 +204,29 @@ public class DonationRequestCreation {
         {
             moneyAssist = DonationRequest.MoneyAssist.HUNDRED;
         }
+
         bloodRequestDAO = new BloodRequestDAO();
+
         Statement statement = bloodRequestDAO.getConnection().createStatement();
+
         User currentUser = Feed.getCurrentUser();
+
         newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>(), name);
-        ResultSet request_id = statement.executeQuery("SELECT donation_id FROM Donations WHERE phone_number = '" + phoneNumberField.getText() + "' AND address = '" + addressArea.getText() + "' AND patient_name = '" + name + "'");
-        if (request_id.next()) {
-            int id = request_id.getInt("donation_id");
-            newRequest.setUniqueId (id);
-        }
-        // Insert the donation request into the database
-        BloodRequestDAO donationRequestDAO = new BloodRequestDAO();
+
         try {
-            donationRequestDAO.insertDonationRequest(newRequest);
-            System.out.println("Donation request published successfully.");
-            // Optionally clear the fields or navigate away
+            bloodRequestDAO.insertDonationRequest(newRequest);
+
+            ResultSet rs = statement.executeQuery("SELECT donation_id FROM Donations WHERE phone_number = '" + newRequest.getPhoneNumberAssc() + "' AND address = '" + newRequest.getAddress() + "' AND patient_name = '" + newRequest.getNameOfPatient() + "'");
+            System.out.println(rs);
+            newRequest.setUniqueId(rs.getInt("donation_id"));
+
         } catch (Exception e) {
             System.out.println("Failed to insert donation request: " + e.getMessage());
             e.printStackTrace();
         }
+
         Stage stage = (Stage) settingsButton.getScene().getWindow();
         showDonationCreatedAlert(stage);
-
     }
 
     public void showDonationCreatedAlert (Stage ownerStage) {

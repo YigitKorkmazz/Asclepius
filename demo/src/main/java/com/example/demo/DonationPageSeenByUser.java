@@ -69,6 +69,7 @@ public class DonationPageSeenByUser {
 
     private BloodRequestDAO donationRequestDAO;
     public static DonationRequest currentRequest;
+    private String notifyUser = "";
 
     //methods
     @FXML
@@ -128,9 +129,10 @@ public class DonationPageSeenByUser {
     public void addNotification(String phoneNumber) {
         UserDAO userDAO = new UserDAO();
         int userId = userDAO.findUserIdByPhoneNumber(phoneNumber);
-        if (userId != -1) { // Assuming -1 indicates the user does not exist
-            String notificationMessage = "You have been tagged in a donation request.";
-            userDAO.updateNotification(userId, notificationMessage);
+        if (userId != -1) {
+            System.out.println(currentRequest.getUniqueId());
+           String notifyUser = "" + currentRequest.getUniqueId() + " " + Feed.getCurrentUser().getUniqueId() + "TAG";
+            userDAO.updateNotification(userId, notifyUser);
             Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
             infoAlert.setContentText("Notification sent to your friend.");
             infoAlert.showAndWait();
