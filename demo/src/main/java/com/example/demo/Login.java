@@ -68,10 +68,9 @@ public class Login {
 
                     Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 600, 650);
+                    Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
                     stage.setTitle("Feed");
                     stage.setScene(scene);
-                    stage.setFullScreen(true);
                     stage.show();
                 } else {
                     showAlertForWrongCredidentials();

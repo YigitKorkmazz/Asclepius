@@ -38,10 +38,9 @@ public class ItemController implements Initializable {
         try{
             Stage stage = (Stage) goRequestButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Donation");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

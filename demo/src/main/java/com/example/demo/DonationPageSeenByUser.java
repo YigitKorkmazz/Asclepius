@@ -84,10 +84,9 @@ public class DonationPageSeenByUser {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donation Requests");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -99,10 +98,9 @@ public class DonationPageSeenByUser {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donation Requests");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -113,10 +111,9 @@ public class DonationPageSeenByUser {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donations");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -128,10 +125,9 @@ public class DonationPageSeenByUser {
         try{
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 900);
             stage.setTitle("Settings");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -141,10 +137,9 @@ public class DonationPageSeenByUser {
         try{
             Stage stage = (Stage) bloodTypeChangeButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Settings");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -154,10 +149,9 @@ public class DonationPageSeenByUser {
         try{
             Stage stage = (Stage) cityChangeButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Settings");
             stage.setScene(scene);
-            stage.setFullScreen(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
