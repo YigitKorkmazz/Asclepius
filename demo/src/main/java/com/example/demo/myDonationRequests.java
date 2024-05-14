@@ -155,7 +155,7 @@ public class myDonationRequests {
         User currentUser = Feed.getCurrentUser();
 
         for (DonationRequest item : requests) {
-            if (item.getCreatorUser().getUniqueId() == 10 && VBoxforRequests != null) {
+            if (item.getCreatorUser().getUniqueId() == currentUser.getUniqueId() && VBoxforRequests != null) {
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("Item.fxml"));

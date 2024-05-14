@@ -37,7 +37,7 @@ public class BloodRequestDAO {
             while (rs.next()) {
                 int userId = rs.getInt("User_id");
                 User creator = getUserById(userId);  // Correctly fetching the user associated with the request
-
+                creator.setUniqueId(userId);
                 String address = rs.getString("address");
                 DonationRequest.City city = DonationRequest.convertStringTypeToEnumForCity(rs.getString("city")); // Direct use of enum as stored in DB
                 DonationRequest.BloodType bloodType = DonationRequest.convertStringTypeToEnum(rs.getString("bloodType")); // Converting string to enum
@@ -46,7 +46,6 @@ public class BloodRequestDAO {
                 String patientName = rs.getString("patient_name");
 
                 List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
-
                 bloodRequests.add(new DonationRequest(creator, rs.getString("phone_number"), address, city, bloodType, transportationAssist, moneyAssist, usersAcceptedList,patientName));
             }
         } catch (SQLException e) {
@@ -81,7 +80,7 @@ public class BloodRequestDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
 
             preparedStatement.setInt(1, request.getCreatorUser().getUniqueId());
-            preparedStatement.setString(2, request.getCreatorUser().getName());
+            preparedStatement.setString(2, request.getNameOfPatient());
             preparedStatement.setString(3, request.getCreatorUser().getPhoneNumber());
             preparedStatement.setString(4, request.getAddress());
             preparedStatement.setString(5, request.getCityAsString());
