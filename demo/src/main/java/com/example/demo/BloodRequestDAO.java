@@ -104,7 +104,7 @@ public class BloodRequestDAO {
 
             preparedStatement.setInt(1, request.getCreatorUser().getUniqueId());
             preparedStatement.setString(2, request.getNameOfPatient());
-            preparedStatement.setString(3, request.getCreatorUser().getPhoneNumber());
+            preparedStatement.setString(3, request.getPhoneNumberAssc());
             preparedStatement.setString(4, request.getAddress());
             preparedStatement.setString(5, request.getCityAsString());
             preparedStatement.setString(6, request.getBloodTypeAsString());

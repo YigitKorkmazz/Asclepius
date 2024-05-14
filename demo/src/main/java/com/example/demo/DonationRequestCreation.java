@@ -172,7 +172,7 @@ public class DonationRequestCreation {
         cityDropdown.setItems(cityList);
     }
     @FXML
-    public void publishButtonOnAction(ActionEvent event) throws SQLException {
+    public void publishButtonOnAction(ActionEvent event) {
         // Validate inputs
         String name = nameField.getText().trim();
         String phoneNumber = phoneNumberField.getText().trim();
@@ -207,23 +207,26 @@ public class DonationRequestCreation {
 
         bloodRequestDAO = new BloodRequestDAO();
 
-        Statement statement = bloodRequestDAO.getConnection().createStatement();
-
-        User currentUser = Feed.getCurrentUser();
-
-        newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>(), name);
-
         try {
+            Statement statement = bloodRequestDAO.getConnection().createStatement();
+
+            User currentUser = Feed.getCurrentUser();
+
+            newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>(), name);
             bloodRequestDAO.insertDonationRequest(newRequest);
 
             ResultSet rs = statement.executeQuery("SELECT donation_id FROM Donations WHERE phone_number = '" + newRequest.getPhoneNumberAssc() + "' AND address = '" + newRequest.getAddress() + "' AND patient_name = '" + newRequest.getNameOfPatient() + "'");
-            System.out.println(rs);
-            newRequest.setUniqueId(rs.getInt("donation_id"));
+
+            // Move the cursor to the first row
+            if (rs.next()) {
+                newRequest.setUniqueId(rs.getInt("donation_id"));
+            }
 
         } catch (Exception e) {
             System.out.println("Failed to insert donation request: " + e.getMessage());
             e.printStackTrace();
         }
+
 
         Stage stage = (Stage) settingsButton.getScene().getWindow();
         showDonationCreatedAlert(stage);
