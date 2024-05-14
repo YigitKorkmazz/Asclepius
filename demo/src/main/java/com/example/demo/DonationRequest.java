@@ -6,8 +6,8 @@ import java.util.List;
 public class DonationRequest {
     // Instance variables
     private static int uniqueId;
-    private User patientName;
-    private String patientName1;
+    private User creatorUser;
+    private String nameOfPatient;
     private String phoneNumberAssc;
     private String address;
     private City city;  // Using enum type for city
@@ -32,24 +32,12 @@ public class DonationRequest {
     public enum MoneyAssist {
         ZERO, FIFTY, HUNDRED
     }
-    public DonationRequest(String patientName, String phoneNumberAssc, String address,
-                           City city, BloodType bloodType, TransportationAssist transportationAssist,
-                           MoneyAssist moneyAssist, List<User> usersAcceptedList) {
-        this.patientName1 = patientName;
-        this.phoneNumberAssc = phoneNumberAssc;
-        this.address = address;
-        this.city = city != null ? city : City.Ankara; // Default city if null
-        this.bloodType = bloodType;
-        this.transportationAssist = transportationAssist != null ? transportationAssist : TransportationAssist.No; // Default assist if null
-        this.moneyAssist = moneyAssist != null ? moneyAssist : MoneyAssist.ZERO; // Default money assist if null
-        this.usersAcceptedList = new ArrayList<>(usersAcceptedList);
-    }
 
-    public DonationRequest(User patientName, String phoneNumberAssc, String address,
+    public DonationRequest(User creatorName, String phoneNumberAssc, String address,
                            City city, BloodType bloodType, TransportationAssist transportationAssist,
-                           MoneyAssist moneyAssist, List<User> usersAcceptedList) {
+                           MoneyAssist moneyAssist, List<User> usersAcceptedList, String nameOfPatient) {
         this.uniqueId++;
-        this.patientName = patientName;
+        this.creatorUser = creatorName;
         this.phoneNumberAssc = phoneNumberAssc;
         this.address = address;
         this.city = city != null ? city : City.Ankara; // Default city if null
@@ -57,6 +45,7 @@ public class DonationRequest {
         this.transportationAssist = transportationAssist != null ? transportationAssist : TransportationAssist.No; // Default assist if null
         this.moneyAssist = moneyAssist != null ? moneyAssist : MoneyAssist.ZERO; // Default money assist if null
         this.usersAcceptedList = new ArrayList<>(usersAcceptedList);
+        this.nameOfPatient = nameOfPatient;
     }
 
     // @TO-DO: some of the setters may be redundant. @umutcaginozcan
@@ -64,12 +53,12 @@ public class DonationRequest {
         return uniqueId;
     }
 
-    public User getPatientName() {
-        return patientName;
+    public User getCreatorUser() {
+        return creatorUser;
     }
 
-    public void setPatientName(User patientName) {
-        this.patientName = patientName;
+    public void setCreatorUser(User creatorUser) {
+        this.creatorUser = creatorUser;
     }
 
     public ArrayList<User> getUsersAcceptedList() {
@@ -112,12 +101,12 @@ public class DonationRequest {
         this.city = city;
     }
 
-    public String getPatientName1() {
-        return patientName1;
+    public String getNameOfPatient() {
+        return nameOfPatient;
     }
 
-    public void setPatientName1(String patientName1) {
-        this.patientName1 = patientName1;
+    public void setNameOfPatient(String nameOfPatient) {
+        this.nameOfPatient = nameOfPatient;
     }
 
     public BloodType getBloodType() {

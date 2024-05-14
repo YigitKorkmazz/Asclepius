@@ -14,7 +14,7 @@ public class DonationRequestWidget extends VBox {
     private Button tagFriendButton;
     public DonationRequestWidget(DonationRequest request) {
     // Initialize UI components and set their values based on the donation request
-        patientNameLabel = new Label(request.getPatientName().getName());
+        patientNameLabel = new Label(request.getCreatorUser().getName());
         bloodTypeLabel = new Label(request.getBloodType().toString());
         locationLabel = new Label(request.getCity().toString());
 

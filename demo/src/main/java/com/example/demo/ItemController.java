@@ -55,7 +55,7 @@ public class ItemController implements Initializable {
     public void setData(DonationRequest request){
 
         bloodTypeRequestLabel.setText (request.getBloodTypeAsString());
-        nameAndCityRequestLabel.setText (request.getPatientName().getName() + " " + request.getCityAsString());
+        nameAndCityRequestLabel.setText (request.getCreatorUser().getName() + " " + request.getCityAsString());
         addressRequestLabel.setText (request.getAddress());
 
         if ( !request.getMoneyAssistAsString().equals("0 usd"))

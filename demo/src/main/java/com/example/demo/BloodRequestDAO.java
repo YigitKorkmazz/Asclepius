@@ -36,17 +36,18 @@ public class BloodRequestDAO {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int userId = rs.getInt("User_id");
-                User patient = getUserById(userId);  // Correctly fetching the user associated with the request
+                User creator = getUserById(userId);  // Correctly fetching the user associated with the request
 
                 String address = rs.getString("address");
                 DonationRequest.City city = DonationRequest.convertStringTypeToEnumForCity(rs.getString("city")); // Direct use of enum as stored in DB
                 DonationRequest.BloodType bloodType = DonationRequest.convertStringTypeToEnum(rs.getString("bloodType")); // Converting string to enum
                 DonationRequest.TransportationAssist transportationAssist = DonationRequest.convertStringTypeToEnumForTransportationAsist(rs.getString("transportationAssist"));
                 DonationRequest.MoneyAssist moneyAssist = DonationRequest.convertStringToMoneyAssist(rs.getString("moneyAssist")); // Converting money assist
+                String patientName = rs.getString("patient_name");
 
                 List<User> usersAcceptedList = new ArrayList<>(); // Placeholder for accepted users list
 
-                bloodRequests.add(new DonationRequest(patient, rs.getString("phone_number"), address, city, bloodType, transportationAssist, moneyAssist, usersAcceptedList));
+                bloodRequests.add(new DonationRequest(creator, rs.getString("phone_number"), address, city, bloodType, transportationAssist, moneyAssist, usersAcceptedList,patientName));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,9 +80,9 @@ public class BloodRequestDAO {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
 
-            preparedStatement.setInt(1, request.getPatientName().getUniqueId());
-            preparedStatement.setString(2, request.getPatientName().getName());
-            preparedStatement.setString(3, request.getPatientName().getPhoneNumber());
+            preparedStatement.setInt(1, request.getCreatorUser().getUniqueId());
+            preparedStatement.setString(2, request.getCreatorUser().getName());
+            preparedStatement.setString(3, request.getCreatorUser().getPhoneNumber());
             preparedStatement.setString(4, request.getAddress());
             preparedStatement.setString(5, request.getCity().toString());
             preparedStatement.setString(6, request.getBloodTypeAsString());
@@ -102,8 +103,8 @@ public class BloodRequestDAO {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
 
-            preparedStatement.setInt(1, request.getPatientName().getUniqueId());
-            preparedStatement.setString(2, request.getPatientName().getPhoneNumber());
+            preparedStatement.setInt(1, request.getCreatorUser().getUniqueId());
+            preparedStatement.setString(2, request.getCreatorUser().getPhoneNumber());
             preparedStatement.setString(3, request.getAddress());
             preparedStatement.setString(4, request.getCity().toString());
             preparedStatement.setString(5, request.getBloodType().toString());
