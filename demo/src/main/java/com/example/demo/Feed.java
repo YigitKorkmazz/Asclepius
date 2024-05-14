@@ -198,9 +198,13 @@ public class Feed{
         }
     }
 
-    public boolean isMatching ()
+    public boolean isMatching (DonationRequest request, User user)
     {
-        return true;
+
+        String userCity = user.getCityAsString().toLowerCase();
+        String donationCity = request.getCityAsString().toLowerCase();
+
+        return userCity.equals(donationCity);
     }
 
     @FXML
@@ -211,7 +215,7 @@ public class Feed{
 
         for (DonationRequest item: requests)
         {
-            if (isMatching() && VBoxforRequests != null)
+            if (isMatching(item, currentUser) && VBoxforRequests != null)
             {
                 try
                 {
