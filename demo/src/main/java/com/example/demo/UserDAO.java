@@ -18,8 +18,7 @@ public class UserDAO {
     protected static final String INSERT_USER = "INSERT INTO user (blood_type, Name, phone_number, userPassword, city) VALUES (?, ?, ?, ?, ?)";
     protected static final String UPDATE_USER = "UPDATE user SET blood_type = ?, Name = ?, phone_number = ?, userPassword = ?, city = ? WHERE User_id = ?";
     protected static final String DELETE_USER = "DELETE FROM user WHERE User_id = ?";
-    private static final String SELECT_USER_ID_BY_PHONE = "SELECT User_id FROM user WHERE phone_number = ?";
-    protected static final String CURRENT_NOTIFICATION = "UPDATE user SET notification = ? WHERE User_id = ?";
+    protected static final String SELECT_USER_BY_PHONE_AND_PASSWORD = "SELECT * FROM user WHERE phone_number = ? AND userPassword = ?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -74,33 +73,28 @@ public class UserDAO {
         return user;
     }
 
-    public void updateNotification(int userId, String message) {
+    public User getUserByPhoneAndPassword(String phoneNumber, String password) {
+        User user = null;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(CURRENT_NOTIFICATION)) {
-            preparedStatement.setString(1, message);
-            preparedStatement.setInt(2, userId);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public int findUserIdByPhoneNumber(String phoneNumber) {
-        int userId = -1; // Use -1 as default to indicate user not found
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_ID_BY_PHONE)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_PHONE_AND_PASSWORD)) {
             preparedStatement.setString(1, phoneNumber);
+            preparedStatement.setString(2, password);
 
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                userId = rs.getInt("User_id");
+                user = new User(
+                        rs.getString("blood_type"),
+                        rs.getString("Name"),
+                        rs.getString("phone_number"),
+                        rs.getString("userPassword"),
+                        rs.getString("city")
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return userId;
+        return user;
     }
-
 
     public void addUser(User user) {
         try (Connection connection = getConnection();
