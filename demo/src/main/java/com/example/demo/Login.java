@@ -52,19 +52,7 @@ public class Login {
                         int id = userId.getInt("User_id");
                         user.setUniqueId(id);
                     }
-
-                    // Updated code to handle null or empty city value
-                    ResultSet city = statement.executeQuery("SELECT city FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
-                    if (city.next()) {
-                        String cityName = city.getString("city");
-                        if (cityName != null && !cityName.isEmpty()) {
-                            user.setCity(cityName);
-                        } else {
-                            // Handle the case when the city value is null or empty
-                            // You can set a default value or take any other appropriate action
-                            user.setCity("Unknown"); // Example: Set a default city value
-                        }
-                    }
+                    user.setCity("Ankara");
 
                     Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
