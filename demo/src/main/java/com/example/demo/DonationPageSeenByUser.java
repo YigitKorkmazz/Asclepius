@@ -3,9 +3,10 @@ package com.example.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -88,11 +89,58 @@ public class DonationPageSeenByUser {
         //TODO
     }
 
-    @FXML
-    public void tagFriend()
-    {
-        //TODO
+    public void tagFriend() {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("Tag a Friend");
+
+        // Set up the input field
+        TextField phoneNumberField = new TextField();
+        phoneNumberField.setPromptText("Enter your friend's phone number");
+
+        // Set up buttons
+        ButtonType sendButtonType = new ButtonType("Send");
+        ButtonType cancelButtonType = new ButtonType("Cancel");
+        dialog.getDialogPane().getButtonTypes().addAll(sendButtonType, cancelButtonType);
+
+        // Layout
+        VBox vbox = new VBox();
+        vbox.getChildren().add(phoneNumberField);
+        dialog.getDialogPane().setContent(vbox);
+
+        // Convert the result to a phone number when the send button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == sendButtonType) {
+                return phoneNumberField.getText();
+            }
+            return null;
+        });
+
+        // Show dialog and get result
+        String phoneNumber = dialog.showAndWait().orElse(null);
+
+        // Handle the result
+        if (phoneNumber != null) {
+            addNotification(phoneNumber);
+        }
     }
+
+    public void addNotification(String phoneNumber) {
+        UserDAO userDAO = new UserDAO();
+        int userId = userDAO.findUserIdByPhoneNumber(phoneNumber);
+        if (userId != -1) { // Assuming -1 indicates the user does not exist
+            String notificationMessage = "You have been tagged in a donation request.";
+            userDAO.updateNotification(userId, notificationMessage);
+            Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+            infoAlert.setContentText("Notification sent to your friend.");
+            infoAlert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("User does not exist.");
+            alert.showAndWait();
+        }
+    }
+
 
     @FXML
     public void goMyDonationRequests()

@@ -149,11 +149,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-<<<<<<< HEAD
-                  <Button layoutX="427.0" layoutY="497.0" mnemonicParsing="false" onAction="#tagFriend" prefHeight="51.0" prefWidth="170.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Tag a Friend" textFill="WHITE">
-=======
                   <Button fx:id="tagAFriendButton" layoutX="427.0" layoutY="497.0" mnemonicParsing="false" onAction="#tagFriend" prefHeight="51.0" prefWidth="170.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Tag a Friend" textFill="WHITE">
->>>>>>> c7f070733ac93660945f162825379da4ba50e94f
                      <font>
                         <Font size="24.0" />
                      </font>
