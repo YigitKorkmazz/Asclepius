@@ -21,16 +21,16 @@ public class DonationRequestCreation {
     public Label helloLabel;
 
     @FXML
-    private Label bloodTypeLabel;
+    public Label bloodTypeLabel;
 
     @FXML
     public Label cityLabel;
 
     @FXML
-    private Button bloodTypeChangeButton;
+    public Button bloodTypeChangeButton;
 
     @FXML
-    private Button cityChangeButton;
+    public Button cityChangeButton;
 
     @FXML
     private Button settingsButton;
@@ -45,37 +45,37 @@ public class DonationRequestCreation {
     private Button myDonationRequestsButton;
 
     @FXML
-    private TextField nameField;
+    public TextField nameField;
 
     @FXML
-    private TextField phoneNumberField;
+    public TextField phoneNumberField;
 
     @FXML
-    private TextArea addressArea;
+    public TextArea addressArea;
 
     @FXML
-    private Button publishButton;
+    public Button publishButton;
 
     @FXML
-    private ComboBox<String> cityDropdown;
+    public ComboBox<String> cityDropdown;
 
     @FXML
-    private ComboBox<String> bloodTypeDropdown;
+    public ComboBox<String> bloodTypeDropdown;
 
     @FXML
-    private CheckBox transportationHelpCb;
+    public CheckBox transportationHelpCb;
 
     @FXML
     private ToggleGroup Amount;
 
     @FXML
-    private RadioButton zeroUsd;
+    public RadioButton zeroUsd;
 
     @FXML
-    private RadioButton fiftyUsd;
+    public RadioButton fiftyUsd;
 
     @FXML
-    private RadioButton hundredUsd;
+    public RadioButton hundredUsd;
 
     private DonationRequest newRequest;
 

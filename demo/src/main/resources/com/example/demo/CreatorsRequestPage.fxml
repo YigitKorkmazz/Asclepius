@@ -139,7 +139,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editButton" layoutX="345.0" layoutY="496.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
+                  <Button fx:id="editButton" layoutX="345.0" layoutY="496.0" mnemonicParsing="false" onAction="#editDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>

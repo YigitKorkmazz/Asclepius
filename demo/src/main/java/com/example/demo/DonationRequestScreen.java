@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class DonationRequestScreen {
@@ -63,6 +64,7 @@ public class DonationRequestScreen {
     private BloodRequestDAO donationRequestDAO;
     public static DonationRequest currentDonation;
 
+
     //methods
     @FXML
     public void displayDonationRequest()
@@ -88,13 +90,45 @@ public class DonationRequestScreen {
     }
 
     @FXML
-    public void editDonation(DonationRequest donation)
+    public void editDonation()
     {
+
         try {
             Stage stage = (Stage) editButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("DonationRequestCreation.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("DonationCreationPage.fxml"));
+
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Donation Request Edit");
+
+            DonationRequestCreation creationPage = fxmlLoader.getController();
+            if (creationPage == null) {
+                System.err.println("Error: DonationRequestCreation controller is null");
+                return;
+            }
+
+            donationRequestDAO = new BloodRequestDAO();
+            donationRequestDAO.deleteDonationRequest(currentDonation.getUniqueId());
+            creationPage.bloodTypeDropdown.setValue(currentDonation.getBloodTypeAsString());
+            creationPage.cityDropdown.setValue(currentDonation.getCityAsString());
+            creationPage.nameField.setText(currentDonation.getNameOfPatient());
+            creationPage.phoneNumberField.setText(currentDonation.getPhoneNumberAssc());
+            creationPage.addressArea.setText(currentDonation.getAddress());
+            creationPage.publishButton.setText("Edit!");
+
+            if ( currentDonation.getTransportationAssist().toString().equals("Yes"))
+            {
+                creationPage.transportationHelpCb.setSelected(true);
+            }
+            if ( creationPage.zeroUsd.isSelected()){
+                creationPage.zeroUsd.setSelected(true);
+            }
+            else if ( creationPage.fiftyUsd.isSelected()){
+                creationPage.fiftyUsd.setSelected(true);
+            }
+            else if(creationPage.hundredUsd.isSelected()){
+                creationPage.hundredUsd.setSelected(true);
+            }
             stage.setScene(scene);
         } catch (IOException ex) {
             ex.printStackTrace();
