@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DonationRequestScreen {
 
@@ -50,6 +51,9 @@ public class DonationRequestScreen {
 
     @FXML
     private Button myDonationRequestsButton;
+
+    private BloodRequestDAO donationRequestDAO;
+
     //methods
     @FXML
     public void displayDonationRequest()
@@ -58,15 +62,23 @@ public class DonationRequestScreen {
     }
 
     @FXML
-    public void closeDonation()
+    public void closeDonation(DonationRequest deleteDon)
     {
-        //TODO
+        donationRequestDAO.deleteDonationRequest(deleteDon.getUniqueId());
     }
 
     @FXML
-    public void editDonation()
+    public void editDonation(DonationRequest donation)
     {
-        //TODO
+        try {
+            Stage stage = (Stage) editButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("DonationRequestCreation.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            stage.setTitle("Donation Request Edit");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
