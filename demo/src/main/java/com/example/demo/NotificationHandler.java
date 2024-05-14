@@ -82,7 +82,8 @@ public class NotificationHandler {
             try {
                 donationRequestDAO = new BloodRequestDAO();
 
-                if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getRequestById(donationID).getCreatorUser().getUniqueId()){
+                DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
+                if (donationRequest != null && Feed.getCurrentUser().getUniqueId() == donationRequest.getCreatorUser().getUniqueId()) {
 
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
                     Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
@@ -91,17 +92,24 @@ public class NotificationHandler {
                         primaryStage.setTitle("Request");
                         primaryStage.setScene(newScene);
                     }
+                    System.out.println("YİĞİTYİĞİT");
                 }
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
-                Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                Stage primaryStage = getPrimaryStage();
-                if (primaryStage != null) {
-                    primaryStage.setTitle("Donation Request");
-                    primaryStage.setScene(newScene);
+                else{
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+                    Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
+                    Stage primaryStage = getPrimaryStage();
+                    if (primaryStage != null) {
+                        primaryStage.setTitle("Request");
+                        primaryStage.setScene(newScene);
+                    }
+
                 }
+
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
             notificationStage.close();
         });
 
