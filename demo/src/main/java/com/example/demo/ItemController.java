@@ -50,6 +50,7 @@ public class ItemController implements Initializable {
             {
                 fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
             }
+            DonationPageSeenByUser.currentRequest = this.request;
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Donation");
             stage.setScene(scene);

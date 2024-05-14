@@ -22,6 +22,13 @@ import javafx.stage.Modality;
 public class DonationPageSeenByUser {
 
     //ui components
+
+    @FXML
+    private Label helloLabel;
+
+    @FXML
+    private Label cityLabel;
+
     @FXML
     private Label bloodTypeLabel;
 
@@ -35,10 +42,10 @@ public class DonationPageSeenByUser {
     private Label locationLabel;
 
     @FXML
-    private Label transportationHelp;
+    private Button transportationHelp;
 
     @FXML
-    private Label moneyHelpField;
+    private Button moneyHelpField;
 
     @FXML
     private Button acceptButton;
@@ -64,7 +71,11 @@ public class DonationPageSeenByUser {
     @FXML
     private Button myDonationRequestsButton;
 
+    @FXML
+    private Label bloodTypeOfPatient;
+
     private BloodRequestDAO donationRequestDAO;
+    public static DonationRequest currentRequest;
 
     //methods
     @FXML
@@ -247,6 +258,37 @@ try {
     @FXML
     public void initialize() {
         User currentUser = Feed.getCurrentUser();
+        bloodTypeOfPatient.setText (currentRequest.getBloodTypeAsString());
+        nameLabel.setText (currentRequest.getNameOfPatient());
+        phoneNumberLabel.setText ("(+90) " + currentRequest.getPhoneNumberAssc());
+        locationLabel.setText (currentRequest.getAddress());
+        if (currentRequest.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
+        {
+            transportationHelp.setVisible(false);
+        }
+        if (currentRequest.getMoneyAssistAsString().equals("0 usd"))
+        {
+            moneyHelpField.setVisible(false);
+        }
+        else
+        {
+            moneyHelpField.setText (currentRequest.getMoneyAssistAsString());
+        }
+
+        if (currentUser != null && helloLabel != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else if (helloLabel != null) {
+            helloLabel.setText("Hello, Guest");
+        }
+        if (cityLabel != null)
+        {
+            cityLabel.setText(currentUser.getCityAsString());
+        }
+        if (bloodTypeLabel != null)
+        {
+            bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+        }
+
 
     }
 }
