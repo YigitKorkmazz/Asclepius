@@ -7,6 +7,7 @@ public class DonationRequest {
     // Instance variables
     private static int uniqueId;
     private User patientName;
+    private String patientName1;
     private String phoneNumberAssc;
     private String address;
     private City city;  // Using enum type for city
@@ -31,8 +32,19 @@ public class DonationRequest {
     public enum MoneyAssist {
         ZERO, FIFTY, HUNDRED
     }
+    public DonationRequest(String patientName, String phoneNumberAssc, String address,
+                           City city, BloodType bloodType, TransportationAssist transportationAssist,
+                           MoneyAssist moneyAssist, List<User> usersAcceptedList) {
+        this.patientName1 = patientName;
+        this.phoneNumberAssc = phoneNumberAssc;
+        this.address = address;
+        this.city = city != null ? city : City.Ankara; // Default city if null
+        this.bloodType = bloodType;
+        this.transportationAssist = transportationAssist != null ? transportationAssist : TransportationAssist.No; // Default assist if null
+        this.moneyAssist = moneyAssist != null ? moneyAssist : MoneyAssist.ZERO; // Default money assist if null
+        this.usersAcceptedList = new ArrayList<>(usersAcceptedList);
+    }
 
-    // Constructor
     public DonationRequest(User patientName, String phoneNumberAssc, String address,
                            City city, BloodType bloodType, TransportationAssist transportationAssist,
                            MoneyAssist moneyAssist, List<User> usersAcceptedList) {
@@ -98,6 +110,14 @@ public class DonationRequest {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public String getPatientName1() {
+        return patientName1;
+    }
+
+    public void setPatientName1(String patientName1) {
+        this.patientName1 = patientName1;
     }
 
     public BloodType getBloodType() {

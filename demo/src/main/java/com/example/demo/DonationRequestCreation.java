@@ -207,7 +207,7 @@ public class DonationRequestCreation {
         }
 
         User currentUser = Feed.getCurrentUser();
-        newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>());
+        newRequest = new DonationRequest(name, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>());
 
         // Insert the donation request into the database
         BloodRequestDAO donationRequestDAO = new BloodRequestDAO();
