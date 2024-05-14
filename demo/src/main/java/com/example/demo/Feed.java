@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -61,10 +62,45 @@ public class Feed{
     }
 
     //methods
-    public void sortScarcity() {
-        List<DonationRequest> donationRequests = donationRequestDAO.listAllBloodRequests();
-        List<DonationRequest> sortedRequests = donationRequests.stream().sorted(Comparator.comparingInt(request -> request.getBloodType().ordinal())).collect(Collectors.toList());
-        displayDonationRequests(sortedRequests);
+    public void sortScarcity(List<DonationRequest> requests) {
+        requests.sort(Comparator.comparing(DonationRequest::getBloodType));
+    }
+
+    public void sortMatching(List<DonationRequest> requests, User currentUser) {
+        String userBloodType = currentUser.getBloodTypeAsString();
+
+        requests.sort((r1, r2) -> {
+            boolean isMatch1 = r1.getBloodTypeAsString().equals(userBloodType);
+            boolean isMatch2 = r2.getBloodTypeAsString().equals(userBloodType);
+
+            if (isMatch1 && !isMatch2) {
+                return -1;
+            } else if (!isMatch1 && isMatch2) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    public boolean isMatching (DonationRequest request, User user)
+    {   String userCity = user.getCityAsString().toLowerCase();
+        String donationCity = request.getCityAsString().toLowerCase();
+        return userCity.equals(donationCity);
+    }
+    public void sortCity(List<DonationRequest> requests, User currentUser) {
+        requests.sort((r1, r2) -> {
+            boolean isMatch1 = isMatching(r1, currentUser);
+            boolean isMatch2 = isMatching(r2, currentUser);
+
+            if (isMatch1 && !isMatch2) {
+                return -1;
+            } else if (!isMatch1 && isMatch2) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
     }
 
 
@@ -198,14 +234,7 @@ public class Feed{
         }
     }
 
-    public boolean isMatching (DonationRequest request, User user)
-    {
 
-        String userCity = user.getCityAsString().toLowerCase();
-        String donationCity = request.getCityAsString().toLowerCase();
-
-        return userCity.equals(donationCity);
-    }
 
     @FXML
     public void initialize (){
@@ -213,9 +242,13 @@ public class Feed{
         List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = getCurrentUser();
 
+        sortScarcity(requests);
+        sortMatching(requests, currentUser);
+        sortCity(requests, currentUser);
+
         for (DonationRequest item: requests)
         {
-            if (isMatching(item, currentUser) && VBoxforRequests != null)
+            if (VBoxforRequests != null)
             {
                 try
                 {
