@@ -32,23 +32,19 @@ public class Login {
     private PasswordField passwordField;
 
     @FXML
-    public void loginButtonOnAction (ActionEvent e)
-    {
-        try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
+    public void loginButtonOnAction(ActionEvent e) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen", "c45cce85f4f1feff87e1055d85bd97153672d7bb");
             Statement statement = connection.createStatement();
-            if (isEmptyLoginButtons())
-            {
+            if (isEmptyLoginButtons()) {
                 showAlertForEmptyCredidentials();
-            }
-            else
-            {
+            } else {
                 ResultSet existingUser = statement.executeQuery("SELECT * FROM user WHERE phone_number = '" + phoneNumberField.getText() + "' AND userPassword = '" + passwordField.getText() + "'");
                 if (existingUser.next()) {
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
                     Stage primaryStage = new Stage();
-                    User user = new User( existingUser.getString("blood_type"),  existingUser.getString("Name"), phoneNumberField.getText(), passwordField.getText(), "Ankara");
+                    User user = new User(existingUser.getString("blood_type"), existingUser.getString("Name"), phoneNumberField.getText(), passwordField.getText(), "Ankara");
 
                     // User ID is set.
                     ResultSet userId = statement.executeQuery("SELECT User_id FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
@@ -56,11 +52,20 @@ public class Login {
                         int id = userId.getInt("User_id");
                         user.setUniqueId(id);
                     }
+
+                    // Updated code to handle null or empty city value
                     ResultSet city = statement.executeQuery("SELECT city FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
                     if (city.next()) {
-                        String cityName  = city.getString("city");
-                        user.setCity(cityName);
+                        String cityName = city.getString("city");
+                        if (cityName != null && !cityName.isEmpty()) {
+                            user.setCity(cityName);
+                        } else {
+                            // Handle the case when the city value is null or empty
+                            // You can set a default value or take any other appropriate action
+                            user.setCity("Unknown"); // Example: Set a default city value
+                        }
                     }
+
                     Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 600, 650);
@@ -68,15 +73,12 @@ public class Login {
                     stage.setScene(scene);
                     stage.setFullScreen(true);
                     stage.show();
-                }
-                else
-                {
+                } else {
                     showAlertForWrongCredidentials();
                     phoneNumberField.setText("");
                     passwordField.setText("");
                 }
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
