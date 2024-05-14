@@ -5,10 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class myDonations {
 
@@ -41,6 +43,8 @@ public class myDonations {
 
     @FXML
     private VBox VBoxforRequests;
+
+    private BloodRequestDAO donationRequestDAO;
 
     @FXML
     public void settingsOnAction()
@@ -124,14 +128,36 @@ public class myDonations {
 
     @FXML
     public void initialize (){
+        donationRequestDAO = new BloodRequestDAO();
+        List<DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = Feed.getCurrentUser();
-        if (currentUser != null) {
-            helloLabel.setText("Hello, " + currentUser.getName());
-        } else {
-            helloLabel.setText("Hello, Guest");
-        }
+        System.out.println ("SU AN DOGRU YERDESIN");
+        for (DonationRequest item : requests) {
+            if (VBoxforRequests != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Item.fxml"));
+                    HBox itemBox = loader.load();
+                    ItemController itemController = loader.getController();
+                    itemController.setData(item);
+                    VBoxforRequests.getChildren().add(itemBox);
 
-        cityLabel.setText(currentUser.getCityAsString());
-        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
+        if (currentUser != null && helloLabel != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+
+            if (cityLabel != null) {
+                cityLabel.setText(currentUser.getCityAsString());
+            }
+            if (bloodTypeLabel != null) {
+                bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+            }
+
+        }
     }
 }
