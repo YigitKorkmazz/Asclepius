@@ -1,11 +1,12 @@
 package com.example.demo;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DonationRequest {
     // Instance variables
-    private static int uniqueId;
+    private int uniqueId;
     private User creatorUser;
     private String nameOfPatient;
     private String phoneNumberAssc;
@@ -36,7 +37,6 @@ public class DonationRequest {
     public DonationRequest(User creatorName, String phoneNumberAssc, String address,
                            City city, BloodType bloodType, TransportationAssist transportationAssist,
                            MoneyAssist moneyAssist, List<User> usersAcceptedList, String nameOfPatient) {
-        this.uniqueId++;
         this.creatorUser = creatorName;
         this.phoneNumberAssc = phoneNumberAssc;
         this.address = address;
@@ -214,5 +214,9 @@ public class DonationRequest {
             case ZeroRHNegative: return "0RH-";
             default: return "Unknown";
         }
+    }
+
+    public void setUniqueId(int uniqueId) {
+        this.uniqueId = uniqueId;
     }
 }

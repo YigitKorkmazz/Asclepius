@@ -10,6 +10,7 @@ public class BloodRequestDAO {
     protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
 
     private static final String SELECT_ALL_BLOOD_REQUESTS = "SELECT * FROM Donations";
+    private static final String SELECT_DONATION_BY_ID = "SELECT * FROM Donations WHERE donation_id = ?";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE User_id = ?";
     private static final String INSERT_SQL = "INSERT INTO Donations (User_id, patient_name, phone_number, address, city, bloodType, transportationAssist, moneyAssist) VALUES (?, ?, ?,?, ?, ?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE Donations SET User_id = ?, patient_name = ?, phone_number = ?, address = ?, city = ?, bloodType = ?, transportationAssist = ?, moneyAssist = ? WHERE donation_id = ?";
@@ -55,7 +56,7 @@ public class BloodRequestDAO {
     }
 
 
-    private User getUserById(int userId) {
+    private User getUserById (int userId) {
         User user = null;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
@@ -73,6 +74,28 @@ public class BloodRequestDAO {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public DonationRequest getRequestById (int donation_id, User user) {
+        DonationRequest request = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DONATION_BY_ID);) {
+            preparedStatement.setInt(1, donation_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String type = rs.getString("blood_type");
+                String nameOfPatient = rs.getString("patient_name");
+                String phoneNumber = rs.getString("phone_number");
+                String city = rs.getString("city");
+                String transportationAssist = rs.getString("transportationAssist");
+                String moneyAssist = rs.getString ("moneyAssist");
+                String address = rs.getString ("address");
+                request = new DonationRequest(user, phoneNumber, address,DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(type), DonationRequest.TransportationAssist.valueOf(transportationAssist), DonationRequest.convertStringToMoneyAssist(moneyAssist), new ArrayList<User>(), nameOfPatient);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return request;
     }
 
     public void insertDonationRequest(DonationRequest request) {
@@ -124,9 +147,10 @@ public class BloodRequestDAO {
 
     public void deleteDonationRequest(int requestId) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL);) {
 
             preparedStatement.setInt(1, requestId);
+            System.out.println("REQUESTTTTTT" + requestId);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("Donation request was deleted successfully!");

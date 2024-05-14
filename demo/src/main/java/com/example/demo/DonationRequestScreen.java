@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class DonationRequestScreen {
 
@@ -53,6 +52,7 @@ public class DonationRequestScreen {
     private Button myDonationRequestsButton;
 
     private BloodRequestDAO donationRequestDAO;
+    public static DonationRequest currentDonation;
 
     //methods
     @FXML
@@ -62,9 +62,20 @@ public class DonationRequestScreen {
     }
 
     @FXML
-    public void closeDonation(DonationRequest deleteDon)
+    public void closeDonationMethod ()
     {
-        donationRequestDAO.deleteDonationRequest(deleteDon.getUniqueId());
+        donationRequestDAO = new BloodRequestDAO();
+        donationRequestDAO.deleteDonationRequest(currentDonation.getUniqueId());
+
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            stage.setTitle("My Donation Requests");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -84,20 +95,6 @@ public class DonationRequestScreen {
 
     @FXML
     public void goMyDonationRequests()
-    {
-        try {
-            Stage stage = (Stage) settingsButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-            stage.setTitle("My Donation Requests");
-            stage.setScene(scene);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void closeDonationMethod()
     {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();

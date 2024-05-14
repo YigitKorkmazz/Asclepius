@@ -45,12 +45,13 @@ public class ItemController implements Initializable {
             if (request.getCreatorUser().getUniqueId() == Feed.getCurrentUser().getUniqueId())
             {
                 fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
+                DonationRequestScreen.currentDonation = this.request;
             }
             else
             {
                 fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+                DonationPageSeenByUser.currentRequest = this.request;
             }
-            DonationPageSeenByUser.currentRequest = this.request;
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Donation");
             stage.setScene(scene);

@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DonationRequestCreation {
@@ -75,6 +78,8 @@ public class DonationRequestCreation {
     private RadioButton hundredUsd;
 
     private DonationRequest newRequest;
+
+    private BloodRequestDAO bloodRequestDAO;
 
     public void settingsOnAction()
     {
@@ -167,7 +172,7 @@ public class DonationRequestCreation {
         cityDropdown.setItems(cityList);
     }
     @FXML
-    public void publishButtonOnAction(ActionEvent event) {
+    public void publishButtonOnAction(ActionEvent event) throws SQLException {
         // Validate inputs
         String name = nameField.getText().trim();
         String phoneNumber = phoneNumberField.getText().trim();
@@ -199,10 +204,15 @@ public class DonationRequestCreation {
         {
             moneyAssist = DonationRequest.MoneyAssist.HUNDRED;
         }
-
+        bloodRequestDAO = new BloodRequestDAO();
+        Statement statement = bloodRequestDAO.getConnection().createStatement();
         User currentUser = Feed.getCurrentUser();
         newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>(), name);
-
+        ResultSet request_id = statement.executeQuery("SELECT donation_id FROM Donations WHERE phone_number = '" + phoneNumberField.getText() + "' AND address = '" + addressArea.getText() + "' AND patient_name = '" + name + "'");
+        if (request_id.next()) {
+            int id = request_id.getInt("donation_id");
+            newRequest.setUniqueId (id);
+        }
         // Insert the donation request into the database
         BloodRequestDAO donationRequestDAO = new BloodRequestDAO();
         try {
