@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DonationRequestScreen {
+public class DonationPageSeenByUser {
 
     //ui components
     @FXML
@@ -31,10 +31,13 @@ public class DonationRequestScreen {
     private Label moneyHelpField;
 
     @FXML
-    private Button closeButton;
+    private Button acceptButton;
 
     @FXML
-    private Button editButton;
+    private Button retreatButton;
+
+    @FXML
+    private Button tagAFriendButton;
 
     @FXML
     private Button cityChangeButton;
@@ -58,17 +61,22 @@ public class DonationRequestScreen {
     }
 
     @FXML
-    public void closeDonation()
+    public void acceptDonation()
     {
         //TODO
     }
 
     @FXML
-    public void editDonation()
+    public void retreatDonation()
     {
         //TODO
     }
 
+    @FXML
+    public void tagFriend()
+    {
+        //TODO
+    }
 
     @FXML
     public void goMyDonationRequests()
@@ -155,3 +163,4 @@ public class DonationRequestScreen {
         }
     }
 }
+
