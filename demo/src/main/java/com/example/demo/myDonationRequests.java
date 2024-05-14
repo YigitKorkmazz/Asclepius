@@ -6,10 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class myDonationRequests {
     @FXML
@@ -45,11 +47,12 @@ public class myDonationRequests {
     @FXML
     private VBox VBoxforRequests;
 
+    private BloodRequestDAO donationRequestDAO;
+
 
     @FXML
-    public void settingsOnAction()
-    {
-        try{
+    public void settingsOnAction() {
+        try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
@@ -62,9 +65,8 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void goSettingsPage1()
-    {
-        try{
+    public void goSettingsPage1() {
+        try {
             Stage stage = (Stage) bloodTypeChangeButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
@@ -77,9 +79,8 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void goSettingsPage2()
-    {
-        try{
+    public void goSettingsPage2() {
+        try {
             Stage stage = (Stage) cityChangeButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 600);
@@ -92,8 +93,7 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void goMyDonationRequests()
-    {
+    public void goMyDonationRequests() {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
@@ -107,8 +107,7 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void goMyDonations()
-    {
+    public void goMyDonations() {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
@@ -122,8 +121,7 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void goFeed()
-    {
+    public void goFeed() {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
@@ -137,8 +135,7 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void plusSignOnAction (ActionEvent event)
-    {
+    public void plusSignOnAction(ActionEvent event) {
         try {
             Stage stage = (Stage) plusSignButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("DonationCreationPage.fxml"));
@@ -152,15 +149,37 @@ public class myDonationRequests {
     }
 
     @FXML
-    public void initialize (){
+    public void initialize() {
+        donationRequestDAO = new BloodRequestDAO();
+        List<DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = Feed.getCurrentUser();
-        if (currentUser != null) {
-            helloLabel.setText("Hello, " + currentUser.getName());
-        } else {
-            helloLabel.setText("Hello, Guest");
-        }
 
-        cityLabel.setText(currentUser.getCityAsString());
-        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+        for (DonationRequest item : requests) {
+            if (item.getPatientName().getUniqueId() == currentUser.getUniqueId() && VBoxforRequests != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Item.fxml"));
+                    HBox itemBox = loader.load();
+                    ItemController itemController = loader.getController();
+                    itemController.setData(item);
+                    VBoxforRequests.getChildren().add(itemBox);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
+        if (currentUser != null && helloLabel != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+
+            if (cityLabel != null) {
+                cityLabel.setText(currentUser.getCityAsString());
+            }
+            if (bloodTypeLabel != null) {
+                bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+            }
+
+        }
     }
 }
