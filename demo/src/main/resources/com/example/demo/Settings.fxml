@@ -34,7 +34,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="bloodTypeChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" minHeight="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goSettingsPage1" prefHeight="44.0" prefWidth="153.0" style="-fx-background-color: white;" text="ABRh-">
+                        <Button fx:id="bloodTypeChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" minHeight="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="153.0" style="-fx-background-color: white;" text="ABRh-">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -49,7 +49,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="cityChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: white;" text="Ankara">
+                        <Button fx:id="cityChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: white;" text="Ankara">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -82,7 +82,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="settingsButton1" layoutY="513.0" mnemonicParsing="false" onAction="#settingsOnAction" prefHeight="48.0" prefWidth="137.0" style="-fx-background-color: white;" text="Settings" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                  <Button fx:id="settingsButton" layoutY="513.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="137.0" style="-fx-background-color: white;" text="Settings" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font size="20.0" />
                      </font>

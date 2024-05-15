@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -104,7 +105,7 @@ public class Feed{
     }
 
     @FXML
-    public void settingsOnAction()
+    public void settingsOnAction (ActionEvent event)
     {
         try{
             Stage stage = (Stage) settingsButton.getScene().getWindow();
@@ -116,7 +117,9 @@ public class Feed{
             ex.printStackTrace();
         }
     }
-    public void goSettingsPage1()
+
+    @FXML
+    public void goSettingsPage1 (ActionEvent event)
     {
         try{
             Stage stage = (Stage) bloodTypeChangeButton.getScene().getWindow();
@@ -128,7 +131,9 @@ public class Feed{
             ex.printStackTrace();
         }
     }
-    public void goSettingsPage2()
+
+    @FXML
+    public void goSettingsPage2 (ActionEvent event)
     {
         try{
             Stage stage = (Stage) cityChangeButton.getScene().getWindow();
