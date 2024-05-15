@@ -81,35 +81,28 @@ public class NotificationHandler {
             System.out.println("Go to the notification clicked");
             try {
                 donationRequestDAO = new BloodRequestDAO();
-
                 DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
+                FXMLLoader fxmlLoader = null;
                 if (donationRequest != null && Feed.getCurrentUser().getUniqueId() == donationRequest.getCreatorUser().getUniqueId()) {
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
-                    Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                    Stage primaryStage = getPrimaryStage();
-                    if (primaryStage != null) {
-                        primaryStage.setTitle("Request");
-                        primaryStage.setScene(newScene);
-                    }
-                    System.out.println("YİĞİTYİĞİT");
+                    fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
+                    DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
+                    donationRequestScreen.setData(donationRequest);
+                } else {
+                    fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+                    DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
+                    donationPageSeenByUser.setData(donationRequest);
                 }
-                else{
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
-                    Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                    Stage primaryStage = getPrimaryStage();
-                    if (primaryStage != null) {
-                        primaryStage.setTitle("Request");
-                        primaryStage.setScene(newScene);
-                    }
+                Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
 
+
+                Stage primaryStage = getPrimaryStage();
+                if (primaryStage != null) {
+                    primaryStage.setTitle("Donation Request");
+                    primaryStage.setScene(newScene);
                 }
-
-
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
             notificationStage.close();
         });
 

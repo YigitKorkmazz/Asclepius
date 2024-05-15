@@ -4,18 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class DonationRequestCreation {
+public class DonationRequestCreation implements Initializable {
 
     @FXML
     public Label helloLabel;
@@ -45,37 +48,37 @@ public class DonationRequestCreation {
     private Button myDonationRequestsButton;
 
     @FXML
-    public TextField nameField;
+    private TextField nameField;
 
     @FXML
-    public TextField phoneNumberField;
+    private TextField phoneNumberField;
 
     @FXML
-    public TextArea addressArea;
+    private TextArea addressArea;
 
     @FXML
-    public Button publishButton;
+    private Button publishButton;
 
     @FXML
-    public ComboBox<String> cityDropdown;
+    private ComboBox<String> cityDropdown;
 
     @FXML
-    public ComboBox<String> bloodTypeDropdown;
+    private ComboBox<String> bloodTypeDropdown;
 
     @FXML
-    public CheckBox transportationHelpCb;
+    private CheckBox transportationHelpCb;
 
     @FXML
     private ToggleGroup Amount;
 
     @FXML
-    public RadioButton zeroUsd;
+    private RadioButton zeroUsd;
 
     @FXML
-    public RadioButton fiftyUsd;
+    private RadioButton fiftyUsd;
 
     @FXML
-    public RadioButton hundredUsd;
+    private RadioButton hundredUsd;
 
     private DonationRequest newRequest;
 
@@ -161,17 +164,6 @@ public class DonationRequestCreation {
     }
 
     @FXML
-    public void initialize (){
-        User currentUser = Feed.getCurrentUser();
-        helloLabel.setText("Hello, " + currentUser.getName());
-        cityLabel.setText(currentUser.getCityAsString());
-        bloodTypeLabel.setText (currentUser.getBloodTypeAsString());
-        ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
-        ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
-        bloodTypeDropdown.setItems(bloodTypeList);
-        cityDropdown.setItems(cityList);
-    }
-    @FXML
     public void publishButtonOnAction(ActionEvent event) {
         // Validate inputs
         String name = nameField.getText().trim();
@@ -238,5 +230,43 @@ public class DonationRequestCreation {
         alert.setTitle("Information Dialog");
         alert.setContentText("Donation created");
         alert.show();
+    }
+
+    public void setData (DonationRequest request)
+    {
+       BloodRequestDAO donationRequestDAO = new BloodRequestDAO();
+        donationRequestDAO.deleteDonationRequest(request.getUniqueId());
+        this.bloodTypeDropdown.setValue(request.getBloodTypeAsString());
+        this.cityDropdown.setValue(request.getCityAsString());
+        this.nameField.setText(request.getNameOfPatient());
+        this.phoneNumberField.setText(request.getPhoneNumberAssc());
+        this.addressArea.setText(request.getAddress());
+        this.publishButton.setText("Edit!");
+
+        if ( request.getTransportationAssist().toString().equals("Yes"))
+        {
+            this.transportationHelpCb.setSelected(true);
+        }
+        if ( this.zeroUsd.isSelected()){
+            this.zeroUsd.setSelected(true);
+        }
+        else if ( this.fiftyUsd.isSelected()){
+            this.fiftyUsd.setSelected(true);
+        }
+        else if(this.hundredUsd.isSelected()){
+            this.hundredUsd.setSelected(true);
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        User currentUser = Feed.getCurrentUser();
+        helloLabel.setText("Hello, " + currentUser.getName());
+        cityLabel.setText(currentUser.getCityAsString());
+        bloodTypeLabel.setText (currentUser.getBloodTypeAsString());
+        ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
+        ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
+        bloodTypeDropdown.setItems(bloodTypeList);
+        cityDropdown.setItems(cityList);
     }
 }

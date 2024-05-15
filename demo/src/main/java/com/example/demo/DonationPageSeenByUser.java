@@ -2,6 +2,7 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -10,9 +11,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class DonationPageSeenByUser {
+public class DonationPageSeenByUser implements Initializable {
 
     //ui components
 
@@ -68,7 +71,7 @@ public class DonationPageSeenByUser {
     private Label bloodTypeOfPatient;
 
     private BloodRequestDAO donationRequestDAO;
-    public static DonationRequest currentRequest;
+    private  DonationRequest currentRequest;
     private String notifyUser = "";
 
     //methods
@@ -223,30 +226,10 @@ public class DonationPageSeenByUser {
         }
     }
 
-    @FXML
-    public void initialize() {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         User currentUser = Feed.getCurrentUser();
-        if ( currentRequest != null)
-        {
-            bloodTypeOfPatient.setText (currentRequest.getBloodTypeAsString());
-            nameLabel.setText (currentRequest.getNameOfPatient());
-            phoneNumberLabel.setText ("(+90) " + currentRequest.getPhoneNumberAssc());
-            locationLabel.setText (currentRequest.getAddress());
-            if (currentRequest.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
-            {
-                transportationHelp.setVisible(false);
-            }
-            if (currentRequest.getMoneyAssistAsString().equals("0 usd"))
-            {
-                moneyHelpField.setVisible(false);
-            }
-            else
-            {
-                moneyHelpField.setText (currentRequest.getMoneyAssistAsString());
-            }
-        }
-
-
         if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());
         } else if (helloLabel != null) {
@@ -261,6 +244,31 @@ public class DonationPageSeenByUser {
             bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
         }
 
+
+    }
+
+    public void setData (DonationRequest request)
+    {
+        this.currentRequest = request;
+        if ( request != null)
+        {
+            bloodTypeOfPatient.setText (request.getBloodTypeAsString());
+            nameLabel.setText (request.getNameOfPatient());
+            phoneNumberLabel.setText ("(+90) " + request.getPhoneNumberAssc());
+            locationLabel.setText (request.getAddress());
+            if (request.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
+            {
+                transportationHelp.setVisible(false);
+            }
+            if (request.getMoneyAssistAsString().equals("0 usd"))
+            {
+                moneyHelpField.setVisible(false);
+            }
+            else
+            {
+                moneyHelpField.setText (request.getMoneyAssistAsString());
+            }
+        }
 
     }
 }

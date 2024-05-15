@@ -49,6 +49,7 @@ public class Login {
                     // User ID is set.
                     ResultSet userId = statement.executeQuery("SELECT User_id FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
                     if (userId.next()) {
+                        System.out.println ("USER ID BURAYA GIRDI");
                         int id = userId.getInt("User_id");
                         user.setUniqueId(id);
                     }

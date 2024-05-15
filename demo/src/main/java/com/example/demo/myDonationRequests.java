@@ -148,8 +148,8 @@ public class myDonationRequests {
         User currentUser = Feed.getCurrentUser();
         System.out.println ("SU AN DOGRU YERDESIN");
         for (DonationRequest item : requests) {
-            System.out.println ("NAME: " +item.getNameOfPatient() + " id: " + item.getUniqueId());
-            if (item.getCreatorUser().getUniqueId() == currentUser.getUniqueId() && VBoxforRequests != null) {
+            System.out.println ("DONATIONUN OLUSTURANI : " + donationRequestDAO.getUserByDonationID(item.getUniqueId()).getUniqueId());
+            if (donationRequestDAO.getUserByDonationID(item.getUniqueId()).getUniqueId() == currentUser.getUniqueId() && VBoxforRequests != null) {
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("Item.fxml"));

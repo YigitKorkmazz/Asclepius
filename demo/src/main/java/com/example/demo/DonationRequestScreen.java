@@ -2,6 +2,7 @@ package com.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,8 +10,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DonationRequestScreen {
+public class DonationRequestScreen implements Initializable {
 
     //ui components
     @FXML
@@ -62,7 +65,7 @@ public class DonationRequestScreen {
     private Label addressLabel;
 
     private BloodRequestDAO donationRequestDAO;
-    public static DonationRequest currentDonation;
+    private DonationRequest currentDonation;
 
 
     //methods
@@ -102,6 +105,7 @@ public class DonationRequestScreen {
             stage.setTitle("Donation Request Edit");
 
             DonationRequestCreation creationPage = fxmlLoader.getController();
+            creationPage.setData(currentDonation);
             if (creationPage == null) {
                 System.err.println("Error: DonationRequestCreation controller is null");
                 return;
@@ -109,26 +113,8 @@ public class DonationRequestScreen {
 
             donationRequestDAO = new BloodRequestDAO();
             donationRequestDAO.deleteDonationRequest(currentDonation.getUniqueId());
-            creationPage.bloodTypeDropdown.setValue(currentDonation.getBloodTypeAsString());
-            creationPage.cityDropdown.setValue(currentDonation.getCityAsString());
-            creationPage.nameField.setText(currentDonation.getNameOfPatient());
-            creationPage.phoneNumberField.setText(currentDonation.getPhoneNumberAssc());
-            creationPage.addressArea.setText(currentDonation.getAddress());
-            creationPage.publishButton.setText("Edit!");
-
-            if ( currentDonation.getTransportationAssist().toString().equals("Yes"))
-            {
-                creationPage.transportationHelpCb.setSelected(true);
-            }
-            if ( creationPage.zeroUsd.isSelected()){
-                creationPage.zeroUsd.setSelected(true);
-            }
-            else if ( creationPage.fiftyUsd.isSelected()){
-                creationPage.fiftyUsd.setSelected(true);
-            }
-            else if(creationPage.hundredUsd.isSelected()){
-                creationPage.hundredUsd.setSelected(true);
-            }
+            DonationRequestCreation donationRequestCreation = fxmlLoader.getController();
+            donationRequestCreation.setData(currentDonation);
             stage.setScene(scene);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -201,24 +187,26 @@ public class DonationRequestScreen {
         }
     }
 
-    @FXML
-    public void initialize() {
+    public void setData (DonationRequest request)
+    {
+        this.currentDonation = request;
         User currentUser = Feed.getCurrentUser();
-        bloodType.setText (currentDonation.getBloodTypeAsString());
-        patientNameLabel.setText (currentDonation.getNameOfPatient());
-        patientPhoneNumberLabel.setText ("(+90) " + currentDonation.getPhoneNumberAssc());
-        addressLabel.setText (currentDonation.getAddress());
-        if (currentDonation.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
+        bloodType.setText (request.getBloodTypeAsString());
+        patientNameLabel.setText (request.getNameOfPatient());
+        patientPhoneNumberLabel.setText ("(+90) " + request.getPhoneNumberAssc());
+        addressLabel.setText (request.getAddress());
+
+        if (request.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
         {
             transportationHelp.setVisible(false);
         }
-        if (currentDonation.getMoneyAssistAsString().equals("0 usd"))
+        if (request.getMoneyAssistAsString().equals("0 usd"))
         {
             moneyHelpLabel.setVisible(false);
         }
         else
         {
-            moneyHelpLabel.setText (currentDonation.getMoneyAssistAsString());
+            moneyHelpLabel.setText (request.getMoneyAssistAsString());
         }
 
         if (currentUser != null && helloLabel != null) {
@@ -235,6 +223,10 @@ public class DonationRequestScreen {
             bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
         }
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 }

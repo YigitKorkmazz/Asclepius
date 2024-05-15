@@ -15,6 +15,7 @@ public class BloodRequestDAO {
     private static final String INSERT_SQL = "INSERT INTO Donations (User_id, patient_name, phone_number, address, city, bloodType, transportationAssist, moneyAssist) VALUES (?, ?, ?,?, ?, ?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE Donations SET User_id = ?, patient_name = ?, phone_number = ?, address = ?, city = ?, bloodType = ?, transportationAssist = ?, moneyAssist = ? WHERE donation_id = ?";
     private static final String DELETE_SQL = "DELETE FROM Donations WHERE donation_id = ?";
+    private static final String SELECT_USER_ID_FROM_DONATIONS = "SELECT User_id FROM Donations where donation_id = ?";
 
 
     public BloodRequestDAO() {}
@@ -74,6 +75,24 @@ public class BloodRequestDAO {
         }
         return user;
     }
+
+    public User getUserByDonationID (int donation_id) {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_ID_FROM_DONATIONS);) {
+            preparedStatement.setInt(1, donation_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int userId = rs.getInt("User_id");
+                user = getUserById(userId);
+                user.setUniqueId(userId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
 
     public DonationRequest getRequestById (int donation_id) {
         DonationRequest request = null;

@@ -33,26 +33,33 @@ public class ItemController implements Initializable {
     private Button transportationHelpLabel;
 
     private DonationRequest request;
+    private BloodRequestDAO bloodRequestDAO;
 
     @FXML
     public void goRequestPage()
     {
+        bloodRequestDAO = new BloodRequestDAO();
         try{
             Stage stage = (Stage) goRequestButton.getScene().getWindow();
             FXMLLoader fxmlLoader = null;
             System.out.println (request.getCreatorUser().getUniqueId() );
             System.out.println (Feed.getCurrentUser().getUniqueId());
-            if (request.getCreatorUser().getUniqueId() == Feed.getCurrentUser().getUniqueId())
+            Scene scene = null;
+            if (bloodRequestDAO.getUserByDonationID(request.getUniqueId()).getUniqueId() == Feed.getCurrentUser().getUniqueId())
             {
                 fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
-                DonationRequestScreen.currentDonation = this.request;
+                 scene = new Scene(fxmlLoader.load(), 1200, 800);
+                DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
+                donationRequestScreen.setData(request);
             }
             else
             {
                 fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
-                DonationPageSeenByUser.currentRequest = this.request;
+                 scene = new Scene(fxmlLoader.load(), 1200, 800);
+                DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
+                donationPageSeenByUser.setData(request);
             }
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+
             stage.setTitle("Donation");
             stage.setScene(scene);
         } catch (IOException ex) {
