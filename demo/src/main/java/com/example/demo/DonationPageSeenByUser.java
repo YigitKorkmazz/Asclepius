@@ -93,10 +93,39 @@ public class DonationPageSeenByUser implements Initializable {
     }
 
     @FXML
-    public void retreatDonation()
-    {
-        //TODO
+    public void retreatDonation() {
+        if (currentRequest != null) {
+            boolean foundUser = false;
+            for (User user : currentRequest.getUsersAcceptedList()) {
+                if (user.getUniqueId() == Feed.getCurrentUser().getUniqueId()) {
+                    // User has already accepted the donation request, so retreat is allowed
+                    foundUser = true;
+                    donationRequestDAO = new BloodRequestDAO();
+                    donationRequestDAO.updateRetreatedDonationForUser(Feed.getCurrentUser().getUniqueId(), currentRequest);
+                    // Perform any additional actions needed after retreat
+                    // For example, you might want to remove the user from the accepted list
+                    currentRequest.getUsersAcceptedList().remove(user);
+                    // Notify the user
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("You have retreated from the donation request.");
+                    alert.showAndWait();
+                    break; // Break out of the loop once user is found
+                }
+            }
+            if (!foundUser) {
+                // User has not accepted the donation request, retreat is not allowed
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("You have not accepted this donation request.");
+                alert.showAndWait();
+            }
+        } else {
+            // No donation request selected
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No donation request selected.");
+            alert.showAndWait();
+        }
     }
+
 
     public void tagFriend() {
         Dialog<String> dialog = new Dialog<>();
