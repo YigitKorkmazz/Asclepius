@@ -78,6 +78,53 @@ public class BloodRequestDAO {
         return user;
     }
 
+    public void updateRetreatedDonationForUser(int userId, DonationRequest request) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCEPTED_USER)) {
+
+            // Fetch the current list of accepted users
+            List<User> acceptedUsers = request.getUsersAcceptedList();
+
+            // Remove the user with userId from the list of accepted users
+            List<User> updatedAcceptedUsers = removeUserFromList(acceptedUsers, userId);
+
+            // Convert the updated list back to a string
+            String updatedAcceptedUsersStr = convertUserListToString(updatedAcceptedUsers);
+
+            // Update the database with the new list of accepted users
+            preparedStatement.setString(1, updatedAcceptedUsersStr);
+            preparedStatement.setInt(2, request.getUniqueId());
+            int result = preparedStatement.executeUpdate();
+            if (result > 0) {
+                System.out.println("Retreated from the donation request successfully.");
+            } else {
+                System.out.println("Failed to retreat from the donation request.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while updating the accepted users: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private List<User> removeUserFromList(List<User> userList, int userId) {
+        List<User> updatedList = new ArrayList<>();
+        for (User user : userList) {
+            if (user.getUniqueId() != userId) {
+                updatedList.add(user);
+            }
+        }
+        return updatedList;
+    }
+
+    private String convertUserListToString(List<User> userList) {
+        StringBuilder sb = new StringBuilder();
+        for (User user : userList) {
+            sb.append(user.getUniqueId()).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+
     public void updateAcceptedUser(int userID, DonationRequest request) {
         // First fetch the current list of accepted users
         String existingAcceptedUsers = "";
