@@ -2,7 +2,7 @@ package com.example.demo;
 
 import java.util.ArrayList;
 
-public class User extends UserController {
+public class User  {
     // Instance variables
     private int uniqueId;
     private String name;
