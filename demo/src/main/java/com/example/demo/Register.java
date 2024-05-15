@@ -94,7 +94,7 @@ public class Register implements Initializable {
 
     public boolean checkFieldsEmpty ()
     {
-        return nameField.getText().isEmpty() || phoneNumberField.getText().isEmpty() || passwordField.getText().isEmpty();
+        return bloodTypeDropdown.getValue() == null || nameField.getText().isEmpty() || phoneNumberField.getText().isEmpty() || passwordField.getText().isEmpty();
 
     }
 
@@ -158,7 +158,7 @@ public class Register implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Do not leave any field blank !");
-        alert.setContentText("The phone number you entered is already registered.");
+        alert.setContentText("Make Sure To Fill All Details To Continue...");
         alert.show();
     }
 
