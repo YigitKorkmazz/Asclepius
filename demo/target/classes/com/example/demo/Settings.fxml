@@ -34,7 +34,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="bloodTypeChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" minHeight="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="153.0" style="-fx-background-color: white;" text="ABRh-">
+                        <Button fx:id="bloodChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" minHeight="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="153.0" style="-fx-background-color: white;" text="ABRh-">
                            <font>
                               <Font size="20.0" />
                            </font>
