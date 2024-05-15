@@ -191,53 +191,65 @@ public class Feed{
 
 
     @FXML
-    public void initialize (){
+    public void initialize () {
 
-        NotificationHandler notificationHandler = new NotificationHandler(new UserDAO(), currentUser.getUniqueId(),settingsButton);
+        NotificationHandler notificationHandler = new NotificationHandler(new UserDAO(), currentUser.getUniqueId(), settingsButton);
         notificationHandler.startScheduledNotification();
 
         donationRequestDAO = new BloodRequestDAO();
-        List <DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
+        List<DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = getCurrentUser();
 
         sortScarcity(requests);
         sortMatching(requests, currentUser);
         sortCity(requests, currentUser);
 
-        for (DonationRequest item: requests)
-        {
-            for (int i = 0 ; i < item.getUsersAcceptedList().size(); i++)
-            {
-                if (item.getUsersAcceptedList().get(i).getUniqueId() != currentUser.getUniqueId() && item.getCreatorUser().getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null)
-                {
+        for (DonationRequest item : requests) {
+            item.setUsersAcceptedList(donationRequestDAO.acceptedUsers(item));
+            System.out.println("ITEM NAME " + item.getNameOfPatient() + " ID " + item.getUniqueId());
+
+            if (item.getCreatorUser().getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null) {
+                if (item.getUsersAcceptedList().isEmpty()) {
                     try {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(getClass().getResource("Item.fxml"));
                         HBox itemBox = loader.load();
                         ItemController itemController = loader.getController();
-                        itemController.setComingFromMyDonations();
                         itemController.setData(item);
                         VBoxforRequests.getChildren().add(itemBox);
-
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                    for (int i = 0; i < item.getUsersAcceptedList().size(); i++) {
+                        if (item.getUsersAcceptedList().get(i).getUniqueId() != currentUser.getUniqueId()) {
+                            try {
+                                FXMLLoader loader = new FXMLLoader();
+                                loader.setLocation(getClass().getResource("Item.fxml"));
+                                HBox itemBox = loader.load();
+                                ItemController itemController = loader.getController();
+                                itemController.setData(item);
+                                VBoxforRequests.getChildren().add(itemBox);
+
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
                 }
+
+            }
+            if (currentUser != null && helloLabel != null) {
+                helloLabel.setText("Hello, " + currentUser.getName());
+            } else if (helloLabel != null) {
+                helloLabel.setText("Hello, Guest");
+            }
+            if (cityChangeButton != null) {
+                cityChangeButton.setText(currentUser.getCityAsString());
+            }
+            if (bloodTypeChangeButton != null) {
+                bloodTypeChangeButton.setText(currentUser.getBloodTypeAsString());
             }
         }
-        if (currentUser != null && helloLabel != null) {
-            helloLabel.setText("Hello, " + currentUser.getName());
-        } else if (helloLabel != null) {
-            helloLabel.setText("Hello, Guest");
-        }
-        if (cityChangeButton != null)
-        {
-            cityChangeButton.setText(currentUser.getCityAsString());
-        }
-        if (bloodTypeChangeButton != null)
-        {
-            bloodTypeChangeButton.setText(currentUser.getBloodTypeAsString());
-        }
-    }
 
+    }
 }
