@@ -39,9 +39,7 @@ public class NotificationHandler {
         // Schedule to run every second
         scheduler.scheduleAtFixedRate(() -> {
 
-
-
-
+            
             try {
                 System.out.println("Scheduler task running at: " + System.currentTimeMillis());
                 String notification = userDAO.getNotification(taggedUserId);
@@ -62,10 +60,7 @@ public class NotificationHandler {
             }
 
 
-            Feed.checkMatch();
-
-
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
     private void sendNotification(String message) {
