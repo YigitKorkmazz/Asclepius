@@ -187,28 +187,27 @@ public class DonationRequestScreen implements Initializable {
         }
     }
 
-    public void setData (DonationRequest request)
-    {
+    public void setData (DonationRequest request) {
         this.currentDonation = request;
-        User currentUser = Feed.getCurrentUser();
-        bloodType.setText (request.getBloodTypeAsString());
-        patientNameLabel.setText (request.getNameOfPatient());
-        patientPhoneNumberLabel.setText ("(+90) " + request.getPhoneNumberAssc());
-        addressLabel.setText (request.getAddress());
+        bloodType.setText(request.getBloodTypeAsString());
+        patientNameLabel.setText(request.getNameOfPatient());
+        patientPhoneNumberLabel.setText("(+90) " + request.getPhoneNumberAssc());
+        addressLabel.setText(request.getAddress());
 
-        if (request.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
-        {
+        if (request.getTransportationAssist().equals(DonationRequest.TransportationAssist.No)) {
             transportationHelp.setVisible(false);
         }
-        if (request.getMoneyAssistAsString().equals("0 usd"))
-        {
+        if (request.getMoneyAssistAsString().equals("0 usd")) {
             moneyHelpLabel.setVisible(false);
-        }
-        else
-        {
-            moneyHelpLabel.setText (request.getMoneyAssistAsString());
+        } else {
+            moneyHelpLabel.setText(request.getMoneyAssistAsString());
         }
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        User currentUser = Feed.getCurrentUser();
         if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());
         } else if (helloLabel != null) {
@@ -222,11 +221,5 @@ public class DonationRequestScreen implements Initializable {
         {
             bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
         }
-
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

@@ -82,17 +82,25 @@ public class NotificationHandler {
             try {
                 donationRequestDAO = new BloodRequestDAO();
                 DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
+                System.out.println();
+                System.out.println (donationRequestDAO.getUserByDonationID(donationID).getUniqueId());
+                System.out.println();
                 FXMLLoader fxmlLoader = null;
-                if (donationRequest != null && Feed.getCurrentUser().getUniqueId() == donationRequest.getCreatorUser().getUniqueId()) {
+                Scene newScene = null;
+                System.out.println (Feed.getCurrentUser().getUniqueId());
+                if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getUserByDonationID(donationID).getUniqueId()) {
                     fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
+                    newScene = new Scene(fxmlLoader.load(), 1200, 800);
                     DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
                     donationRequestScreen.setData(donationRequest);
+                    System.out.println ("SET DATA WORKED");
                 } else {
                     fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+                    newScene = new Scene(fxmlLoader.load(), 1200, 800);
                     DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
                     donationPageSeenByUser.setData(donationRequest);
+                    System.out.println ("SET DATA WORKED");
                 }
-                Scene newScene = new Scene(fxmlLoader.load(), 1200, 800);
 
 
                 Stage primaryStage = getPrimaryStage();
