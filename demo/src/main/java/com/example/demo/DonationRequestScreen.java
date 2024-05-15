@@ -26,6 +26,9 @@ public class DonationRequestScreen implements Initializable {
     private Label cityLabel;
 
     @FXML
+    private Button goBackButton;
+
+    @FXML
     private Button transportationHelp;
 
     @FXML
@@ -127,6 +130,20 @@ public class DonationRequestScreen implements Initializable {
     {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            stage.setTitle("My Donation Requests");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void goMyDonationRequests1()
+    {
+        try {
+            Stage stage = (Stage) goBackButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donation Requests");

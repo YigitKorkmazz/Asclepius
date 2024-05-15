@@ -144,7 +144,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests" style="-fx-background-color: white;" text="&lt;">
+                  <Button fx:id="goBackButton" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests1" style="-fx-background-color: white;" text="&lt;">
                      <font>
                         <Font size="24.0" />
                      </font>
