@@ -39,7 +39,7 @@ public void start(Stage stage) throws IOException {
         fadeTransition.setOnFinished(event -> {
                 try {
                         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-                        Scene newScene = new Scene(fxmlLoader.load(), 600, 675);
+                        Scene newScene = new Scene(fxmlLoader.load());
                         stage.setTitle("Hello!");
                         stage.setScene(newScene);
                 } catch (IOException e) {
