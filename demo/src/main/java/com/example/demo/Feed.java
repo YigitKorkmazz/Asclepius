@@ -270,10 +270,8 @@ public class Feed{
                 }
 
             }
-            if (currentUser != null && helloLabel != null) {
+            if (helloLabel != null) {
                 helloLabel.setText("Hello, " + currentUser.getName());
-            } else if (helloLabel != null) {
-                helloLabel.setText("Hello, Guest");
             }
             if (cityChangeButton != null) {
                 cityChangeButton.setText(currentUser.getCityAsString());
