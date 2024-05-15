@@ -146,7 +146,7 @@ public class Settings extends UserDAO{
         {
             bloodChangeButton.setText(currentUser.getBloodTypeAsString());
         }
-        bloodType.setText(currentUser.getBloodTypeAsString());
+        bloodChangeButton.setText(currentUser.getBloodTypeAsString());
         city.setText(currentUser.getCityAsString());
         ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
         ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
