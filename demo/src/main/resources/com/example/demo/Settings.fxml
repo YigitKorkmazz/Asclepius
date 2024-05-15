@@ -42,12 +42,12 @@
                         <Font size="20.0" fx:id="x1" />
                      </font>
                   </Label>
-                  <Label fx:id="bloodChangeButton" layoutX="25.0" layoutY="187.0" prefHeight="28.0" prefWidth="112.0" text="Blood Type" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="85.0">
+                  <Label fx:id="bloodTypeLabel" layoutX="25.0" layoutY="187.0" prefHeight="28.0" prefWidth="112.0" text="Blood Type" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="85.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="cityChangeButton" layoutX="19.0" layoutY="245.0" prefHeight="44.0" prefWidth="159.0" text="City" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="71.0">
+                  <Label fx:id="cityLabel" layoutX="19.0" layoutY="245.0" prefHeight="44.0" prefWidth="159.0" text="City" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="71.0">
                      <font>
                         <Font size="20.0" />
                      </font>
