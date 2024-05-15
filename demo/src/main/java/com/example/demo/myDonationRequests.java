@@ -166,14 +166,16 @@ public class myDonationRequests {
         }
         if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());
-
-            if (cityLabel != null) {
-                cityLabel.setText(currentUser.getCityAsString());
-            }
-            if (bloodTypeLabel != null) {
-                bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
-            }
-
+        } else if (helloLabel != null) {
+            helloLabel.setText("Hello, Guest");
+        }
+        if (cityChangeButton != null)
+        {
+            cityChangeButton.setText(currentUser.getCityAsString());
+        }
+        if (bloodTypeChangeButton != null)
+        {
+            bloodTypeChangeButton.setText(currentUser.getBloodTypeAsString());
         }
     }
 }

@@ -223,13 +223,13 @@ public class Feed{
         } else if (helloLabel != null) {
             helloLabel.setText("Hello, Guest");
         }
-        if (cityLabel != null)
+        if (cityChangeButton != null)
         {
-            cityLabel.setText(currentUser.getCityAsString());
+            cityChangeButton.setText(currentUser.getCityAsString());
         }
-        if (bloodTypeLabel != null)
+        if (bloodTypeChangeButton != null)
         {
-            bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+            bloodTypeChangeButton.setText(currentUser.getBloodTypeAsString());
         }
     }
 

@@ -261,9 +261,19 @@ public class DonationRequestCreation implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         User currentUser = Feed.getCurrentUser();
-        helloLabel.setText("Hello, " + currentUser.getName());
-        cityLabel.setText(currentUser.getCityAsString());
-        bloodTypeLabel.setText (currentUser.getBloodTypeAsString());
+        if (currentUser != null && helloLabel != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else if (helloLabel != null) {
+            helloLabel.setText("Hello, Guest");
+        }
+        if (cityChangeButton != null)
+        {
+            cityChangeButton.setText(currentUser.getCityAsString());
+        }
+        if (bloodTypeChangeButton != null)
+        {
+            bloodTypeChangeButton.setText(currentUser.getBloodTypeAsString());
+        }
         ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
         ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
         bloodTypeDropdown.setItems(bloodTypeList);

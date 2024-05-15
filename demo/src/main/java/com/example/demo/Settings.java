@@ -59,10 +59,10 @@ public class Settings extends UserDAO{
     private Button logOutBtn;
 
     @FXML
-    protected Label bloodTypeLabel;
+    private Button bloodChangeButton;
 
     @FXML
-    private Label cityLabel;
+    private Button cityChangeButton;
 
     @FXML
     private Button settingsButton;
@@ -132,9 +132,19 @@ public class Settings extends UserDAO{
     @FXML
     public void initialize (){
         User currentUser = Feed.getCurrentUser();
-        helloLabel.setText("Hello, " + currentUser.getName());
-        cityLabel.setText(currentUser.getCityAsString());
-        bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
+        if (currentUser != null && helloLabel != null) {
+            helloLabel.setText("Hello, " + currentUser.getName());
+        } else if (helloLabel != null) {
+            helloLabel.setText("Hello, Guest");
+        }
+        if (cityChangeButton != null)
+        {
+            cityChangeButton.setText(currentUser.getCityAsString());
+        }
+        if (bloodChangeButton != null)
+        {
+            bloodChangeButton.setText(currentUser.getBloodTypeAsString());
+        }
         bloodType.setText(currentUser.getBloodTypeAsString());
         city.setText(currentUser.getCityAsString());
         ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
