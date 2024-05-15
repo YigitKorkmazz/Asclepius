@@ -20,7 +20,7 @@ public class Settings extends UserDAO{
     private TextField validationPasswordTf;
 
     @FXML
-    private Label helloLabel;
+    private Label helloLabel1;
 
     @FXML
     private PasswordField oldPassword;
@@ -133,10 +133,10 @@ public class Settings extends UserDAO{
     @FXML
     public void initialize (){
         User currentUser = Feed.getCurrentUser();
-        if (currentUser != null && helloLabel != null) {
-            helloLabel.setText("Hello, " + currentUser.getName());
-        } else if (helloLabel != null) {
-            helloLabel.setText("Hello, Guest");
+        if (currentUser != null && helloLabel1 != null) {
+            helloLabel1.setText("Hello, " + currentUser.getName());
+        } else if (helloLabel1 != null) {
+            helloLabel1.setText("Hello, Guest");
         }
         if (cityChangeButton != null)
         {
