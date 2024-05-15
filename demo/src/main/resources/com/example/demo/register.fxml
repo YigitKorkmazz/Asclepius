@@ -52,7 +52,7 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <ComboBox fx:id="bloodTypeDropdown1" layoutX="238.0" layoutY="185.0" prefHeight="24.0" prefWidth="158.0" promptText="Choose City" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: black;" />
+      <ComboBox fx:id="cityDropdown" layoutX="238.0" layoutY="185.0" prefHeight="24.0" prefWidth="158.0" promptText="Choose City" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: black;" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="238.0" layoutY="131.0" prefHeight="62.0" prefWidth="157.0" text="and I live in:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />

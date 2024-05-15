@@ -46,7 +46,7 @@ public class Login {
                     stage.close();
                     Stage primaryStage = new Stage();
                     User user = new User(existingUser.getString("blood_type"), existingUser.getString("Name"), phoneNumberField.getText(), passwordField.getText(), "Ankara");
-
+                    user.setCity (existingUser.getString("city"));
                     // User ID is set.
                     ResultSet userId = statement.executeQuery("SELECT User_id FROM user WHERE phone_number = '" + phoneNumberField.getText() + "'");
                     if (userId.next()) {
@@ -54,8 +54,6 @@ public class Login {
                         int id = userId.getInt("User_id");
                         user.setUniqueId(id);
                     }
-                    user.setCity("Ankara");
-
                     Feed.setCurrentUser(user);
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 1200, 800);

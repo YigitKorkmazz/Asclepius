@@ -38,6 +38,8 @@ public class Register implements Initializable {
 
     @FXML
     private ComboBox<String> bloodTypeDropdown;
+    @FXML
+    private ComboBox<String> cityDropdown;
 
     //methods
     @FXML
@@ -48,7 +50,7 @@ public class Register implements Initializable {
             Statement statement = connection.createStatement();
             if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty() && checkPhoneNumberIsTrue())
             {
-                statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number) VALUES ('" + nameField.getText() + "','" + bloodTypeDropdown.getValue() + "', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "')");
+                statement.executeUpdate("INSERT INTO user (Name, blood_Type, userPassword, phone_number,city) VALUES ('" + nameField.getText() + "','" + bloodTypeDropdown.getValue() + "', '" + passwordField.getText() + "', '" + phoneNumberField.getText() + "', '" + cityDropdown.getValue() +"')");
                 showSuccessAlert();
             }
             else if (checkFieldsEmpty())
@@ -101,7 +103,8 @@ public class Register implements Initializable {
     @FXML
     public void Select (ActionEvent event)
     {
-        String s = bloodTypeDropdown.getSelectionModel().getSelectedItem().toString();
+        String bloodType = bloodTypeDropdown.getSelectionModel().getSelectedItem().toString();
+        String city = cityDropdown.getSelectionModel().getSelectedItem().toString();
     }
 
     @FXML
@@ -119,8 +122,10 @@ public class Register implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> list = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
-        bloodTypeDropdown.setItems(list);
+        ObservableList<String> bloodTypeList = FXCollections.observableArrayList("ABRH+","ARH+","BRH+","0RH+","ABRH-","ARH-","BRH-","0RH-");
+        ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul", "Ankara", "Izmir");
+        bloodTypeDropdown.setItems(bloodTypeList);
+        cityDropdown.setItems(cityList);
     }
 
     public void showSuccessAlert()

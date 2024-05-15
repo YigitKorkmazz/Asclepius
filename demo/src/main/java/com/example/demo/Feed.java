@@ -240,7 +240,7 @@ public class Feed{
             item.setUsersAcceptedList(donationRequestDAO.acceptedUsers(item));
             System.out.println("ITEM NAME " + item.getNameOfPatient() + " ID " + item.getUniqueId());
 
-            if (item.getCreatorUser().getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null) {
+            if (donationRequestDAO.getUserByDonationID(item.getUniqueId()).getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null) {
                 if (item.getUsersAcceptedList().isEmpty()) {
                     try {
                         FXMLLoader loader = new FXMLLoader();
