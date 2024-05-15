@@ -101,18 +101,15 @@ public class DonationPageSeenByUser implements Initializable {
             boolean foundUser = false;
             for (User user : currentRequest.getUsersAcceptedList()) {
                 if (user.getUniqueId() == Feed.getCurrentUser().getUniqueId()) {
-                    // User has already accepted the donation request, so retreat is allowed
                     foundUser = true;
                     donationRequestDAO = new BloodRequestDAO();
                     donationRequestDAO.updateRetreatedDonationForUser(Feed.getCurrentUser().getUniqueId(), currentRequest);
-                    // Perform any additional actions needed after retreat
-                    // For example, you might want to remove the user from the accepted list
                     currentRequest.getUsersAcceptedList().remove(user);
-                    // Notify the user
+                    donationRequestDAO.deleteUserFromAcceptedList(currentRequest.getUniqueId(), Feed.getCurrentUser().getUniqueId());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("You have retreated from the donation request.");
                     alert.showAndWait();
-                    break; // Break out of the loop once user is found
+                    break;
                 }
             }
             if (!foundUser) {
