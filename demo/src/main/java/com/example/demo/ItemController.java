@@ -60,6 +60,15 @@ public class ItemController implements Initializable {
                  scene = new Scene(fxmlLoader.load(), 1200, 800);
                 DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
                 donationPageSeenByUser.setData(request,isComingFromMyDonations);
+                if (isComingFromMyDonations)
+                {
+                    donationPageSeenByUser.setAcceptDisabled();
+                }
+                else
+                {
+                    donationPageSeenByUser.setAcceptEnabled();
+                    donationPageSeenByUser.setRetreatDisabled();
+                }
             }
 
             stage.setTitle("Donation");
@@ -97,5 +106,4 @@ public class ItemController implements Initializable {
     public void setComingFromMyDonations(){
         this.isComingFromMyDonations = true;
     }
-    
 }

@@ -86,12 +86,10 @@ public class DonationPageSeenByUser implements Initializable {
         alert.showAndWait();
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donations");
             stage.setScene(scene);
-            addNotification(currentRequest.getCreatorUser().getPhoneNumber(), "ACCEPT");
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -128,6 +126,16 @@ public class DonationPageSeenByUser implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("No donation request selected.");
             alert.showAndWait();
+        }
+
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            stage.setTitle("My Donations");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -305,5 +313,22 @@ public class DonationPageSeenByUser implements Initializable {
     public void setNumberVisible(DonationRequest request){
         this.phoneNumberLabel.setText("(+90) " + request.getPhoneNumberAssc());
     }
+
+    public void setRetreatDisabled ()
+    {
+        this.retreatButton.setDisable(true);
+    }
+
+    public void setAcceptDisabled ()
+    {
+        this.acceptButton.setDisable (true);
+        this.acceptButton.setText ("Accepted");
+    }
+
+    public void setAcceptEnabled ()
+    {
+        this.acceptButton.setDisable(false);
+    }
+
 }
 
