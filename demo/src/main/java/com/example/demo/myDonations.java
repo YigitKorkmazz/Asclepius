@@ -144,6 +144,7 @@ public class myDonations {
                          loader.setLocation(getClass().getResource("Item.fxml"));
                          HBox itemBox = loader.load();
                          ItemController itemController = loader.getController();
+                         itemController.setComingFromMyDonations();
                          itemController.setData(item);
                          VBoxforRequests.getChildren().add(itemBox);
 

@@ -35,6 +35,8 @@ public class ItemController implements Initializable {
     private DonationRequest request;
     private BloodRequestDAO bloodRequestDAO;
 
+    private boolean isComingFromMyDonations = false;
+
     @FXML
     public void goRequestPage()
     {
@@ -57,7 +59,7 @@ public class ItemController implements Initializable {
                 fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
                  scene = new Scene(fxmlLoader.load(), 1200, 800);
                 DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
-                donationPageSeenByUser.setData(request);
+                donationPageSeenByUser.setData(request,isComingFromMyDonations);
             }
 
             stage.setTitle("Donation");
@@ -91,4 +93,9 @@ public class ItemController implements Initializable {
             transportationHelpLabel.setVisible(false);
         }
     }
+
+    public void setComingFromMyDonations(){
+        this.isComingFromMyDonations = true;
+    }
+    
 }

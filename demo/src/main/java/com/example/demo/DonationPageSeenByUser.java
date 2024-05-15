@@ -252,14 +252,20 @@ public class DonationPageSeenByUser implements Initializable {
 
     }
 
-    public void setData (DonationRequest request)
+    public void setData (DonationRequest request, boolean isPhoneNumberSeen)
     {
         this.currentRequest = request;
         if ( request != null)
         {
             bloodTypeOfPatient.setText (request.getBloodTypeAsString());
             nameLabel.setText (request.getNameOfPatient());
-            phoneNumberLabel.setText ("(+90) " + request.getPhoneNumberAssc());
+
+            if ( isPhoneNumberSeen){
+               setNumberVisible(request);
+
+            }else{
+                phoneNumberLabel.setText ("(+90) **********" );
+            }
             locationLabel.setText (request.getAddress());
             if (request.getTransportationAssist().equals(DonationRequest.TransportationAssist.No))
             {
@@ -275,6 +281,10 @@ public class DonationPageSeenByUser implements Initializable {
             }
         }
 
+    }
+
+    public void setNumberVisible(DonationRequest request){
+        this.phoneNumberLabel.setText("(+90) " + request.getPhoneNumberAssc());
     }
 }
 

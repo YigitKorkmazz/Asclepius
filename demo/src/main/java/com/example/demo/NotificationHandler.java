@@ -98,7 +98,7 @@ public class NotificationHandler {
                     fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
                     newScene = new Scene(fxmlLoader.load(), 1200, 800);
                     DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
-                    donationPageSeenByUser.setData(donationRequest);
+                    donationPageSeenByUser.setData(donationRequest,false);
                     System.out.println ("SET DATA WORKED");
                 }
 
