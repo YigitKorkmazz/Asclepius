@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BloodRequestDAO {
@@ -18,7 +19,6 @@ public class BloodRequestDAO {
     private static final String SELECT_USER_ID_FROM_DONATIONS = "SELECT User_id FROM Donations where donation_id = ?";
     private static final String UPDATE_ACCEPTED_USER = "UPDATE Donations SET acceptedUser = ? Where donation_id = ?";
     private static final String SELECT_ACCEPTED_USERS = "SELECT acceptedUser from Donations where donation_id = ?";
-
 
     public BloodRequestDAO() {}
 
@@ -56,7 +56,6 @@ public class BloodRequestDAO {
         }
         return bloodRequests;
     }
-
 
     private User getUserById (int userId) {
         User user = null;
@@ -124,6 +123,39 @@ public class BloodRequestDAO {
         return sb.toString().trim();
     }
 
+    public void deleteUserFromAcceptedList(int donationId, int userId) {
+        String acceptedUsers = "";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACCEPTED_USERS)) {
+            preparedStatement.setInt(1, donationId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                acceptedUsers = rs.getString("acceptedUser");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching existing accepted users: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        List<String> userList = new ArrayList<>(Arrays.asList(acceptedUsers.split(" ")));
+        userList.remove(String.valueOf(userId));
+        String updatedUserList = String.join(" ", userList);
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCEPTED_USER)) {
+            preparedStatement.setString(1, updatedUserList);
+            preparedStatement.setInt(2, donationId);
+            int result = preparedStatement.executeUpdate();
+            if (result > 0) {
+                System.out.println("User successfully removed from the accepted list.");
+            } else {
+                System.out.println("Failed to update the accepted list.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while updating the accepted users: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     public void updateAcceptedUser(int userID, DonationRequest request) {
         // First fetch the current list of accepted users
@@ -163,7 +195,6 @@ public class BloodRequestDAO {
         request.getUsersAcceptedList().add(getUserById(userID));
     }
 
-
     public ArrayList<User> acceptedUsers(DonationRequest request) {
         ArrayList<User> acceptedOnes = new ArrayList<>();
         try (Connection connection = getConnection();
@@ -197,7 +228,6 @@ public class BloodRequestDAO {
         return acceptedOnes;
     }
 
-
     public User getUserByDonationID (int donation_id) {
         User user = null;
         try (Connection connection = getConnection();
@@ -214,7 +244,6 @@ public class BloodRequestDAO {
         }
         return user;
     }
-
 
     public DonationRequest getRequestById (int donation_id) {
         DonationRequest request = null;
