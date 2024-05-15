@@ -241,6 +241,7 @@ public class Feed{
             System.out.println("ITEM NAME " + item.getNameOfPatient() + " ID " + item.getUniqueId());
 
             if (donationRequestDAO.getUserByDonationID(item.getUniqueId()).getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null) {
+                System.out.println("ITEM NAME " + item.getNameOfPatient() + "icerdeyim!");
                 if (item.getUsersAcceptedList().isEmpty()) {
                     try {
                         FXMLLoader loader = new FXMLLoader();
@@ -252,6 +253,8 @@ public class Feed{
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                }
+                else {
                     for (int i = 0; i < item.getUsersAcceptedList().size(); i++) {
                         if (item.getUsersAcceptedList().get(i).getUniqueId() != currentUser.getUniqueId()) {
                             try {
@@ -268,6 +271,7 @@ public class Feed{
                         }
                     }
                 }
+            }
 
             }
             if (helloLabel != null) {
@@ -282,4 +286,3 @@ public class Feed{
         }
 
     }
-}
