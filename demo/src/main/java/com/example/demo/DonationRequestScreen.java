@@ -67,7 +67,7 @@ public class DonationRequestScreen implements Initializable {
     @FXML
     private Label addressLabel;
 
-    private BloodRequestDAO donationRequestDAO;
+    private BloodRequestDAO donationRequestDAO = new BloodRequestDAO();
     private DonationRequest currentDonation;
 
 
@@ -208,7 +208,32 @@ public class DonationRequestScreen implements Initializable {
         this.currentDonation = request;
         bloodType.setText(request.getBloodTypeAsString());
         patientNameLabel.setText(request.getNameOfPatient());
-        patientPhoneNumberLabel.setText("(+90) " + request.getPhoneNumberAssc());
+        System.out.println ("request id su an " + request.getUniqueId());
+        donationRequestDAO.acceptedUsers(request);
+        System.out.println (request.getUsersAcceptedList().size() +" SIZEEEEEEEE");
+        if (request.getUsersAcceptedList().isEmpty())
+        {
+            patientPhoneNumberLabel.setText("Owner's phone number (+90) " + request.getCreatorUser().getPhoneNumber());
+        }
+        else if (request.getUsersAcceptedList().size() == 1)
+        {
+            patientPhoneNumberLabel.setText("Phone numbers of accepted users\n" + request.getUsersAcceptedList().get(0).getPhoneNumber());
+        }
+        else if (request.getUsersAcceptedList().size() == 2)
+        {
+            patientPhoneNumberLabel.setText("Phone numbers of accepted users\n" + request.getUsersAcceptedList().get(0).getPhoneNumber() + "\n " + request.getUsersAcceptedList().get(1).getPhoneNumber());
+        }
+        else if (request.getUsersAcceptedList().size() == 3)
+        {
+            patientPhoneNumberLabel.setText("Phone numbers of accepted users\n" + request.getUsersAcceptedList().get(0).getPhoneNumber() + "\n " + request.getUsersAcceptedList().get(1).getPhoneNumber() +
+                    "\n " + request.getUsersAcceptedList().get(2).getPhoneNumber());
+        }
+        else if (request.getUsersAcceptedList().size() >= 4)
+        {
+            patientPhoneNumberLabel.setText("Phone numbers of accepted users\n" + request.getUsersAcceptedList().get(request.getUsersAcceptedList().size() - 1).getPhoneNumber() + "\n " + request.getUsersAcceptedList().get(request.getUsersAcceptedList().size() - 1).getPhoneNumber());
+        }
+
+
         addressLabel.setText(request.getAddress());
 
         if (request.getTransportationAssist().equals(DonationRequest.TransportationAssist.No)) {

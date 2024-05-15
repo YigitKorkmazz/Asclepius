@@ -112,7 +112,7 @@
                               <Font name="System Bold" size="36.0" />
                            </font>
                         </Label>
-                        <Label fx:id="patientPhoneNumberLabel" alignment="CENTER" prefHeight="26.0" prefWidth="227.0" text="(Telephone Number)" textAlignment="CENTER">
+                        <Label fx:id="patientPhoneNumberLabel" alignment="CENTER" prefHeight="133.0" prefWidth="642.0" text="(Telephone Number)" textAlignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -134,17 +134,17 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="closeButton" layoutX="155.0" layoutY="497.0" mnemonicParsing="false" onAction="#closeDonationMethod" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
+                  <Button fx:id="closeButton" layoutX="153.0" layoutY="519.0" mnemonicParsing="false" onAction="#closeDonationMethod" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editButton" layoutX="345.0" layoutY="496.0" mnemonicParsing="false" onAction="#editDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
+                  <Button fx:id="editButton" layoutX="345.0" layoutY="519.0" mnemonicParsing="false" onAction="#editDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="goBackButton" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests1" style="-fx-background-color: white;" text="&lt;">
+                  <Button layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests" style="-fx-background-color: white;" text="&lt;">
                      <font>
                         <Font size="24.0" />
                      </font>
