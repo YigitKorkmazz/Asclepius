@@ -16,6 +16,8 @@ public class BloodRequestDAO {
     private static final String UPDATE_SQL = "UPDATE Donations SET User_id = ?, patient_name = ?, phone_number = ?, address = ?, city = ?, bloodType = ?, transportationAssist = ?, moneyAssist = ? WHERE donation_id = ?";
     private static final String DELETE_SQL = "DELETE FROM Donations WHERE donation_id = ?";
     private static final String SELECT_USER_ID_FROM_DONATIONS = "SELECT User_id FROM Donations where donation_id = ?";
+    private static final String UPDATE_ACCEPTED_USER = "UPDATE Donations SET acceptedUser = ? Where donation_id = ?";
+    private static final String SELECT_ACCEPTED_USERS = "SELECT acceptedUser from Donations where donation_id = ?";
 
 
     public BloodRequestDAO() {}
@@ -75,6 +77,79 @@ public class BloodRequestDAO {
         }
         return user;
     }
+
+    public void updateAcceptedUser(int userID, DonationRequest request) {
+        // First fetch the current list of accepted users
+        String existingAcceptedUsers = "";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACCEPTED_USERS)) {
+            preparedStatement.setInt(1, request.getUniqueId());
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                existingAcceptedUsers = rs.getString("acceptedUser");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching existing accepted users: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // Append the new user ID
+        String updatedAcceptedUsers = existingAcceptedUsers == null ? String.valueOf(userID) : existingAcceptedUsers + " " + userID;
+
+        // Update the database with the new list of accepted users
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ACCEPTED_USER)) {
+            preparedStatement.setString(1, updatedAcceptedUsers);
+            preparedStatement.setInt(2, request.getUniqueId());
+            int result = preparedStatement.executeUpdate();
+            if (result > 0) {
+                System.out.println("Accepted users updated successfully.");
+            } else {
+                System.out.println("Failed to update accepted users.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while updating the accepted users: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // Optionally, add the user to the request's list of accepted users
+        request.getUsersAcceptedList().add(getUserById(userID));
+    }
+
+
+    public ArrayList<User> acceptedUsers(DonationRequest request) {
+        ArrayList<User> acceptedOnes = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACCEPTED_USERS)) {
+            preparedStatement.setInt(1, request.getUniqueId());
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                String acceptedUsers = rs.getString("acceptedUser");
+                if (acceptedUsers != null && !acceptedUsers.isEmpty()) {
+                    String[] userIds = acceptedUsers.split(" ");
+                    for (String userIdStr : userIds) {
+                        try {
+                            int userId = Integer.parseInt(userIdStr);
+                            User user = getUserById(userId);
+                            user.setUniqueId(userId);
+                            if (user != null) {
+                                acceptedOnes.add(user);
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error parsing user ID: " + userIdStr);
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception while fetching accepted users: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        request.setUsersAcceptedList(acceptedOnes);
+        return acceptedOnes;
+    }
+
 
     public User getUserByDonationID (int donation_id) {
         User user = null;

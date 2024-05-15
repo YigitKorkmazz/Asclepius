@@ -131,22 +131,27 @@ public class myDonations {
         donationRequestDAO = new BloodRequestDAO();
         List<DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
         User currentUser = Feed.getCurrentUser();
-        System.out.println ("SU AN DOGRU YERDESIN");
         for (DonationRequest item : requests) {
-            if (VBoxforRequests != null) {
-                try {
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("Item.fxml"));
-                    HBox itemBox = loader.load();
-                    ItemController itemController = loader.getController();
-                    itemController.setData(item);
-                    VBoxforRequests.getChildren().add(itemBox);
+            item.setUsersAcceptedList(donationRequestDAO.acceptedUsers(item));
+             for (int i = 0 ; i < item.getUsersAcceptedList().size(); i++)
+             {
+                 System.out.println("FORA GIRDI");
+                 System.out.println ("KABUL EDEN USERIN YUNIK Idsi: " + item.getUsersAcceptedList().get(i).getUniqueId());
+                 if (item.getUsersAcceptedList().get(i).getUniqueId() == currentUser.getUniqueId())
+                 {
+                     try {
+                         FXMLLoader loader = new FXMLLoader();
+                         loader.setLocation(getClass().getResource("Item.fxml"));
+                         HBox itemBox = loader.load();
+                         ItemController itemController = loader.getController();
+                         itemController.setData(item);
+                         VBoxforRequests.getChildren().add(itemBox);
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
+                     } catch (IOException e) {
+                         throw new RuntimeException(e);
+                     }
+                 }
+             }
         }
         if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());

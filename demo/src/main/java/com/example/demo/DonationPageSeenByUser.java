@@ -75,16 +75,21 @@ public class DonationPageSeenByUser implements Initializable {
     private String notifyUser = "";
 
     //methods
-    @FXML
-    public void displayDonationRequest()
-    {
-        //TODO
-    }
 
     @FXML
     public void acceptDonation()
     {
-        //TODO
+        donationRequestDAO = new BloodRequestDAO();
+        donationRequestDAO.updateAcceptedUser(Feed.getCurrentUser().getUniqueId(), currentRequest);
+        try {
+            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            stage.setTitle("My Donations");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
