@@ -135,8 +135,6 @@ public class myDonations {
             item.setUsersAcceptedList(donationRequestDAO.acceptedUsers(item));
              for (int i = 0 ; i < item.getUsersAcceptedList().size(); i++)
              {
-                 System.out.println("FORA GIRDI");
-                 System.out.println ("KABUL EDEN USERIN YUNIK Idsi: " + item.getUsersAcceptedList().get(i).getUniqueId());
                  if (item.getUsersAcceptedList().get(i).getUniqueId() == currentUser.getUniqueId())
                  {
                      try {
@@ -156,14 +154,16 @@ public class myDonations {
         }
         if (currentUser != null && helloLabel != null) {
             helloLabel.setText("Hello, " + currentUser.getName());
-
-            if (cityLabel != null) {
-                cityLabel.setText(currentUser.getCityAsString());
-            }
-            if (bloodTypeLabel != null) {
-                bloodTypeLabel.setText(currentUser.getBloodTypeAsString());
-            }
-
+        } else if (helloLabel != null) {
+            helloLabel.setText("Hello, Guest");
+        }
+        if (cityChangeButton != null)
+        {
+            cityChangeButton.setText(currentUser.getCityAsString());
+        }
+        if (bloodTypeChangeButton != null)
+        {
+            bloodTypeChangeButton.setText(currentUser.getBloodTypeAsString());
         }
     }
 }

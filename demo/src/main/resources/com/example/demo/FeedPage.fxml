@@ -107,16 +107,6 @@
                               <Insets left="-1.0" />
                            </padding>
                         </Button>
-                        <Label fx:id="bloodTypeLabel" prefHeight="28.0" prefWidth="112.0" text="Blood Type">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="cityLabel" prefHeight="30.0" prefWidth="157.0" text="City">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
                      </children>
                   </VBox>
                   <Button fx:id="settingsButton" layoutY="513.0" mnemonicParsing="false" onAction="#settingsOnAction" prefHeight="48.0" prefWidth="137.0" style="-fx-background-color: white;" text="Settings" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
