@@ -129,7 +129,7 @@ public class DonationRequestScreen implements Initializable {
     public void goMyDonationRequests()
     {
         try {
-            Stage stage = (Stage) settingsButton.getScene().getWindow();
+            Stage stage = (Stage) goBackButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donation Requests");
