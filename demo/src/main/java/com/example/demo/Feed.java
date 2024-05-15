@@ -206,21 +206,23 @@ public class Feed{
 
         for (DonationRequest item: requests)
         {
-            if (item.getCreatorUser().getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null)
+            for (int i = 0 ; i < item.getUsersAcceptedList().size(); i++)
             {
-                try
+                if (item.getUsersAcceptedList().get(i).getUniqueId() != currentUser.getUniqueId() && item.getCreatorUser().getUniqueId() != currentUser.getUniqueId() && VBoxforRequests != null)
                 {
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("Item.fxml"));
-                    HBox itemBox = loader.load();
-                    ItemController itemController = loader.getController();
-                    itemController.setData(item);
-                    VBoxforRequests.getChildren().add(itemBox);
+                    try {
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("Item.fxml"));
+                        HBox itemBox = loader.load();
+                        ItemController itemController = loader.getController();
+                        itemController.setComingFromMyDonations();
+                        itemController.setData(item);
+                        VBoxforRequests.getChildren().add(itemBox);
 
-                } catch (IOException e ) {
-                    throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-
             }
         }
         if (currentUser != null && helloLabel != null) {
