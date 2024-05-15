@@ -222,6 +222,14 @@ public class DonationRequestCreation implements Initializable {
 
         Stage stage = (Stage) settingsButton.getScene().getWindow();
         showDonationCreatedAlert(stage);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            stage.setTitle("My Donation Requests");
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void showDonationCreatedAlert (Stage ownerStage) {
