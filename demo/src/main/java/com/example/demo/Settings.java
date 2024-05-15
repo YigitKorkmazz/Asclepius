@@ -86,6 +86,7 @@ public class Settings extends UserDAO{
     {
         Stage stage = (Stage) logOutBtn.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
 
