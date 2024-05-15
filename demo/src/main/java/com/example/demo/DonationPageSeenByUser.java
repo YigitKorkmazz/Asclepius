@@ -87,6 +87,8 @@ public class DonationPageSeenByUser implements Initializable {
             Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("My Donations");
             stage.setScene(scene);
+            addNotification(currentRequest.getCreatorUser().getPhoneNumber(), "ACCEPT");
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
