@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.io.IOException;
 
@@ -33,6 +34,7 @@ public void start(Stage stage) throws IOException {
         Scene scene = new Scene(root, 600, 675, Color.RED);
         stage.setScene(scene);
         stage.setTitle("Logo Animation");
+        stage.initStyle(StageStyle.UNDECORATED);
 
         fadeTransition.play();
         stage.show();
@@ -42,6 +44,9 @@ public void start(Stage stage) throws IOException {
                         Scene newScene = new Scene(fxmlLoader.load());
                         stage.setTitle("Hello!");
                         stage.setScene(newScene);
+
+                        stage.show();
+
                 } catch (IOException e) {
                         e.printStackTrace();
                 }

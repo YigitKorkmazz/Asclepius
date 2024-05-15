@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -50,7 +51,7 @@ public class Feed{
     @FXML
     private Button myDonationRequestsButton;
 
-    private BloodRequestDAO donationRequestDAO;
+    private static BloodRequestDAO donationRequestDAO;
 
     // Rest of your class implementation...
 
@@ -173,7 +174,7 @@ public class Feed{
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     public void goFeed()
     {
@@ -188,6 +189,36 @@ public class Feed{
         }
     }
 
+    List <DonationRequest> currentRequests;
+
+    private static boolean noMoreNotification = false;
+
+    public static void sendNoMoreNotification(){
+        noMoreNotification = true;
+    }
+
+    public static void checkMatch() {
+        if (!noMoreNotification) {
+            List<DonationRequest> currentRequests = donationRequestDAO.listAllBloodRequests();
+            boolean matching = false;
+            for (DonationRequest dr : currentRequests) {
+                if (dr.getCityAsString().equals(currentUser.getCityAsString())
+                        || dr.getBloodTypeAsString().equals(currentUser.getBloodTypeAsString())) {
+                    matching = true;
+                }
+            }
+            if (matching) {
+                UserDAO userDAO = new UserDAO();
+                int userId = currentUser.getUniqueId();
+                if (userId != -1) {
+                    String notifyUser = "" + -1 + " " + Feed.getCurrentUser().getUniqueId() + " " + "MATCH";
+                    userDAO.updateNotification(userId, notifyUser);
+                }
+            }
+        }
+    }
+
+
 
 
     @FXML
@@ -198,6 +229,7 @@ public class Feed{
 
         donationRequestDAO = new BloodRequestDAO();
         List<DonationRequest> requests = donationRequestDAO.listAllBloodRequests();
+        currentRequests = requests;
         User currentUser = getCurrentUser();
 
         sortScarcity(requests);

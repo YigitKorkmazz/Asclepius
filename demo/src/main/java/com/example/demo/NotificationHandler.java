@@ -24,17 +24,24 @@ public class NotificationHandler {
     private final Button triggerButton;
     private static BloodRequestDAO donationRequestDAO;
 
+
     public NotificationHandler(UserDAO userDAO, int taggedUserId, Button triggerButton) {
         this.userDAO = userDAO;
         this.taggedUserId = taggedUserId;
         this.triggerButton = triggerButton;
     }
 
+
+
     public void startScheduledNotification() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
         // Schedule to run every second
         scheduler.scheduleAtFixedRate(() -> {
+
+
+
+
             try {
                 System.out.println("Scheduler task running at: " + System.currentTimeMillis());
                 String notification = userDAO.getNotification(taggedUserId);
@@ -53,6 +60,11 @@ public class NotificationHandler {
             } catch (Exception e) {
                 System.err.println("General Exception in scheduled task: " + e.getMessage());
             }
+
+
+            Feed.checkMatch();
+
+
         }, 0, 1, TimeUnit.SECONDS);
     }
 
@@ -61,60 +73,84 @@ public class NotificationHandler {
         notificationStage.initModality(Modality.APPLICATION_MODAL);
         notificationStage.initStyle(StageStyle.UTILITY);
         notificationStage.setTitle("Notification");
+        notificationStage.initStyle(StageStyle.UNDECORATED);
 
         String[] input = message.split(" ");
         int donationID = Integer.parseInt(input[0]);
         int userID = Integer.parseInt(input[1]);
         String type = input[2];
 
+
         Label messageLabel = new Label();
         switch (type) {
-            case "ACCEPT" -> messageLabel.setText("Your donation was accepted");
-            case "TAG" -> messageLabel.setText("You were tagged");
-            case "MATCH" -> messageLabel.setText("There are some donations you match with");
+            case "ACCEPT" -> messageLabel.setText(" Your donation was accepted.");
+            case "TAG" -> messageLabel.setText("You were tagged to a donation.");
+            case "MATCH" -> messageLabel.setText("There are some donations you match with!");
         }
 
-        Button goToNotificationButton = new Button("Go to the notification");
+        Button goToNotificationButton = new Button("Go to the post!");
         Button dismissButton = new Button("Dismiss");
 
         goToNotificationButton.setOnAction(e -> {
-            System.out.println("Go to the notification clicked");
-            try {
-                donationRequestDAO = new BloodRequestDAO();
-                DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
-                System.out.println();
-                System.out.println (donationRequestDAO.getUserByDonationID(donationID).getUniqueId());
-                System.out.println();
-                FXMLLoader fxmlLoader = null;
-                Scene newScene = null;
-                System.out.println (Feed.getCurrentUser().getUniqueId());
-                if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getUserByDonationID(donationID).getUniqueId()) {
-                    fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
-                    newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                    DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
-                    donationRequestScreen.setData(donationRequest);
-                    System.out.println ("SET DATA WORKED");
-                } else {
-                    fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
-                    newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                    DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
-                    donationPageSeenByUser.setData(donationRequest,false);
-                    System.out.println ("SET DATA WORKED");
-                }
+
+            System.out.println("Go to the post!");
+            if (type.equals("MATCH")){
+                Feed.sendNoMoreNotification();
+                try {
+                    Stage stage = getPrimaryStage();
+                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+                    if(stage != null){
+                        stage.setTitle("My Donations");
+                        stage.setScene(scene);
+                    }
 
 
-                Stage primaryStage = getPrimaryStage();
-                if (primaryStage != null) {
-                    primaryStage.setTitle("Donation Request");
-                    primaryStage.setScene(newScene);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            }else {
+                try {
+                    donationRequestDAO = new BloodRequestDAO();
+                    DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
+                    System.out.println();
+                    System.out.println(donationRequestDAO.getUserByDonationID(donationID).getUniqueId());
+                    System.out.println();
+                    FXMLLoader fxmlLoader = null;
+                    Scene newScene = null;
+                    System.out.println(Feed.getCurrentUser().getUniqueId());
+                    if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getUserByDonationID(donationID).getUniqueId()) {
+                        fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
+                        newScene = new Scene(fxmlLoader.load(), 1200, 800);
+                        DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
+                        donationRequestScreen.setData(donationRequest);
+                        System.out.println("SET DATA WORKED");
+                    } else {
+                        fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+                        newScene = new Scene(fxmlLoader.load(), 1200, 800);
+                        DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
+                        donationPageSeenByUser.setData(donationRequest, false);
+                        System.out.println("SET DATA WORKED");
+                    }
+
+
+                    Stage primaryStage = getPrimaryStage();
+                    if (primaryStage != null) {
+                        primaryStage.setTitle("Donation Request");
+                        primaryStage.setScene(newScene);
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
             notificationStage.close();
         });
 
-        dismissButton.setOnAction(e -> notificationStage.close());
+        dismissButton.setOnAction(e -> {
+            notificationStage.close();
+            if(type.equals("MATCH")){
+                Feed.sendNoMoreNotification();}
+        });
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));

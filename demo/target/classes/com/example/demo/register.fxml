@@ -9,31 +9,31 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="619.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Register">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="619.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Register">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="30.0" prefHeight="68.0" prefWidth="171.0" text="  I have ," textFill="WHITE" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="223.0">
          <font>
-            <Font name="System Bold" size="45.0" />
+            <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <ComboBox fx:id="bloodTypeDropdown" layoutX="247.0" layoutY="107.0" prefHeight="24.0" prefWidth="158.0" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: black;" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="214.0" />
-      <TextField fx:id="nameField" layoutX="145.0" layoutY="173.0" prefHeight="24.0" prefWidth="346.0" promptText="Name" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-background-color: black; -fx-border-color: white; -fx-text-fill: white;" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="128.0">
+      <ComboBox fx:id="bloodTypeDropdown" layoutX="238.0" layoutY="98.0" prefHeight="24.0" prefWidth="158.0" promptText="Choose Blood Type" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: black;" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="223.0" />
+      <TextField fx:id="nameField" layoutX="147.0" layoutY="230.0" prefHeight="24.0" prefWidth="243.0" promptText="Name" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-background-color: black; -fx-border-color: white; -fx-text-fill: white;" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="126.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="phoneNumberField" layoutX="145.0" layoutY="233.0" prefHeight="24.0" prefWidth="346.0" promptText="Phone Number" style="-fx-background-radius: 30; -fx-border-color: white; -fx-border-radius: 30; -fx-background-color: black; -fx-text-fill: white;" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="128.0">
+      <TextField fx:id="phoneNumberField" layoutX="147.0" layoutY="280.0" prefHeight="24.0" prefWidth="346.0" promptText="Phone Number" style="-fx-background-radius: 30; -fx-border-color: white; -fx-border-radius: 30; -fx-background-color: black; -fx-text-fill: white;" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="126.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="registerButton" layoutX="245.0" layoutY="354.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="43.0" prefWidth="144.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="Register" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="230.0">
+      <Button fx:id="registerButton" layoutX="239.0" layoutY="395.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="43.0" prefWidth="144.0" style="-fx-background-radius: 30; -fx-background-color: white;" text="Register" AnchorPane.leftAnchor="239.0" AnchorPane.rightAnchor="236.0">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="485.0" prefHeight="99.0" prefWidth="546.0" text="Certain medical conditions, age restrictions, minimum weight requirements, medications, pregnancy, and active infections, may disqualify individuals from donating blood or necessitate specific waiting periods." textAlignment="CENTER" textFill="#bfbfbf" textOverrun="CENTER_ELLIPSIS" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="28.0" />
-      <HBox alignment="CENTER" layoutX="63.0" layoutY="402.0" prefHeight="99.0" prefWidth="522.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="34.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="609.0" prefHeight="99.0" prefWidth="546.0" text="Certain medical conditions, age restrictions, minimum weight requirements, medications, pregnancy, and active infections, may disqualify individuals from donating blood or necessitate specific waiting periods." textAlignment="CENTER" textFill="#bfbfbf" textOverrun="CENTER_ELLIPSIS" wrapText="true" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="35.0" />
+      <HBox alignment="CENTER" layoutX="66.0" layoutY="439.0" prefHeight="99.0" prefWidth="522.0" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="31.0">
          <children>
             <Label prefHeight="28.0" prefWidth="247.0" text="If you already have an account " textFill="WHITE">
                <font>
@@ -47,10 +47,16 @@
             </Button>
          </children>
       </HBox>
-      <PasswordField fx:id="passwordField" layoutX="145.0" layoutY="285.0" prefHeight="37.0" prefWidth="346.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white;" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="128.0">
+      <PasswordField fx:id="passwordField" layoutX="148.0" layoutY="332.0" prefHeight="37.0" prefWidth="346.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white;" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="125.0">
          <font>
             <Font size="20.0" />
          </font>
       </PasswordField>
+      <ComboBox fx:id="bloodTypeDropdown1" layoutX="238.0" layoutY="185.0" prefHeight="24.0" prefWidth="158.0" promptText="Choose City" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: black;" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="238.0" layoutY="131.0" prefHeight="62.0" prefWidth="157.0" text="and I live in:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

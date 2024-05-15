@@ -110,7 +110,7 @@ public class Register implements Initializable {
         try {
             Stage stage = (Stage) loginPageDirectorButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load(), 600, 675);
+            Scene newScene = new Scene(fxmlLoader.load());
             stage.setTitle("Login!");
             stage.setScene(newScene);
         } catch (IOException e) {
