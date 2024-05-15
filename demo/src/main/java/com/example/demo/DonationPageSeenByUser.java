@@ -81,6 +81,9 @@ public class DonationPageSeenByUser implements Initializable {
     {
         donationRequestDAO = new BloodRequestDAO();
         donationRequestDAO.updateAcceptedUser(Feed.getCurrentUser().getUniqueId(), currentRequest);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("You have accepted this donation request.");
+        alert.showAndWait();
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonations.fxml"));
@@ -183,20 +186,6 @@ public class DonationPageSeenByUser implements Initializable {
 
     @FXML
     public void goMyDonationRequests()
-    {
-        try {
-            Stage stage = (Stage) settingsButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MyDonationRequests.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-            stage.setTitle("My Donation Requests");
-            stage.setScene(scene);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void closeDonationMethod()
     {
         try {
             Stage stage = (Stage) settingsButton.getScene().getWindow();
