@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Settings extends UserDAO{
 
@@ -73,7 +75,7 @@ public class Settings extends UserDAO{
     @FXML
     private Button myDonationRequestsButton;
 
-
+    private BloodRequestDAO dao;
     @FXML
     private Button deleteTheAccountButton;
 
@@ -209,6 +211,8 @@ public class Settings extends UserDAO{
     @FXML
     public void deleteTheAccount (ActionEvent Event)
     {
+
+
         Stage stage = (Stage) deleteTheAccountButton.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(stage); // Set the owner of the alert
@@ -216,8 +220,20 @@ public class Settings extends UserDAO{
         alert.setHeaderText("Warning");
         alert.setContentText("Are you sure about deleting your account ? ");
         alert.setOnCloseRequest(event -> {
+            User user = Feed.getCurrentUser();
+            dao = new BloodRequestDAO();
+            List<DonationRequest> requests = dao.listAllBloodRequests();
+
+            for ( DonationRequest item : requests)
+            {
+                if (dao.getUserByDonationID(item.getUniqueId()).getUniqueId() == user.getUniqueId())
+                {
+                    dao.deleteDonationRequest(item.getUniqueId());
+                }
+            }
             userDAO.deleteUser(Feed.getCurrentUser().getUniqueId());
             stage.close();
+            System.exit(0);
         });
         alert.show();
     }
