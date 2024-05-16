@@ -217,10 +217,7 @@ public class Feed{
             }
         }
     }
-
-
-
-
+    
     @FXML
     public void initialize () {
 
