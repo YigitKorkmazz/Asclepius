@@ -37,10 +37,10 @@ public class UserDAO {
     }
 
     public void updateNotificationStatus(int user_id, boolean wantsToReceive) {
-        String status = "No";
+        String status = "Yes";
         if (wantsToReceive)
         {
-            status = "Yes";
+            status = "No";
         }
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_NOTIFICATION_STATUS)) {
