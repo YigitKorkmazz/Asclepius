@@ -19,7 +19,7 @@ public class DonationRequest {
 
     // Enums for city, blood type, transportation assist, and money assist
     public enum City {
-        Ankara, Istanbul, Izmir
+        Ankara, Istanbul, Izmir, İZMİR
     }
 
     public enum BloodType {
@@ -172,6 +172,7 @@ public class DonationRequest {
             case "Izmir": return City.Izmir;
             case "IZMIR": return City.Izmir;
             case "İZMIR": return City.Izmir;
+            case "İZMİR": return City.Izmir;
             case "Ankara": return City.Ankara;
             case "ANKARA": return City.Ankara;
             default: return null;

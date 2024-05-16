@@ -35,7 +35,7 @@ public class User  {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.password = password;
-        this.city = City.valueOf(cityString); // This assumes cityString is a valid enum name
+        this.city = User.convertStringTypeToEnumForCity(cityString); // This assumes cityString is a valid enum name
     }
 
     public BloodType convertStringTypeToEnum(String type) {
@@ -130,5 +130,19 @@ public class User  {
     public void setBloodType (String bloodType)
     {
         this.bloodType = convertStringTypeToEnum(bloodType);
+    }
+
+    public static User.City convertStringTypeToEnumForCity(String type) {
+        switch (type) {
+            case "Istanbul": return User.City.Istanbul;
+            case "ISTANBUL": return User.City.Istanbul;
+            case "İSTANBUL": return User.City.Istanbul;
+            case "Izmir": return User.City.Izmir;
+            case "IZMIR": return User.City.Izmir;
+            case "İZMIR": return User.City.Izmir;
+            case "Ankara": return User.City.Ankara;
+            case "ANKARA": return User.City.Ankara;
+            default: return null;
+        }
     }
 }
