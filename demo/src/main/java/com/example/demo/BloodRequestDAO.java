@@ -209,9 +209,10 @@ public class BloodRequestDAO {
                         try {
                             int userId = Integer.parseInt(userIdStr);
                             User user = getUserById(userId);
-                            user.setUniqueId(userId);
+
                             if (user != null) {
                                 acceptedOnes.add(user);
+                                user.setUniqueId(userId);
                             }
                         } catch (NumberFormatException e) {
                             System.out.println("Error parsing user ID: " + userIdStr);
