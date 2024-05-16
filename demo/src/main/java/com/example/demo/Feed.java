@@ -255,9 +255,15 @@ public class Feed{
                     }
                 }
                 else {
+                    boolean isOneOfMyAccepted = false;
                     for (int i = 0; i < item.getUsersAcceptedList().size(); i++) {
-                        if (item.getUsersAcceptedList().get(i).getUniqueId() != currentUser.getUniqueId()) {
-                            try {
+                        if (item.getUsersAcceptedList().get(i).getUniqueId() == currentUser.getUniqueId()) {
+                            isOneOfMyAccepted = true;
+                            break;
+                        }
+                    }
+                     if (!isOneOfMyAccepted)
+                         try {
                                 FXMLLoader loader = new FXMLLoader();
                                 loader.setLocation(getClass().getResource("Item.fxml"));
                                 HBox itemBox = loader.load();
@@ -271,9 +277,9 @@ public class Feed{
                         }
                     }
                 }
-            }
 
-            }
+
+
             if (helloLabel != null) {
                 helloLabel.setText("Hello, " + currentUser.getName());
             }
