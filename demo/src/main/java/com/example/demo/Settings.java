@@ -53,9 +53,6 @@ public class Settings extends UserDAO{
     private CheckBox ntfForRelevantRequests;
 
     @FXML
-    private CheckBox ntfForTaggedRequests;
-
-    @FXML
     private Button logOutBtn;
 
     @FXML
@@ -75,6 +72,7 @@ public class Settings extends UserDAO{
 
     @FXML
     private Button myDonationRequestsButton;
+
 
     @FXML
     private Button deleteTheAccountButton;
@@ -152,6 +150,8 @@ public class Settings extends UserDAO{
         ObservableList<String> cityList = FXCollections.observableArrayList("Istanbul","Ankara","Izmir");
         bloodTypeDropdown.setItems(bloodTypeList);
         cityDropdown.setItems(cityList);
+
+        ntfForRelevantRequests.setSelected(!userDAO.getNotificationStatus(Feed.getCurrentUser().getUniqueId()));
     }
 
     @FXML
@@ -326,5 +326,12 @@ public class Settings extends UserDAO{
         User currentUser = Feed.getCurrentUser();
         currentUser.setPhoneNumber(newPhoneNumberTf.getText()); // Update password in memory
         userDAO.updateUser(currentUser);
+    }
+
+    @FXML
+    public void notifPressed(){
+
+        System.out.println(ntfForRelevantRequests.isSelected());
+        userDAO.updateNotificationStatus(Feed.getCurrentUser().getUniqueId(), ntfForRelevantRequests.isSelected());
     }
 }

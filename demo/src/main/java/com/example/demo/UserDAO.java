@@ -22,6 +22,8 @@ public class UserDAO {
     private static final String SELECT_USER_ID_BY_PHONE = "SELECT User_id FROM user WHERE phone_number = ?";
     protected static final String CURRENT_NOTIFICATION = "UPDATE user SET notification = ? WHERE User_id = ?";
     protected static final String SELECT_NOTIFICATION = "Select notification FROM user WHERE User_id = ?";
+    private static final String UPDATE_NOTIFICATION_STATUS = "UPDATE user SET receive_notifications = ? WHERE User_id = ?";
+    private static final String SELECT_NOTIFICATION_STATUS = "SELECT receive_notifications FROM user WHERE User_id = ?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -32,6 +34,40 @@ public class UserDAO {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public void updateNotificationStatus(int user_id, boolean wantsToReceive) {
+        String status = "No";
+        if (wantsToReceive)
+        {
+            status = "Yes";
+        }
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_NOTIFICATION_STATUS)) {
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, user_id);
+            preparedStatement.executeUpdate();
+            System.out.println("set notification status to " + status);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean getNotificationStatus(int user_id) {
+        boolean notificationStatus = false;
+        String notificationColumn = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
+            preparedStatement.setInt(1, user_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                notificationColumn = rs.getString("receive_notifications");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return notificationColumn.equals("Yes");
     }
 
     public List<User> listAllUsers() {
@@ -72,7 +108,8 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }        return user;
+        }
+        return user;
     }
 
     public void updateNotification(int userId, String message) {
