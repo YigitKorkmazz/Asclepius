@@ -209,8 +209,8 @@ public class BloodRequestDAO {
                         try {
                             int userId = Integer.parseInt(userIdStr);
                             User user = getUserById(userId);
-
                             if (user != null) {
+                                user.setUniqueId(userId);
                                 acceptedOnes.add(user);
                                 user.setUniqueId(userId);
                             }
