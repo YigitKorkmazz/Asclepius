@@ -228,6 +228,9 @@ public class BloodRequestDAO {
         return acceptedOnes;
     }
 
+
+
+    
     public User getUserByDonationID (int donation_id) {
         User user = null;
         try (Connection connection = getConnection();
