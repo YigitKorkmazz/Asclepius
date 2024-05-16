@@ -24,6 +24,8 @@ public class NotificationHandler {
     private final Button triggerButton;
     private static BloodRequestDAO donationRequestDAO;
 
+    private boolean isComingFromMyDonations = false;
+
 
     public NotificationHandler(UserDAO userDAO, int taggedUserId, Button triggerButton) {
         this.userDAO = userDAO;
@@ -108,6 +110,14 @@ public class NotificationHandler {
                 try {
                     donationRequestDAO = new BloodRequestDAO();
                     DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
+                    for (int i = 0 ; i < donationRequest.getUsersAcceptedList().size(); i++)
+                    {
+                        if (donationRequestDAO.getRequestById(donationID).getUniqueId() == Feed.getCurrentUser().getUniqueId())
+                        {
+                            isComingFromMyDonations = true;
+                            break;
+                        }
+                    }
                     System.out.println();
                     System.out.println(donationRequestDAO.getUserByDonationID(donationID).getUniqueId());
                     System.out.println();
@@ -126,6 +136,15 @@ public class NotificationHandler {
                         DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
                         donationPageSeenByUser.setData(donationRequest, false);
                         System.out.println("SET DATA WORKED");
+                        if (isComingFromMyDonations)
+                        {
+                            donationPageSeenByUser.setAcceptDisabled();
+                        }
+                        else
+                        {
+                            donationPageSeenByUser.setAcceptEnabled();
+                            donationPageSeenByUser.setRetreatDisabled();
+                        }
                     }
 
 

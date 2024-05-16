@@ -204,7 +204,7 @@ public class DonationRequestCreation implements Initializable {
 
             User currentUser = Feed.getCurrentUser();
 
-            newRequest = new DonationRequest(currentUser, phoneNumber, address, DonationRequest.City.valueOf(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>(), name);
+            newRequest = new DonationRequest(currentUser, phoneNumber, address,DonationRequest.convertStringTypeToEnumForCity(city), DonationRequest.convertStringTypeToEnum(bloodType), transAssist, moneyAssist, new ArrayList<User>(), name);
             bloodRequestDAO.insertDonationRequest(newRequest);
 
             ResultSet rs = statement.executeQuery("SELECT donation_id FROM Donations WHERE phone_number = '" + newRequest.getPhoneNumberAssc() + "' AND address = '" + newRequest.getAddress() + "' AND patient_name = '" + newRequest.getNameOfPatient() + "'");
