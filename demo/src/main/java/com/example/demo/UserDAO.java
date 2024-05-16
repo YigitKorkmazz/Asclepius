@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    protected String jdbcURL = "jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen";
-    protected String jdbcUsername = "myFirstProject_willingmen";
-    protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
+    protected String jdbcURL = "jdbc:mysql://127.0.0.1:3306/demodb";
+    protected String jdbcUsername = "root";
+    protected String jdbcPassword = "Asclepius1453";
 
     protected static final String SELECT_ALL_USERS = "SELECT * FROM user";
     protected static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE User_id = ?";

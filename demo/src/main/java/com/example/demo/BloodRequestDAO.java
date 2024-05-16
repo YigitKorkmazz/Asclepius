@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BloodRequestDAO {
-    protected String jdbcURL = "jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen";
-    protected String jdbcUsername = "myFirstProject_willingmen";
-    protected String jdbcPassword = "c45cce85f4f1feff87e1055d85bd97153672d7bb";
+    protected String jdbcURL = "jdbc:mysql://127.0.0.1:3306/demodb";
+    protected String jdbcUsername = "root";
+    protected String jdbcPassword = "Asclepius1453";
 
     private static final String SELECT_ALL_BLOOD_REQUESTS = "SELECT * FROM Donations";
     private static final String SELECT_DONATION_BY_ID = "SELECT * FROM Donations WHERE donation_id = ?";
@@ -71,7 +71,7 @@ public class BloodRequestDAO {
                 String city = rs.getString("city");
                 user = new User(type, name, phoneNumber, password, city);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         return user;
@@ -220,7 +220,7 @@ public class BloodRequestDAO {
                     }
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println("SQL Exception while fetching accepted users: " + e.getMessage());
             e.printStackTrace();
         }
@@ -243,7 +243,7 @@ public class BloodRequestDAO {
                 user = getUserById(userId);
                 user.setUniqueId(userId);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         return user;
@@ -267,7 +267,7 @@ public class BloodRequestDAO {
                 request = new DonationRequest(getUserById(UserId), phoneNumber, address,DonationRequest.convertStringTypeToEnumForCity(city), DonationRequest.convertStringTypeToEnum(type), DonationRequest.convertStringTypeToEnumForTransportationAsist(transportationAssist), DonationRequest.convertStringToMoneyAssist(moneyAssist), new ArrayList<User>(), nameOfPatient);
                 request.setUniqueId (donation_id);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         return request;
