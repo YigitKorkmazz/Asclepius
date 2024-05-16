@@ -93,6 +93,8 @@ public class DonationPageSeenByUser implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        addNotification(currentRequest.getCreatorUser().getPhoneNumber(), "ACCEPT");
     }
 
     @FXML
@@ -148,7 +150,7 @@ public class DonationPageSeenByUser implements Initializable {
 
         // Set up buttons
         ButtonType sendButtonType = new ButtonType("Send");
-        ButtonType cancelButtonType = new ButtonType("Cancel");
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(sendButtonType, cancelButtonType);
 
         // Layout
@@ -172,6 +174,7 @@ public class DonationPageSeenByUser implements Initializable {
             addNotification(phoneNumber, "TAG");
         }
     }
+
 
     public void addNotification(String phoneNumber, String type) {
         UserDAO userDAO = new UserDAO();

@@ -77,36 +77,44 @@ public class NotificationHandler {
         int userID = Integer.parseInt(input[1]);
         String type = input[2];
 
-
         Label messageLabel = new Label();
         switch (type) {
             case "ACCEPT" -> messageLabel.setText(" Your donation was accepted.");
             case "TAG" -> messageLabel.setText("You were tagged to a donation.");
             case "MATCH" -> messageLabel.setText("There are some donations you match with!");
         }
+        messageLabel.setStyle("-fx-text-fill: white;");
 
         Button goToNotificationButton = new Button("Go to the post!");
+        goToNotificationButton.setStyle(
+                "-fx-background-color: white; " +
+                        "-fx-text-fill: black; " +
+                        "-fx-border-radius: 30px; " +
+                        "-fx-background-radius: 30px;");
+
         Button dismissButton = new Button("Dismiss");
+        dismissButton.setStyle(
+                "-fx-background-color: #f53a40; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-border-radius: 30px; " +
+                        "-fx-background-radius: 30px;");
 
         goToNotificationButton.setOnAction(e -> {
-
             System.out.println("Go to the post!");
-            if (type.equals("MATCH")){
+            if (type.equals("MATCH")) {
                 Feed.sendNoMoreNotification();
                 try {
                     Stage stage = getPrimaryStage();
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-                    if(stage != null){
+                    if (stage != null) {
                         stage.setTitle("My Donations");
                         stage.setScene(scene);
                     }
-
-
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-            }else {
+            } else {
                 try {
                     donationRequestDAO = new BloodRequestDAO();
                     DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
@@ -121,15 +129,14 @@ public class NotificationHandler {
                     System.out.println();
                     System.out.println(donationRequestDAO.getUserByDonationID(donationID).getUniqueId());
                     System.out.println();
+
                     FXMLLoader fxmlLoader = null;
                     Scene newScene = null;
-                    System.out.println(Feed.getCurrentUser().getUniqueId());
                     if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getUserByDonationID(donationID).getUniqueId()) {
                         fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
                         newScene = new Scene(fxmlLoader.load(), 1200, 800);
                         DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
                         donationRequestScreen.setData(donationRequest);
-                        System.out.println("SET DATA WORKED");
                     } else {
                         fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
                         newScene = new Scene(fxmlLoader.load(), 1200, 800);
@@ -145,9 +152,8 @@ public class NotificationHandler {
                             donationPageSeenByUser.setAcceptEnabled();
                             donationPageSeenByUser.setRetreatDisabled();
                         }
+
                     }
-
-
                     Stage primaryStage = getPrimaryStage();
                     if (primaryStage != null) {
                         primaryStage.setTitle("Donation Request");
@@ -162,12 +168,14 @@ public class NotificationHandler {
 
         dismissButton.setOnAction(e -> {
             notificationStage.close();
-            if(type.equals("MATCH")){
-                Feed.sendNoMoreNotification();}
+            if (type.equals("MATCH")) {
+                Feed.sendNoMoreNotification();
+            }
         });
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
+        layout.setStyle("-fx-background-color: black;");
         layout.getChildren().addAll(messageLabel, goToNotificationButton, dismissButton);
 
         Scene scene = new Scene(layout, 300, 150);
