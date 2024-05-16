@@ -7,18 +7,19 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DonationRequestScreen">
+<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DonationRequestScreen">
    <children>
-      <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.3" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
          <items>
             <AnchorPane prefHeight="598.0" prefWidth="155.0" style="-fx-background-color: white;">
                <children>
                   <VBox layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <Label fx:id="helloLabel1" minWidth="60.0" prefHeight="26.0" prefWidth="201.0" style="&#10;" text="Hello" wrapText="true">
+                        <Label fx:id="helloLabel" minWidth="60.0" prefHeight="35.0" prefWidth="346.0" style="&#10;" text="Hello" wrapText="true">
                            <font>
                               <Font name="System Bold" size="29.0" fx:id="x11" />
                            </font>
@@ -28,7 +29,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="bloodTypeChangeButton1" alignment="TOP_LEFT" contentDisplay="RIGHT" minHeight="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goSettingsPage1" prefHeight="44.0" prefWidth="153.0" style="-fx-background-color: white;" text="ABRh-">
+                        <Button fx:id="bloodTypeChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" minHeight="-Infinity" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goSettingsPage1" prefHeight="44.0" prefWidth="153.0" style="-fx-background-color: white;" text="ABRh-">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -43,7 +44,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="cityChangeButton1" alignment="TOP_LEFT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: white;" text="Ankara">
+                        <Button fx:id="cityChangeButton" alignment="TOP_LEFT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#goSettingsPage2" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: white;" text="Ankara">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -76,7 +77,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="settingsButton1" layoutY="513.0" mnemonicParsing="false" onAction="#settingsOnAction" prefHeight="48.0" prefWidth="137.0" style="-fx-background-color: white;" text="Settings" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                  <Button fx:id="settingsButton" layoutY="513.0" mnemonicParsing="false" onAction="#settingsOnAction" prefHeight="48.0" prefWidth="137.0" style="-fx-background-color: white;" text="Settings" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -95,58 +96,62 @@
             </AnchorPane>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="132.0" prefWidth="639.0">
                <children>
-                  <VBox alignment="TOP_CENTER" layoutY="38.0" prefHeight="467.0" prefWidth="639.0" spacing="20.0" style="-fx-background-color: white;">
+                  <Pane layoutY="38.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="bloodType" alignment="CENTER" prefHeight="79.0" prefWidth="227.0" text="(Blood Type)" textAlignment="CENTER">
+                        <VBox alignment="TOP_CENTER" layoutX="109.0" layoutY="20.0" prefHeight="467.0" prefWidth="639.0" spacing="20.0" style="-fx-background-color: white;">
+                           <children>
+                              <Label fx:id="bloodType" alignment="CENTER" prefHeight="123.0" prefWidth="346.0" text="(Blood Type)" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="54.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="26.0" prefWidth="227.0" text="needed by" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientNameLabel" alignment="CENTER" prefHeight="55.0" prefWidth="227.0" text="(User Name)" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientPhoneNumberLabel" alignment="CENTER" prefHeight="133.0" prefWidth="642.0" text="(Telephone Number)" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="addressLabel" alignment="CENTER" prefHeight="45.0" prefWidth="428.0" text="(Address)" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="transportationHelp" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: black; -fx-text-fill: black; -fx-border-radius: 30;" text="Transportation Help ✓" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="moneyHelpLabel" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 30; -fx-text-fill: black; -fx-border-color: black; -fx-border-radius: 30;" text="Money Help" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <Button fx:id="closeButton" layoutX="269.0" layoutY="706.0" mnemonicParsing="false" onAction="#closeDonationMethod" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="36.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="227.0" text="needed by" textAlignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="patientNameLabel" alignment="CENTER" prefHeight="55.0" prefWidth="227.0" text="(User Name)" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="36.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="patientPhoneNumberLabel" alignment="CENTER" prefHeight="133.0" prefWidth="642.0" text="(Telephone Number)" textAlignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="addressLabel" alignment="CENTER" prefHeight="45.0" prefWidth="428.0" text="(Address)" textAlignment="CENTER">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="transportationHelp" mnemonicParsing="false" style="-fx-background-color: black; -fx-background-radius: 30;" text="Transportation Help" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
+                              <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="moneyHelpLabel" mnemonicParsing="false" style="-fx-background-color: black; -fx-background-radius: 30;" text="Money Help" textFill="WHITE">
+                        <Button fx:id="editButton" layoutX="454.0" layoutY="707.0" mnemonicParsing="false" onAction="#editDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="24.0" />
                            </font>
                         </Button>
                      </children>
-                  </VBox>
-                  <Button fx:id="closeButton" layoutX="153.0" layoutY="519.0" mnemonicParsing="false" onAction="#closeDonationMethod" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: RED; -fx-background-radius: 30;" text="Close" textFill="WHITE">
+                  </Pane>
+                  <Button fx:id="goBackButton" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests" prefHeight="70.0" prefWidth="94.0" style="-fx-background-color: white;" text="←">
                      <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="editButton" layoutX="345.0" layoutY="519.0" mnemonicParsing="false" onAction="#editDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Edit" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="goBackButton" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests" style="-fx-background-color: white;" text="&lt;">
-                     <font>
-                        <Font size="24.0" />
+                        <Font size="40.0" />
                      </font>
                   </Button>
                </children>

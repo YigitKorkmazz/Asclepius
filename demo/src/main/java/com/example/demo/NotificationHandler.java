@@ -26,22 +26,18 @@ public class NotificationHandler {
 
     private boolean isComingFromMyDonations = false;
 
-
     public NotificationHandler(UserDAO userDAO, int taggedUserId, Button triggerButton) {
         this.userDAO = userDAO;
         this.taggedUserId = taggedUserId;
         this.triggerButton = triggerButton;
     }
 
-
-
     public void startScheduledNotification() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
         // Schedule to run every second
         scheduler.scheduleAtFixedRate(() -> {
-            if(userDAO.getNotificationStatus(Feed.getCurrentUser().getUniqueId())) {
-
+            if (userDAO.getNotificationStatus(Feed.getCurrentUser().getUniqueId())) {
                 try {
                     System.out.println("Scheduler task running at: " + System.currentTimeMillis());
                     String notification = userDAO.getNotification(taggedUserId);
@@ -60,7 +56,6 @@ public class NotificationHandler {
                 } catch (Exception e) {
                     System.err.println("General Exception in scheduled task: " + e.getMessage());
                 }
-
             }
         }, 0, 5, TimeUnit.SECONDS);
     }
@@ -100,74 +95,11 @@ public class NotificationHandler {
                         "-fx-background-radius: 30px;");
 
         goToNotificationButton.setOnAction(e -> {
-
-
-
-                System.out.println("Go to the post!");
-                if (type.equals("MATCH")) {
-                    Feed.sendNoMoreNotification();
-                    try {
-                        Stage stage = getPrimaryStage();
-                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
-                        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-                        if (stage != null) {
-                            stage.setTitle("My Donations");
-                            stage.setScene(scene);
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    try {
-                        donationRequestDAO = new BloodRequestDAO();
-                        DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
-                        for (int i = 0 ; i < donationRequest.getUsersAcceptedList().size(); i++)
-                        {
-                            if (donationRequestDAO.getRequestById(donationID).getUniqueId() == Feed.getCurrentUser().getUniqueId())
-                            {
-                                isComingFromMyDonations = true;
-                                break;
-                            }
-                        }
-                        System.out.println();
-                        System.out.println(donationRequestDAO.getUserByDonationID(donationID).getUniqueId());
-                        System.out.println();
-
-                        FXMLLoader fxmlLoader = null;
-                        Scene newScene = null;
-                        if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getUserByDonationID(donationID).getUniqueId()) {
-                            fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
-                            newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                            DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
-                            donationRequestScreen.setData(donationRequest);
-                        } else {
-                            fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
-                            newScene = new Scene(fxmlLoader.load(), 1200, 800);
-                            DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
-                            donationPageSeenByUser.setData(donationRequest, false);
-                            System.out.println("SET DATA WORKED");
-                            if (isComingFromMyDonations)
-                            {
-                                donationPageSeenByUser.setAcceptDisabled();
-                            }
-                            else
-                            {
-                                donationPageSeenByUser.setAcceptEnabled();
-                                donationPageSeenByUser.setRetreatDisabled();
-                            }
-
-                        }
-                        Stage primaryStage = getPrimaryStage();
-                        if (primaryStage != null) {
-                            primaryStage.setTitle("Donation Request");
-                            primaryStage.setScene(newScene);
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-                notificationStage.close();
-
+            if (type.equals("MATCH")) {
+                handleMatchNotification(notificationStage);
+            } else {
+                handleDonationNotification(notificationStage, donationID, type);
+            }
         });
 
         dismissButton.setOnAction(e -> {
@@ -185,6 +117,66 @@ public class NotificationHandler {
         Scene scene = new Scene(layout, 300, 150);
         notificationStage.setScene(scene);
         notificationStage.showAndWait();
+    }
+
+    private void handleMatchNotification(Stage notificationStage) {
+        Feed.sendNoMoreNotification();
+        try {
+            Stage stage = getPrimaryStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FeedPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+            if (stage != null) {
+                stage.setTitle("Feed");
+                stage.setScene(scene);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        notificationStage.close();
+    }
+
+    private void handleDonationNotification(Stage notificationStage, int donationID, String type) {
+        try {
+            donationRequestDAO = new BloodRequestDAO();
+            DonationRequest donationRequest = donationRequestDAO.getRequestById(donationID);
+            isComingFromMyDonations = false;
+
+            for (User user : donationRequest.getUsersAcceptedList()) {
+                if (user.getUniqueId() == Feed.getCurrentUser().getUniqueId()) {
+                    isComingFromMyDonations = true;
+                    break;
+                }
+            }
+
+            FXMLLoader fxmlLoader;
+            Scene newScene;
+            if (Feed.getCurrentUser().getUniqueId() == donationRequestDAO.getUserByDonationID(donationID).getUniqueId()) {
+                fxmlLoader = new FXMLLoader(getClass().getResource("CreatorsRequestPage.fxml"));
+                newScene = new Scene(fxmlLoader.load(), 1200, 800);
+                DonationRequestScreen donationRequestScreen = fxmlLoader.getController();
+                donationRequestScreen.setData(donationRequest);
+            } else {
+                fxmlLoader = new FXMLLoader(getClass().getResource("DonationPageSeenByUser.fxml"));
+                newScene = new Scene(fxmlLoader.load(), 1200, 800);
+                DonationPageSeenByUser donationPageSeenByUser = fxmlLoader.getController();
+                donationPageSeenByUser.setData(donationRequest, false);
+                if (isComingFromMyDonations) {
+                    donationPageSeenByUser.setAcceptDisabled();
+                } else {
+                    donationPageSeenByUser.setAcceptEnabled();
+                    donationPageSeenByUser.setRetreatDisabled();
+                }
+            }
+
+            Stage primaryStage = getPrimaryStage();
+            if (primaryStage != null) {
+                primaryStage.setTitle("Donation Request");
+                primaryStage.setScene(newScene);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        notificationStage.close();
     }
 
     private Stage getPrimaryStage() {

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Settings">
+<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Settings">
    <children>
       <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <items>
@@ -103,69 +103,35 @@
                <content>
                   <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="598.0" prefWidth="671.0" style="-fx-background-color: white;">
                      <children>
-                        <Label alignment="CENTER" layoutX="194.0" layoutY="2.0" prefHeight="24.0" prefWidth="239.0" style="&#10;" text="Settings" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="2.0">
+                        <Label alignment="CENTER" layoutX="200.0" layoutY="5.0" prefHeight="24.0" prefWidth="239.0" style="&#10;" text="Settings" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="203.0" AnchorPane.topAnchor="20.0">
                            <font>
-                              <Font size="20.0" fx:id="x1" />
+                              <Font name="System Bold" size="29.0" fx:id="x1" />
                            </font></Label>
-                        <ComboBox fx:id="bloodTypeDropdown" layoutX="318.0" layoutY="269.0" prefHeight="26.0" prefWidth="153.0" promptText="Choose Blood Type" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="198.0" />
-                        <Label fx:id="bloodType" layoutX="222.0" layoutY="271.0" prefHeight="19.0" prefWidth="95.0" text="Blood Type" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="321.0">
+                        <ComboBox fx:id="bloodTypeDropdown" layoutX="366.0" layoutY="405.0" prefHeight="26.0" prefWidth="168.0" promptText="Change blood type to" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 30;" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="360.0" />
+                        <Label fx:id="bloodType" layoutX="199.0" layoutY="338.0" prefHeight="19.0" prefWidth="95.0" text="Blood Type" visible="false" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="344.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="city" layoutX="225.0" layoutY="329.0" prefHeight="19.0" prefWidth="115.0" text="City" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="298.0">
+                        <Button fx:id="secondChangeButton" alignment="CENTER" layoutX="330.0" layoutY="581.0" mnemonicParsing="false" onAction="#secondChangeOnAction" prefHeight="36.0" prefWidth="245.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change your details" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="581.0">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="20.0" />
                            </font>
-                        </Label>
-                        <ComboBox fx:id="cityDropdown" layoutX="318.0" layoutY="327.0" prefHeight="26.0" prefWidth="153.0" promptText="Choose City" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="198.0" />
-                        <Button fx:id="secondChangeButton" alignment="CENTER" layoutX="273.0" layoutY="475.0" mnemonicParsing="false" onAction="#secondChangeOnAction" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="277.0" AnchorPane.topAnchor="475.0">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </Button>
-                        <VBox layoutX="190.0" layoutY="515.0" prefHeight="71.0" prefWidth="399.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="515.0">
-                           <children>
-                              <CheckBox fx:id="ntfForRelevantRequests" mnemonicParsing="false" onAction="#notifPressed" prefHeight="19.0" prefWidth="398.0" text="I don't want to receive notificiations">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </CheckBox>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="186.0" layoutY="38.0" prefHeight="138.0" prefWidth="289.0" spacing="15.0" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="38.0">
-                           <children>
-                              <PasswordField fx:id="oldPassword" promptText="Old Password" style="-fx-background-radius: 30;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </PasswordField>
-                              <PasswordField fx:id="newPassword" promptText="New Password" style="-fx-background-radius: 30;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </PasswordField>
-                              <PasswordField fx:id="newPasswordAgain" prefHeight="33.0" prefWidth="297.0" promptText="New Password Again" style="-fx-background-radius: 30;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </PasswordField>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="197.0" layoutY="364.0" prefHeight="79.0" prefWidth="280.0" spacing="15.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="165.0">
-                           <children>
-                              <TextField fx:id="newPhoneNumberTf" promptText="New Phone Number" style="-fx-background-radius: 30;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <PasswordField fx:id="validationPasswordTf" promptText="Password" style="-fx-background-radius: 30;">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </PasswordField>
-                           </children>
-                        </VBox>
+                        <CheckBox fx:id="ntfForRelevantRequests" layoutX="328.0" layoutY="637.0" mnemonicParsing="false" onAction="#notifPressed" prefHeight="21.0" prefWidth="251.0" text="I don't want to receive notificiations">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                        <ComboBox fx:id="cityDropdown" layoutX="366.0" layoutY="440.0" prefHeight="28.0" prefWidth="168.0" promptText="Choose city to" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 30;" />
+                        <Label fx:id="city" prefHeight="19.0" prefWidth="115.0" text="City" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                         <Button fx:id="homePageButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#goFeed" prefHeight="51.0" prefWidth="54.0" style="-fx-background-color: white;">
                            <graphic>
                               <ImageView fitHeight="44.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
@@ -175,12 +141,15 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="firstChangeButton" alignment="CENTER" layoutX="273.0" layoutY="217.0" mnemonicParsing="false" onAction="#firstChangeOnAction" prefHeight="30.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="277.0">
+                        <Button fx:id="firstChangeButton" alignment="CENTER" layoutX="344.0" layoutY="318.0" mnemonicParsing="false" onAction="#firstChangeOnAction" prefHeight="37.0" prefWidth="223.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Change your password" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="327.0">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="19.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </Button>
-                        <HBox layoutX="10.0" layoutY="576.0" prefHeight="72.0" prefWidth="638.0" AnchorPane.bottomAnchor="-42.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
+                        <HBox layoutX="22.0" layoutY="756.0" prefHeight="24.0" prefWidth="894.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
                               <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logOut" prefHeight="33.0" prefWidth="533.0" style="-fx-background-color: white;" text="Log Out" textFill="RED" underline="true">
                                  <font>
@@ -194,6 +163,31 @@
                               </Button>
                            </children>
                         </HBox>
+                        <PasswordField fx:id="validationPasswordTf" layoutX="340.0" layoutY="531.0" promptText="Password" style="-fx-background-radius: 30;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                        <TextField fx:id="newPhoneNumberTf" layoutX="340.0" layoutY="484.0" promptText="New Phone Number" style="-fx-background-radius: 30;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField fx:id="newPasswordAgain" layoutX="330.0" layoutY="253.0" prefHeight="35.0" prefWidth="239.0" promptText="Confirm Password" style="-fx-background-radius: 30;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                        <PasswordField fx:id="newPassword" layoutX="331.0" layoutY="207.0" prefHeight="35.0" prefWidth="239.0" promptText="New Password" style="-fx-background-radius: 30;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                        <PasswordField fx:id="oldPassword" layoutX="331.0" layoutY="159.0" prefHeight="35.0" prefWidth="239.0" promptText="Old Password" style="-fx-background-radius: 30;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
                      </children>
                   </AnchorPane>
                </content>

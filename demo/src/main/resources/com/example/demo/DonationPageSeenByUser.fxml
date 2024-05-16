@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DonationPageSeenByUser">
+<VBox prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DonationPageSeenByUser">
    <children>
-      <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.3" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
          <items>
             <AnchorPane prefHeight="598.0" prefWidth="155.0" style="-fx-background-color: white;">
                <children>
@@ -95,11 +95,11 @@
             </AnchorPane>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="132.0" prefWidth="639.0">
                <children>
-                  <VBox alignment="TOP_CENTER" layoutY="38.0" prefHeight="467.0" prefWidth="639.0" spacing="20.0" style="-fx-background-color: white;">
+                  <VBox alignment="TOP_CENTER" layoutY="23.0" prefHeight="482.0" prefWidth="835.0" spacing="20.0" style="-fx-background-color: white;">
                      <children>
                         <Label fx:id="bloodTypeOfPatient" alignment="CENTER" prefHeight="79.0" prefWidth="227.0" text="(Blood Type)" textAlignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="36.0" />
+                              <Font name="System Bold" size="40.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" prefHeight="26.0" prefWidth="227.0" text="needed by" textAlignment="CENTER">
@@ -122,34 +122,34 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="transportationHelp" disable="true" mnemonicParsing="false" style="-fx-background-color: black; -fx-background-radius: 30;" text="Transportation Help ✔" textFill="WHITE">
+                        <Button fx:id="transportationHelp" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-text-fill: black;" text="Transportation Help ✓" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="moneyHelpField" disable="true" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: black;" text="Money Help" textFill="#f5f5f5">
+                        <Button fx:id="moneyHelpField" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 30; -fx-text-fill: black;" text="Money Help" textFill="#f5f5f5">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="retreatButton" layoutX="248.0" layoutY="497.0" mnemonicParsing="false" onAction="#retreatDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Retreat" textFill="WHITE">
+                  <Button fx:id="retreatButton" layoutX="332.0" layoutY="712.0" mnemonicParsing="false" onAction="#retreatDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Retreat" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests" style="-fx-background-color: white;" text="&lt;">
+                  <Button layoutX="20.0" layoutY="15.0" mnemonicParsing="false" onAction="#goMyDonationRequests" style="-fx-background-color: white;" text="←">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="acceptButton" layoutX="153.0" layoutY="712.0" mnemonicParsing="false" onAction="#acceptDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="Accept" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="acceptButton" layoutX="69.0" layoutY="497.0" mnemonicParsing="false" onAction="#acceptDonation" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="Accept" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="tagAFriendButton" layoutX="427.0" layoutY="497.0" mnemonicParsing="false" onAction="#tagFriend" prefHeight="51.0" prefWidth="170.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Tag a Friend" textFill="WHITE">
+                  <Button fx:id="tagAFriendButton" layoutX="511.0" layoutY="712.0" mnemonicParsing="false" onAction="#tagFriend" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: black; -fx-background-radius: 30;" text="Tag a Friend" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
