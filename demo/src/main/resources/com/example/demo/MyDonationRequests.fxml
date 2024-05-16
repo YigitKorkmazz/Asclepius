@@ -107,13 +107,15 @@
                               <Font size="37.0" />
                            </font>
                         </Button>
-                        <Button fx:id="homePageButton" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#goFeed" prefHeight="48.0" prefWidth="54.0" style="-fx-background-color: white;" />
+                        <Button fx:id="homePageButton" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#goFeed" prefHeight="48.0" prefWidth="54.0" style="-fx-background-color: white;">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/homepage.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <VBox fx:id="VBoxforRequests" layoutY="97.0" prefHeight="501.0" prefWidth="642.0" />
-                        <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="37.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/homepage.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>

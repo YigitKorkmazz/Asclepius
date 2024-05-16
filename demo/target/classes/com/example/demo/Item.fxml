@@ -48,7 +48,7 @@
       </VBox>
       <Button fx:id="goRequestButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#goRequestPage" prefHeight="206.0" prefWidth="270.0" style="-fx-background-color: transparent;" text="→">
          <font>
-            <Font size="57.0" />
+            <Font size="31.0" />
          </font>
          <HBox.margin>
             <Insets />
