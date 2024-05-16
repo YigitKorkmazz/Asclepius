@@ -227,7 +227,7 @@ public class DonationPageSeenByUser implements Initializable {
         try{
             Stage stage = (Stage) settingsButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 900);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
             stage.setTitle("Settings");
             stage.setScene(scene);
         } catch (IOException ex) {
