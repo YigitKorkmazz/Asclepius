@@ -55,7 +55,7 @@ public class UserDAO {
 
     public boolean getNotificationStatus(int user_id) {
         boolean notificationStatus = false;
-        String notificationColumn = null;
+        String notificationColumn = "";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
             preparedStatement.setInt(1, user_id);

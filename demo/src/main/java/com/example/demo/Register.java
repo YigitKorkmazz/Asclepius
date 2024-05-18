@@ -46,7 +46,7 @@ public class Register implements Initializable {
     public void registerButtonOnAction(ActionEvent e)
     {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://myFirstProject_willingmen:c45cce85f4f1feff87e1055d85bd97153672d7bb@tzq.h.filess.io:3307/myFirstProject_willingmen", "myFirstProject_willingmen","c45cce85f4f1feff87e1055d85bd97153672d7bb");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/demodb", "root","Asclepius1453");
             Statement statement = connection.createStatement();
             if (!checkPhoneNumberIsUsing(connection, statement) && !checkFieldsEmpty() && checkPhoneNumberIsTrue())
             {
